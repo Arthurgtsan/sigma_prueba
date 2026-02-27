@@ -1,0 +1,864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Selector de Capas</title>
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+
+</head>
+
+
+<style>
+          .boton1{font-family: Arial; font-size: 10px; line-height: 1.3; font-weight: normal;}
+          .table0 {border-top: 1px solid #AAAAAA;}
+          .table00 {border-bottom: 1px solid #AAAAAA;}
+
+		  .table1 {font-family: Arial; font-size: 10px; line-height: 1.3; font-weight: normal;border-top: 1px solid #AAAAAA;}
+		  .table2 {font-family: Arial; font-size: 10px; line-height: 1.3; font-weight: normal;border-bottom: 1px solid #AAAAAA;}
+
+
+            </style>
+
+
+<script type="text/javascript">
+parent.document.getElementById('ventana-flotante_ce').className = 'oculto_ce';
+parent.document.getElementById('ventana-flotante_pre').className = 'oculto_pre';
+var img=0;
+
+var edicion1=1;
+var edicion2=1;
+
+
+document.write("<body><form name='capas'>");
+document.write("<table border=0 style='font-family: Arial; sans-serif;font-size: 12px;margin:0;padding:0;border:0;font-weight: normal;border-spacing:0;' cellspacing=0 cellpadding=0><tr><td nowrap>&nbsp;&nbsp;&nbsp;<td nowrap><b>CAPAS BASE</b>&nbsp;&nbsp;<img onclick='javascript:mas();'  src='images/mas.png' Title='Aumentar transparencia'></img>&nbsp;&nbsp;<img onclick='javascript:menos();'  src='images/menos.png' Title='Disminuir transparencia'></img><td colspan=2><input type='radio' name='base' onclick='envia(0,\"fondovacio\",this.checked,0)'><img src='images/vac.png' width=15></img>");
+
+//--LAS IMAGENES DEBEN DE TENER EN ENVIA(NUM---) EL ORDEN DE POSICION
+document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(1,\"fondo\",this.checked,0)'> <img src='images/vac.png'></img> Base MDM");
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(2,\"geoeye2\",this.checked,0)'> <img src='images/map.png'></img> Geoeye 2018");
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(4,\"orto\",this.checked,0)'> <img src='images/map.png'></img> Ortofotos");
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(3,\"spot5\",this.checked,0)' disabled='true'> <img src='images/map.png'></img> Spot-5 (offline)");
+document.write("<tr><td nowrap  class=table0><td  class=table0 nowrap title='Se visualiza a una escala menor de 1:400,000'><input type='radio' name='base' onclick='envia(4,\"spot6\",this.checked,0)'> <img src='images/map.png'></img> OneAtlas");
+document.write("<td class=table0 colspan=2 title='Cargar imagen en centroide' nowrap>&nbsp;&nbsp;<img src='images/actualizar1.png' width=15 onclick='cargaatlas()'></img>");
+
+document.write("<tr><td nowrap  class=table00><td nowrap class=table00 colspan=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha:<input type=radio class=boton1 name=filteratlas title='Orden por fecha mas reciente' value='fecha' checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calidad:<input type=radio class=boton1 name=filteratlas title='Orden por calidad de imagen PNEO/PHR/SPOT' value='calidad'> ");
+
+
+//MOSAICO DE DIGITAL GLOBE
+
+document.write("<tr><td nowrap><td nowrap title='Mosaico DGG'><input type='radio' name='base' onclick='envia(9,\"diglob2\",this.checked,0)'> <img src='images/map.png'></img> SIDAISAR");
+	//document.write("<td title='Fecha de actualizacion de imagen' nowrap ><input id='img13' class='boton' type='checkbox' onclick='selctlimg(13,this.checked)'><img src='images/fedg.png' width=15></img>");
+
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(3,\"geoeye1\",this.checked,0)'> <img src='images/map.png'></img> EIC - 2025");
+
+/*
+	document.write("<tr><td nowrap class=table1><td nowrap class=table0><input type='radio' name='base' onclick='envia(5,\"diglob\",this.checked,0)'> <img src='images/otmap.png'></img> Digital Globe");
+
+	document.write("<td title='Fecha de actualizacion de imagen' nowrap class=table1><input id='img4' class='boton' type='checkbox' onclick='selctlimg(4,this.checked)'><img src='images/fedg.png' width=15></img>");
+
+if (parent.correodg.toUpperCase()==parent.encdg.toUpperCase()){
+document.write("<td title='Cambiar Pass Securewatch' nowrap class=table1>&nbsp;&nbsp;<img src='images/userdg.png' width=15 onclick='chgpass()'></img>");
+}else{
+	document.write("<td nowrap class=table1>");
+}
+
+	document.write("<tr><td nowrap class=table2 colspan=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F<:<input type=date class=boton1 name=filterfe title='Filtro fecha menor a:' value='' min='2010-01-01' style='width:105px' onchange='cambiadg(event)';> &nbsp&nbsp&nbsp;N:<select class=boton1 name=filternub title='Filtro de nubosidad'  onchange='cambiadg(event)'><option value=100>N/A%</option><option  value=50>50%</option>");
+		document.write("<option value=.45>45%</option><option value=.40>40%</option><option value=.35>35%</option><option value=.30>30%</option>");
+		document.write("<option value=.35>35%</option><option value=.30>30%</option><option value=.25>25%</option><option value=.20>20%</option>");
+		document.write("<option value=.15>15%</option><option value=.10>10%</option><option value=.09>9%</option><option value=.08>8%</option>");
+		document.write("<option value=.07>7%</option><option value=.06>6%</option><option value=.05>5%</option><option value=.04>4%</option>");
+		document.write("<option value=.03>3%</option><option value=.02>2%</option><option value=.01>1%</option><option value=0>0%</option></select>");
+//}
+*/
+
+//if (parent.nored==1){
+//	document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(6,\"gooimg\",this.checked,0)' disabled='true'> <img src='images/otmap.png'></img> Google (offline)");
+	//document.write("<tr><td nowrap><td nowrap title='Usar esta imagen cuando falle Google Maps'><input type='radio' name='base' onclick='envia(7,\"gooimgStatic\",this.checked,0)'> <img src='images/otmap.png'></img> Google Maps (Estatico)");
+//}else{
+	document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(6,\"gooimg\",this.checked,0)'> <img src='images/otmap.png'></img> Google Maps");
+	//document.write("<tr><td nowrap><td nowrap title='Usar esta imagen cuando falle Google Maps'><input type='radio' name='base' onclick='envia(7,\"gooimgStatic\",this.checked,0)'> <img src='images/otmap.png'></img> Google Maps (Estatico)");
+//}
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(7,\"esri\",this.checked,0)'> <img src='images/otmap.png'></img> Esri");
+/*if (parent.permisoimgex1==1){
+	document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(8,\"imgex1\",this.checked,0)'> <img src='images/map.png'></img> WMS-EdoMex");
+}*/
+
+
+//document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(8,\"bingimg\",this.checked,0)'> <img src='images/otmap.png'></img> Bing Earth");
+/*if (parent.nored==1){
+	document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' disabled='true'> <img src='images/otmap.png'></img> Google St. (offline)");
+}else{
+	document.write("<tr><td nowrap><td nowrap><input type='radio' name='base' onclick='envia(9,\"streetmap\",this.checked,0)'> <img src='images/otmap.png'></img> Google Street");
+}*/
+
+
+document.write("<tr><td nowrap><td nowrap>&nbsp;<tr><td nowrap><td nowrap><b>CAPAS&nbsp;&nbsp;</b><img onclick='javascript:versiones();'  src='images/versiones.png' width=12px Title='Ver las versiones y fechas de las capas'></img>");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:3,000,000'><input name='cc1' class='boton' type='checkbox' onclick='envia(1,\"cartas\",this.checked,1)'> <img src='images/car.png'></img> Cartas 1:50");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:1,000,000'><input name='ct1' class='boton' type='checkbox' onclick='envia(1,\"cartaset\",this.checked,2)'> <b>T</b>");
+
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:3,000,000'><input name='cc25' class='boton' type='checkbox' onclick='envia(25,\"cartas20\",this.checked,1)'> <img src='images/car.png'></img> Cartas 1:20");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:1,000,000'><input name='ct25' class='boton' type='checkbox' onclick='envia(25,\"cartaset20\",this.checked,2)'> <b>T</b>");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a cualquier escala'><input name='cc2' class='boton' type='checkbox' onclick='envia(2,\"estados\",this.checked,1)'> <img src='images/ent.png'></img> Estados");
+document.write("<td nowrap title='Texto de la capa se visualiza a cualquier escala'><input name='ct2' class='boton' type='checkbox' onclick='envia(2,\"estadoset\",this.checked,2)'> <b>T</b>");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:3,000,000'><input name='cc3' class='boton' type='checkbox' onclick='envia(3,\"municipios\",this.checked,1)'> <img src='images/mun.png'></img> Municipios");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:1,000,000'><input name='ct3' class='boton' type='checkbox' onclick='envia(3,\"municipioset\",this.checked,2)'> <b>T</b>");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:1,000,000'><input name='cc4' class='boton' type='checkbox' onclick='envia(4,\"agebs\",this.checked,1)'> <img src='images/ag.png'></img> Ageb Rural");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:600,000'><input name='ct4' class='boton' type='checkbox' onclick='envia(4,\"agebset\",this.checked,2)'> <b>T</b>");
+
+
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:500,000'><input name='cc6' class='boton' type='checkbox' onclick='envia(6,\"locurb\",this.checked,1)'> <img src='images/lou.png'></img> Loc. Urbana");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:100,000'><input name='ct6' class='boton' type='checkbox' onclick='envia(6,\"locurbet\",this.checked,2)'> <b>T</b>");
+
+//-----------------------------------
+document.write("<tr>");
+if (parent.edagpr==1 && edicion1==edicion2){
+	document.write("<td nowrap title='Editar Agebs Urbanas'><img id='edit_au' src='images/editar0.png' onclick=\"editar('au');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:60,000'><input name='cc5' class='boton' type='checkbox' onclick='envia(5,\"agebsur\",this.checked,1)'> <img src='images/ag.png'></img> Ageb Urbana");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:60,000'><input name='ct5' class='boton' type='checkbox' onclick='envia(5,\"agebsuret\",this.checked,2)'> <b>T</b>");
+if (parent.nivelcapa!=5){
+		document.write("<td nowrap title='Informacion editada'><input name='cc26' class='boton' type='checkbox' onclick='envia(26,\"agebu_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+}
+
+//-----------------------------------
+document.write("<tr>");
+if (parent.edagpr==1 && edicion1==edicion2){
+	document.write("<td nowrap title='Editar Poligonos Rurales'><img id='edit_pr' src='images/editar0.png' onclick=\"editar('pr');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:300,000'><input name='cc7' class='boton' type='checkbox' onclick='envia(7,\"locrurpol\",this.checked,1)'> <img src='images/lor.png'></img> Loc. Rural");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:100,000'><input name='ct7' class='boton' type='checkbox' onclick='envia(7,\"locrurpolet\",this.checked,2)'> <b>T</b>");
+if (parent.nivelcapa!=5){
+	document.write("<td nowrap title='Informacion editada'><input name='cc27' class='boton' type='checkbox' onclick='envia(27,\"polr_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+}
+document.write("<tr>");
+if (parent.edagpr==1 && edicion1==edicion2){
+	document.write("<td nowrap title='Editar Poligonos Externos'><img id='edit_pe' src='images/editar0.png' onclick=\"editar('pe');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:300,000'><input name='cc8' class='boton' type='checkbox' onclick='envia(8,\"locrurpol_ext\",this.checked,1)'> <img src='images/lorext.png'></img> Loc. Externo");
+if (parent.nivelcapa!=5){
+	document.write("<td><td nowrap title='Informacion editada'><input name='cc35' class='boton' type='checkbox' onclick='envia(35,\"locrurpol_ext_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>")
+}
+//-----------------------------------
+document.write("<tr>");
+if (parent.edmz==1 && edicion1==edicion2){
+	document.write("<td nowrap title='Editar Manzanas'><img id='edit_mz' src='images/editar0.png' onclick=\"editar('mz');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:50,000'><input name='cc12' class='boton' type='checkbox' onclick='envia(12,\"mza\",this.checked,1)'> <img src='images/mzn.png'></img> Manzs Base");
+
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:20,000'><input name='ct12' class='boton' type='checkbox' onclick='envia(12,\"mzaet\",this.checked,2)'> <b>T</b>");
+
+if (parent.nivelcapa!=5){
+	document.write("<td nowrap title='Informacion editada'><input name='cc13' class='boton' type='checkbox' onclick='envia(13,\"mza_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+}
+
+
+//frentes
+document.write("<tr>");
+document.write("<td><td nowrap title='Se visualiza a una escala menor de 1:5,000'><input name='cc39' class='boton' type='checkbox' onclick='envia(39,\"cat_frentes\",this.checked,1)'> <img src='images/via.png'></img> Frentes (actual)");
+
+
+document.write("<tr>");
+if (parent.edmz==1 && edicion1==edicion2){
+	document.write("<td nowrap title='Editar Caserios'><img id='edit_cd' src='images/editar0.png' onclick=\"editar('cd');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:20,000'><input name='cc22' class='boton' type='checkbox' onclick='envia(22,\"caserio\",this.checked,1)'> <img src='images/caserio.png'></img> Caserio");
+
+if (parent.nivelcapa!=5){
+document.write("<td><td nowrap title='Informacion editada'><input name='cc28' class='boton' type='checkbox' onclick='envia(28,\"caserio_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>")
+}
+//-----------------------------------
+document.write("<tr>");
+if (parent.edloc==1 && 1==1){
+	document.write("<td nowrap title='Editar Locs Vigentes'><img id='edit_lv' src='images/editar0.png' onclick=\"editar('lv');\">");
+}else{
+	document.write("<td nowrap'>");
+}
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:200,000'><input name='cc9' class='boton' type='checkbox' onclick='envia(9,\"locrur1\",this.checked,1)'> <img src='images/lrv.png'></img> Locs. Vigentes&nbsp;&nbsp;");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:100,000'><input name='ct9' class='boton' type='checkbox' onclick='envia(9,\"locruret1\",this.checked,2)'> <b>T</b>");
+	if (parent.nivelcapa!=5){
+		document.write("<td nowrap title='Informacion editada'><input name='cc29' class='boton' type='checkbox' onclick='envia(29,\"locrurmov1\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+}
+//-----------------------------------
+document.write("<tr>");
+//if (parent.edloc==1){
+//	document.write("<td nowrap title='Editar Locs Bajas'><img id='edit_lb' src='images/editar0.png' onclick=\"editar('lb');\">");
+//}else{
+	document.write("<td nowrap'>");
+//}
+document.write("<td nowrap title='Se visualiza a una escala menor de 1:200,000'><input name='cc10' class='boton' type='checkbox' onclick='envia(10,\"locrur0\",this.checked,1)'> <img src='images/lrb.png'></img> Locs. Baja");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:100,000'><input name='ct10' class='boton' type='checkbox' onclick='envia(10,\"locruret0\",this.checked,2)'> <b>T</b>");
+//document.write("<td nowrap title='Informacion editada'><input name='cc30' class='boton' type='checkbox' onclick='envia(30,\"locrurmov0\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+
+
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:100,000'><input name='cc11' class='boton' type='checkbox' onclick='envia(11,\"asen\",this.checked,1)'> <img src='images/ase.png'></img> Asentamientos");
+document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:50,000'><input name='ct11' class='boton' type='checkbox' onclick='envia(11,\"asenet\",this.checked,2)'> <b>T</b>");
+
+
+//if (parent.nivelcapa==3){
+	//document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:30,000'><input name='cc33' class='boton' type='checkbox' onclick='envia(33,\"mza_inv\",this.checked,1)'> <img src='images/mzn_inv.png'></img> Mz INV");
+//}
+
+
+
+//CAPAS PARA EL MODULO
+//if (parent.edmz==1){
+	if (parent.nivelcapa!=5){
+
+
+
+// capa Manz CU
+	document.write("<tr><td nowrap><td colspan=5 nowrap title='Se visualiza a una escala menor de 1:30,000'><input name='cc24' class='boton' type='checkbox' onclick='envia(24,\"mza_bcuu\",this.checked,1)'> <img src='images/mzn_ruv.png'></img> MZ-Proyectadas");
+
+   // para CUR
+		document.write("<tr><td nowrap class=table0><td  class=table0 colspan=5 nowrap title='Se visualiza a una escala menor de 1:30,000'><input name='cc21' class='boton' type='checkbox' onclick='envia(21,\"mza_acu\",this.checked,1)'> <img src='images/mzn_mod.png'></img> MZ-Integracion CUR");
+
+
+
+		document.write("<tr><td nowrap class=table00><td colspan=5 class=table00 nowrap title='Se visualiza a una escala menor de 1:60,000'><input name='cc44' class='boton' type='checkbox' onclick='envia(44,\"mza_mod_locrur\",this.checked,1)'> <img src='images/mzn_mod.png'></img> PE/LR-Integracion CUR");
+
+// para MCC
+/*
+	document.write("<tr><td nowrap class=table0><td class=table0 colspan=5 nowrap title='Se visualiza a una escala menor de 1:60,000'><input name='cc41' class='boton' type='checkbox' onclick='envia(41,\"vw_carga_tcar\",this.checked,1)'> <img src='images/c8.png'></img> CARGA AC-EIC2025");
+
+
+	  document.write("<tr><td nowrap class=table00><td colspan=5 class=table00 nowrap title='Se visualiza a una escala menor de 1:30,000'><input name='cc37' class='boton' type='checkbox' onclick='envia(37,\"mza_mod\",this.checked,1)'> <img src='images/mzn_mcc.png'></img> MZ-Integracion MCC");
+	*/
+	//
+		//document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:30,000'><input name='cc37' class='boton' type='checkbox' onclick='envia(37,\"mza_mod_rech\",this.checked,1)'> <img src='images/mzn_mod_rech.png'></img> MCC-Rechazo");
+  //}
+
+}
+	//document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:200,000'><img border=0  width=16 HEIGHT=16 onclick='javascript:selectapoyo();'  src='images/menu.png' Title='Abrir capas'></img>&nbsp; <img src='images/mzn_ruv.png'></img> Pol. Apoyo");
+
+//document.write("<tr><td nowrap><td nowrap title='Abre ventana de capas del Censo Economico'>&nbsp;<img src='images/menu.png' onclick='abre(\"capas_ce\")'></img>&nbsp;<b>CAPAS CE19</b> ");
+document.write("<tr><td nowrap title='Abre ventana de capas del Censo Economico'><img src='images/menu.png' onclick='abre_ce(event)'></img><td nowrap colspan=5><input name='abCE' class='boton' type='checkbox' disabled> <img src='images/mzn_eco.png'></img><b> CAPAS CE24</b> ");
+
+if (parent.nivelcapa!=5){
+		document.write("<tr><td nowrap title='Se visualiza a una escala menor de 1:30,000'><img src='images/menu.png' onclick='abre_pre(event)'></img><td nowrap><input name='cc23' class='boton' type='checkbox' onclick='envia(23,\"predig\",this.checked,1)'> <img src='images/mzn_predig.png'></img> Mz Pre-Dig.");
+}
+//CAPAS PARA EL MODULO
+
+//-----------------------------------
+
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:20,000'><input name='cc14' class='boton' type='checkbox' onclick='envia(14,\"servs\",this.checked,1)'> <img src='images/ser.png'></img> Servicios");
+//document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:10,000'><input name='cc15' class='boton' type='checkbox' onclick='envia(15,\"vialine\",this.checked,1)'> <img src='images/via.png'></img> Vialidades");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:10,000'><input name='ct15' class='boton' type='checkbox' onclick='envia(15,\"vial\",this.checked,2)'> <img src='images/via.png'></img> Vialidades");
+//document.write("<td nowrap title='Texto de la capa se visualiza a una escala menor de 1:10,000'><input name='ct15' class='boton' type='checkbox' onclick='envia(15,\"vial\",this.checked,2)'> <b>T</b>");
+
+if (parent.nivelcapa!=5){
+	//document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:100,000'><input name='cc31' class='boton' type='checkbox' onclick='envia(31,\"ca_ac\",this.checked,1)'> <img src='images/ac.png'></img> A. Control");
+	document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:60,000'><input name='cc32' class='boton' type='checkbox' onclick='envia(32,\"ca_ni\",this.checked,1)'> <img src='images/terr.png'></img> Terrenos / AC");
+		//document.write("<td><td nowrap title='Informacion editada'><input name='cc42' class='boton' type='checkbox' onclick='envia(42,\"ni_gen\",this.checked,1)'><img src='images/mzn_gen.png'></img>");
+}
+
+	document.write("<tr><td nowrap><td colspan=5 nowrap title='Se visualiza a una escala menor de 1:500,000'><input name='cc40' class='boton' type='checkbox' onclick='envia(40,\"rnc\",this.checked,1)'> <img src='images/rnc.png'></img> Red Carretera 2024");
+//if (parent.iduser==44 || parent.iduser==1320 || parent.iduser==1679){  //solo lo veo yo
+	document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:20,000'><input name='cc38' class='boton' type='checkbox' onclick='envia(38,\"viviendas\",this.checked,1)'> <img src='images/viv.png'></img> Viv CPyV 2020");
+//}
+	//document.write("<tr><td nowrap><td nowrap title=''><input name='cc34' class='boton' type='checkbox' onclick='envia(34,\"denue\",this.checked,1)'> <img src='images/denue.png'></img> DENUE");
+
+document.write("<tr><td nowrap><td nowrap title=''><input name='cc43' class='boton' type='checkbox' onclick='envia(43,\"crecimientos\",this.checked,1)'> <img src='images/mzn_ggl.png'></img> Crecimientos GGL");
+//document.write("<tr><td nowrap><td nowrap title=''><input name='cc45' class='boton' type='checkbox' onclick='envia(45,\"predios_ne\",this.checked,1)'> <img src='images/vac.png' width=14 height=10></img> Predios NE");
+
+if (parent.nivelcapa!=5){
+	document.write("<tr><td nowrap><td nowrap title='Se visualiza a cualquier escala'><input name='cc36' class='boton' type='checkbox' onclick='envia(36,\"anota\",this.checked,1)'> <img src='images/anota.png'></img> Anotaciones");
+	document.write("<tr><td nowrap><td nowrap title='Se visualiza a cualquier escala'><input name='cc16' class='boton' type='checkbox' onclick='envia(16,\"bd_loc\",this.checked,1)'> <img src='images/cap.png'></img> Captura");
+}
+
+document.write("</table></form>");
+
+document.write("</body>");
+
+
+  ////hay que actualizarlo cuando seleccionamos una imagen
+  var capabase='fondovacio';
+	var ncb=0;
+	switch (parent.basesel){
+  	case 'fondovacio': 		capabase='fondovacio';ncb=0;break;
+  	case 'fondo'	: 			capabase='fondo';ncb=1;break;
+    //case 'geoeye2': 		capabase='geoeye2';	ncb=2;break;
+    case 'spot6': 			  capabase='spot6';	ncb=2;break;
+    case 'diglob2': 			capabase='diglob2';ncb=3;break;
+    //case 'diglob': 				capabase='diglob';ncb=4;break;
+    case 'gooimg': 				capabase='gooimg';ncb=4;break;
+    case 'esri': 				  capabase='esri';ncb=5;break;
+    case 'bingimg': 			capabase='bingimg';ncb=6;break;
+  }
+     document.capas.base[ncb].checked=true;
+
+
+function selctlimg(num,val){
+img=num;
+if ((capabase=='diglob' && num==4 && val==true) ){
+		parent.butfedg.activate();
+		//document.getElementById("img13").checked=false;
+}else if (capabase=='diglob2' && num==13 && val==true){
+		//parent.butfedg.activate();
+		//document.getElementById("img4").checked=false;
+}else{
+	parent.butfedg.deactivate();
+	if (num==4){
+				parent.alertmsg("No tiene activada la capa BASE de Digital Globe");
+	}else if (num==13){
+				parent.alertmsg("No tiene activada la capa BASE de DGGMA-CE24");
+	}
+		//document.getElementById("img4").checked=false;
+		//document.getElementById("img13").checked=false;
+}
+}
+
+
+
+
+setTimeout(continua, 1000);
+
+function continua(){
+ //console.log(parent.capasel);
+	for (n=0;n<parent.capasel.length;n++){
+		if (parent.capasel[n]=='1'){
+			eval ('document.capas.cc'+(n+1)+'.checked=true');
+			eval ('var val=document.capas.cc'+(n+1)+'.checked');
+			//console.log (n+1);
+		}
+	}
+	for (n=0;n<parent.textsel.length;n++){
+		if (parent.textsel[n]=='1'){
+			eval ('document.capas.ct'+(n+1)+'.checked=true');
+		}
+	}
+if (parent.map.getScale()<230000){   //2 = openatlas
+	document.capas.base[2].disabled=false;
+}else{
+	document.capas.base[2].disabled=true;
+}
+
+	//parent.veravancepredig.activate();
+    //parent.avdig=1;
+    //parent.cartas5rep.setVisibility(true); 
+
+}
+
+////////////////////////////////////////////////////AL TIRO AL QUITAR O AGREGAR CAPAS DE IMAGENES
+//var dgwms=0;
+//var dgwms2=0;
+
+function envia(num,capa,val,tipo) {
+	if (tipo==0){ //imagen
+		parent.highlight.removeAllFeatures();
+		parent.spot6a.setVisibility(false);
+		//parent.diglob.setVisibility(false);
+		//parent.spot6b.setVisibility(false);
+		//parent.spot6c.setVisibility(false);
+		capabase=capa;
+		if (capabase=='spot6'){
+			cargaatlas();
+	  }
+	}
+	parent.changeFeatureVisibility(num,capa,val,tipo);
+
+     ///aqui era para el logueo de digital globe
+/*
+	if (num==5 && parent.dgwms==0 && tipo==0 && parent.userdg=="0"){  //digital globe
+	 		 var ajax=nuevoAjax();
+
+			//basemap anterior WMS:
+			//https://services.digitalglobe.com/mapservice/wmsaccess?connectid=e9f730a6-bc7b-4c79-89bd-67b4c17d557d
+			//				WMTS:
+			//https://services.digitalglobe.com/earthservice/wmtsaccess?connectid=e9f730a6-bc7b-4c79-89bd-67b4c17d557d
+
+			//securewatch nuevo WMS:
+			//https://securewatch.maxar.com/mapservice/wmsaccess?connectid=d00cf4ef-159e-4abe-bc7b-816599f09238	
+			//        		  WMTS:
+			//https://securewatch.maxar.com/earthservice/wmtsaccess?connectid=d00cf4ef-159e-4abe-bc7b-816599f09238
+
+			//para el ZIP:
+			//https://securewatch.maxar.com/catalogservice/wfsaccess?SERVICE=WFS&REQUEST=GetFeature&typeName=DigitalGlobe:FinishedFeature&VERSION=1.1.0&connectid=d00cf4ef-159e-4abe-bc7b-816599f09238&BBOX=14,-118.5,33,-86&outputFormat=shape-zip&srsName=EPSG:4326
+
+
+					 ajax.open("GET","https://securewatch.maxar.com/earthservice/wmtsaccess?connectid=d00cf4ef-159e-4abe-bc7b-816599f09238&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=DigitalGlobe%3AImageryTileService&STYLE=_null&TILEMATRIXSET=EPSG%3A3857&TILEMATRIX=EPSG%3A3857%3A10&featureProfile=Global_Currency_Profile&TILEROW="+(Math.floor(Math.random() * 1000))+"&TILECOL="+(Math.floor(Math.random() * 1000))+"&FORMAT=image%2Fpng", true);
+			         	ajax.withCredentials=true;
+				        ajax.send(null);
+				       //parent.dgwms=1;
+    }else if (num==5 && parent.dgwms==0 && tipo==0 && parent.userdg!="0"){  //digital globe
+				//parent.diglob.params["CQL_FILTER"] = 'CE90Accuracy is not null';
+					cambiadg();   //aplico si hay filtros seleccionados
+			 	 var ajax=nuevoAjax();
+			 	 var ajax1=nuevoAjax();
+				 //ajax.timeout=2000;
+
+		 	 var val="";
+    	// aqui pongo un ajax para siempre sacar el pssdg
+                 ajax1.open("GET",'obtpassdg.jsp?x='+parent.userdg, true);
+                        ajax1.onreadystatechange=function()
+                        {
+                            if(ajax1.readyState==4)  {
+                                 var val=ajax1.responseText;
+                                if (val=='1' || val==1){
+                                    parent.alertmsg ("No se pudo obtener el pass");
+                                }else{
+                                    parent.passdg=val;
+																	       if (parent.dgwms2==0){
+																				parent.alertmsg('- Logueando DG -');
+																			}
+																	       		setTimeout(function(){
+																			    	//if (parent.dgwms2==0 && ajax.status=='401'){
+																	       			if (parent.dgwms2==0){
+																						ventanadg = window.open("https://"+parent.userdg+":"+val+"@securewatch.maxar.com/earthservice/wmtsaccess?connectid=d00cf4ef-159e-4abe-bc7b-816599f09238&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=DigitalGlobe%3AImageryTileService&STYLE=_null&TILEMATRIXSET=EPSG%3A3857&TILEMATRIX=EPSG%3A3857%3A10&featureProfile=Global_Currency_Profile&TILEROW="+(Math.floor(Math.random() * 1000))+"&TILECOL="+(Math.floor(Math.random() * 1000))+"&FORMAT=image%2Fpng",'AgregarMz','toolbar=no,Resizable=1,scrollbars=1,width=40,height=40,left=0,top=0');
+																		                setTimeout(
+																		                	function(){
+																		                		ventanadg.close();
+
+																		                	},4000);
+																			       		//parent.dgwms2=1;
+																			       	}
+																	      		 }, 2000);
+							   										 }
+                            }
+                        }
+                        ajax1.send(null);
+	}
+	*/
+}
+
+
+
+
+
+function versiones(){
+ventana = window.open('versiones.jsp','Versiones','toolbar=no,Resizable=1,scrollbars=1');
+ventana.focus();
+}
+
+function selectapoyo(){
+ventana = window.open('capasapoyo.jsp','Versiones','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,Resizable=1');
+ventana.focus();
+}
+
+
+
+function mas(){
+	if (capabase=='gooimg'){
+		if (parent.gooimg.opacity>0){
+			parent.gooimg.setOpacity(parent.gooimg.opacity+.1);
+		}
+	}else{
+		eval ('if (parent.'+capabase+'.opacity<1){parent.'+capabase+'.opacity+=.1;parent.'+capabase+'.redraw(true);}');
+		if (capabase=='spot6'){
+			 if (parent.spot6a.opacity<1){
+			 		parent.spot6a.opacity+=.1;
+			 		parent.spot6a.redraw(true);
+			 	}
+		}
+	}
+}
+
+function menos(){
+	if (capabase=='gooimg'){
+		if (parent.gooimg.opacity>0){
+			parent.gooimg.setOpacity(parent.gooimg.opacity-.1);
+		}
+	}else{
+		eval ('if (parent.'+capabase+'.opacity>0){parent.'+capabase+'.opacity-=.1;parent.'+capabase+'.redraw(true);}');
+		if (capabase=='spot6'){
+			 if (parent.spot6a.opacity>0){
+			 		parent.spot6a.opacity-=.1;
+			 		parent.spot6a.redraw(true);
+			 	}
+		}
+
+	}
+}
+
+function editar(val){
+	if (parent.ban1==1){
+		parent.alertmsg ("Ya tiene activada la herramienta de edicion");
+		return false;
+	}
+
+	if (val=='au'){
+			document.getElementById("edit_au").src="images/editar1.png";parent.editarau.activate();parent.editarau.trigger();
+	}else if (val=='pr'){
+			document.getElementById("edit_pr").src="images/editar1.png";parent.editarpr.activate();parent.editarpr.trigger();
+	}else if (val=='pe'){
+			document.getElementById("edit_pe").src="images/editar1.png";parent.editarpe.activate();parent.editarpe.trigger();
+	}else if (val=='lv'){
+			parent.ediloc=1;
+			document.getElementById("edit_lv").src="images/editar1.png";parent.editar.activate();parent.editar.trigger();
+	}else if (val=='lb'){
+			parent.ediloc=0;
+			document.getElementById("edit_lb").src="images/editar1.png";parent.editar.activate();parent.editar.trigger();
+	}else if (val=='mz'){
+			document.getElementById("edit_mz").src="images/editar1.png";parent.editarmz.activate();parent.editarmz.trigger();
+	}else if (val=='cd'){
+			document.getElementById("edit_cd").src="images/editar1.png";parent.editarcd.activate();parent.editarcd.trigger();
+	}
+}
+
+function edita_off(val){
+	if (val=='au'){
+			document.getElementById("edit_au").src="images/editar0.png";parent.editarau.deactivate();
+	}else if (val=='pr'){
+			document.getElementById("edit_pr").src="images/editar0.png";parent.editarpr.deactivate();
+	}else if (val=='pe'){
+			document.getElementById("edit_pe").src="images/editar0.png";parent.editarpe.deactivate();
+	}else if (val=='lv'){
+			document.getElementById("edit_lv").src="images/editar0.png";parent.editar.deactivate();
+	}else if (val=='lb'){
+			document.getElementById("edit_lb").src="images/editar0.png";parent.editar.deactivate();
+	}else if (val=='mz'){
+			document.getElementById("edit_mz").src="images/editar0.png";parent.editarmz.deactivate();
+	}else if (val=='cd'){
+			document.getElementById("edit_cd").src="images/editar0.png";parent.editarcd.deactivate();
+	}
+}
+
+function nuevoAjax()
+{
+    /* Crea el objeto AJAX. Esta funcion es generica para cualquier utilidad de este tipo, por
+    lo que se puede copiar tal como esta aqui */
+    var xmlhttp=false;
+    try {
+        // Creacion del objeto AJAX para navegadores no IE
+        xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }catch(e){
+        try {
+            // Creacion del objet AJAX para IE
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }catch(E){
+            if (!xmlhttp && typeof XMLHttpRequest!=undefined) xmlhttp=new XMLHttpRequest();
+        }
+    }return xmlhttp;
+}
+
+/*
+function cambiadg(e){
+
+//en WMS : COVERAGE_CQL_FILTER=cloudCover<0.05
+//en WMTS : CQL_FILTER=cloudCover<0.05
+
+	//console.log(document.capas.filterfe.value);  //&COVERAGE_CQL_FILTER=acquisitionDate<'5/1/2015'
+	//console.log(document.capas.filternub.value);  //&Coverage_CQL_Filter=cloudCover<.1",
+	parent.filnu=document.capas.filternub.value;
+	parent.filfe=document.capas.filterfe.value;
+
+	if (capabase=='diglob'){
+			if (document.capas.filternub.value=='100' && document.capas.filterfe.value==''){
+				parent.diglob.params["CQL_FILTER"] = 'CE90Accuracy is not null';
+			}else if (document.capas.filternub.value=='100' && document.capas.filterfe.value!=''){
+				parent.diglob.params["CQL_FILTER"] = 'CE90Accuracy is not null AND acquisitionDate<=\''+document.capas.filterfe.value+'\'';
+			}else if (document.capas.filternub.value!='100' && document.capas.filterfe.value==''){
+				parent.diglob.params["CQL_FILTER"] = 'CE90Accuracy is not null AND cloudCover<='+document.capas.filternub.value;
+			}else if (document.capas.filternub.value!='100' && document.capas.filterfe.value!=''){
+				parent.diglob.params["CQL_FILTER"] = 'CE90Accuracy is not null AND acquisitionDate<=\''+document.capas.filterfe.value+'\' AND cloudCover<='+document.capas.filternub.value;
+			}
+
+		parent.diglob.redraw(true);
+		//console.log(parent.diglob);
+
+	}
+}
+*/
+
+
+function  chgpass(){
+	//ventana = window.open('http://'+window.location.hostname+':8888/Edit-Pass/index.php?user='+parent.userdg,'userdg','toolbar=no,Resizable=1,scrollbars=1');  
+	ventana = window.open('zedit-pass.jsp?user='+parent.correodg+'&userdg='+parent.userdg,'userdg','toolbar=no,Resizable=1,scrollbars=1');
+	//ventana = window.open('http://'+window.location.hostname+':8070/openlayers2/zedit-passSigma.jsp?user='+parent.userdg,'userdg','toolbar=no,Resizable=1,scrollbars=1');
+	ventana.focus();
+}
+
+
+var accessToken='';
+parent.dgwms2=0;
+
+function logueoAtlasAUTOMATICO() {
+    const url = 'https://authenticate.foundation.api.oneatlas.airbus.com/auth/realms/IDP/protocol/openid-connect/token';
+    const data = new URLSearchParams({
+      grant_type: 'api_key',
+      apikey: parent.passdg,
+      client_id: 'IDP'
+    });
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data.toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+      accessToken = data.access_token;
+      	 //console.log('TOKEN'+accessToken);
+     			ejecutaAtlas();
+    })
+    .catch(error => console.error('Error en autenticación:', error));
+}
+
+
+	function cargaatlas(){
+	if (capabase!='spot6'){
+				parent.alertmsg ("No tiene selecionada la imagen OneAtlas");
+				return false;
+	}else{
+			//si y apasó una hora no se loguea y se pasa directo a ejecutar
+ 	  	//aqui era el automatico
+
+ 	  	if (parent.dgwms2==0){
+ 	  		logueoAtlasAUTOMATICO();
+ 				parent.dgwms2=1;
+				setTimeout(function(){
+					 		parent.dgwms2=0;              //reinicia a la hora que se loguee de nuevo
+					},3600000);
+ 	  	}else {
+     			ejecutaAtlas();
+ 	  	}
+
+ 	  		/*
+				//logueo anterior por ventana
+				if (parent.dgwms2==0){
+						parent.alertmsg('- Logueando OneAtlas - Tiene 1 minuto para agregar su APIKEY (usuario "APIKEY") -');
+					  ventanadg = window.open("https://access.foundation.api.oneatlas.airbus.com/api/v1/items/ac16e9c8-245b-4e8c-bf11-f11d2c36ee66/wms?LAYERS=layer_0&FORMAT=image%2Fpng&TRANSPARENT=TRUE&VERSION=1.1.1&SRS=EPSG%3A900913&SERVICE=WMS&REQUEST=GetMap&STYLES=&_OLSALT=0.40937971130272244&BBOX=-11567857.100874,2451770.3146697,-11489585.583924,2530041.8316197&WIDTH=512&HEIGHT=512",'AgregarMz','toolbar=no,Resizable=1,scrollbars=1,width=400,height=400,left=0,top=0');
+					        setTimeout(
+					        	function(){
+					        		ventanadg.close();     //cierra la ventana al minuto
+					        	},60000);
+					 				parent.dgwms2=1;
+						 				setTimeout(
+						        	function(){
+						        		parent.dgwms2=0;              //reinicia a la hora que se loguee de nuevo
+						        	},3600000);
+										setTimeout(
+											function(){
+													ejecutaAtlas();            //<muestra las imagenes a los 5 segundos de abrir la ventana
+										},5000);
+					}else{
+					    		ejecutaAtlas();            //<muestra las imagenes
+					}
+					*/
+			}
+		} // funcion carga oneatlas
+
+var conteocarga=0;
+
+function ejecutaAtlas(){
+
+ 	if (conteocarga==0){
+					var baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+					var baseUrlnode = (window.location.origin.replace('8070','3001'));
+					//alert(baseUrlnode);
+					 center = parent.map.getCenter().transform("EPSG:900913", "EPSG:4326");
+				   var ajax=nuevoAjax();
+				   parent.alertmsg("Cargando imagen.....")
+            ajax.open("GET",'obt_atlas.jsp?correo='+parent.correodg+'&api='+parent.passdg+'&filtro='+document.capas.filteratlas.value+'&x='+center.lon+'&y='+center.lat+'&box='+squareCenter()+'&boxtotal='+squareCentertotal(), true);
+            ajax.onreadystatechange=function()
+            {
+                if(ajax.readyState==4)  {
+                    var val=ajax.responseText;
+                    if (val=='1' || val==1){
+                        parent.alertmsg ("No existen coordenadas en este punto "+center.lon.toString().substring(0,8)+" , "+center.lat.toString().substring(0,6));
+                    }else{
+											conteocarga=1;
+											setTimeout(function(){
+					 							conteocarga=0;              //reinicia en 20 segundos para queno den tantos clicks
+											},10000);
+
+                    	val=val.replace(/\n/g, '');
+                    	val=val.replace(/\r/g, '');
+                    	//console.log(val)
+                    	var array=val.split('#');
+                    	var array2;
+											parent.highlight.removeAllFeatures();
+											parent.spot6.setVisibility(false);
+											parent.spot6a.setVisibility(false);
+											//parent.diglob.setVisibility(false);
+											//parent.spot6b.setVisibility(false);
+											//parent.spot6c.setVisibility(false);
+                    	for (var n=0;n<array.length;n++){
+														var array2=array[n].split('&');
+														//console.log(array2);
+                          	var a_id=array2[0];
+            								var a_date=array2[1];
+            								var a_geom=array2[2];
+            								var a_cons=array2[3];
+            								var a_cloud=array2[4];
+            								var a_angle=array2[5];
+          									//parent.alertmsg ("Cargando . . . .  ("+a_date+" / "+a_cons+")");
+            								//        String wmsBaseUrl = "https://access.foundation.api.oneatlas.airbus.com/api/v1/items/";
+														//        String wmsUrl = wmsBaseUrl + a_id + "/wmts";
+														const idimg=a_id;
+            								//a_id="https://access.foundation.api.oneatlas.airbus.com/api/v1/items/"+a_id+"/wms";
+
+
+            								//mapa base:https://view-bm.api.oneatlas.airbus.com/basemap/wmts
+
+            								//reviso la respueta del server si es 403 entonces muestro capa base
+            							  /*if (n==0 && (revisaWMSresponse(`${baseUrl}proxywms?token=${accessToken}&a_id=${a_id}`)) == false){
+            							  						a_id="https://view-bm.api.oneatlas.airbus.com/basemap/wmts";
+					                          		parent.diglob.url=`${baseUrl}proxywms?token=${accessToken}&a_id=${a_id}`;
+					                          		parent.diglob.setVisibility(true);//parent.spot6.redraw(true);
+					                          		parent.alertmsg("!!!!! LAS IMAGENES DE ONEATLAS ESTAN CADUCADAS - SE MUESTRA EL MAPABASE ONEATLAS !!!!!")
+					            							  	break;  //<- se sale del for
+            							  }else{
+            							  	*/
+					            							  switch (n){
+					                        		case 0:
+					                          		//parent.spot6.url='http://dc046068asdggma.inegi.gob.mx:8070/openlayers2/proxywms=https://access.foundation.api.oneatlas.airbus.com/api/v1/items/'+a_id+'/wms';
+					                          		//parent.spot6.url=`${baseUrl}proxywms?token=${accessToken}&a_id=${a_id}`;
+					                    					//parent.spot6.url=`${baseUrlnode}/wms?token=${accessToken}&a_id=${a_id}`;
+					                    					parent.spot6.url=baseUrlnode+"/wmts/tiles/"+idimg+"/"+accessToken+"/1.0.0/default/rgb/EPSG3857/${z}/${x}/${y}.png";
+					                    					//parent.spot6.url=`${a_id}`;
+																				parent.spot6.setVisibility(true);
+																				//parent.spot6.redraw(true);
+					                        			break;
+					                        		/*
+					                        		case 1:
+					                          		parent.spot6c.url='https://access.foundation.api.oneatlas.airbus.com/api/v1/items/'+a_id+'/wms';
+																				parent.spot6c.setVisibility(true);//parent.spot6a.redraw(true);
+					                        			break;
+					                        		case 2:
+					                        			parent.spot6b.url='https://access.foundation.api.oneatlas.airbus.com/api/v1/items/'+a_id+'/wms';
+																				parent.spot6b.setVisibility(true);//parent.spot6b.redraw(true);
+					                        			break;
+					                        		case 3:
+					                        			*/
+					                        		case 1:
+					                          		//parent.spot6a.url=`${baseUrl}proxywms?token=${accessToken}&a_id=${a_id}`;
+					                    					//parent.spot6a.url=`${baseUrlnode}/wms?token=${accessToken}&a_id=${a_id}`;
+      										              parent.spot6a.url=baseUrlnode+"/wmts/tiles/"+idimg+"/"+accessToken+"/1.0.0/default/rgb/EPSG3857/${z}/${x}/${y}.png";
+					                          		//parent.spot6a.url=`${a_id}`;
+																				parent.spot6a.setVisibility(true);
+																				//parent.spot6a.redraw(true);
+					                        			break;
+					                        		}
+																			//a_geom=a_geom.replace('POLYGON','MULTIPOLYGON(')+')';
+																			var geompol = parent.OpenLayers.Geometry.fromWKT(a_geom);
+																			var feature = new parent.OpenLayers.Feature.Vector(geompol, {}, {
+					  															strokeColor: '#FFFF00', // Color de la línea amarilla (hex para amarillo)
+																					strokeOpacity: 0.7,       // Opacidad de la línea (1 = opaco)
+																					strokeWidth: 2,         // Grosor de la línea
+																					fillOpacity: 0,
+																					label: a_date+" / "+a_cons,   // Texto que quieres mostrar
+																			    fontColor: "#FFFF00",     // Color del texto (negro)
+																			    fontSize: "12px",         // Tamaño de la fuente
+																			    fontFamily: "Arial, sans-serif", // Familia de la fuente
+																			    fontWeight: "bold",       // Peso de la fuente (negrita)
+																			    labelAlign: "cm",         // Alineación del texto (centro medio)
+																			    labelXOffset: 0,          // Desplazamiento horizontal del texto
+																			    labelYOffset: 0           // Desplazamiento vertical del texto
+					         										});
+															        parent.highlight.addFeatures([feature]);
+            							  //}   --- ELSE del revisaWMSresponse
+											} //for
+                    } //else
+                }// if ajax
+            }
+            ajax.send(null);
+
+    } else {//conteocarga
+				   parent.alertmsg("Espere a que cargue la imagen.....")
+    }
+}
+
+
+
+var style = {
+    strokeColor: '#FFFF00',   // Color de la línea amarilla
+    strokeOpacity: 0.7,       // Opacidad de la línea
+    strokeWidth: 2,           // Grosor de la línea
+    fillOpacity: 0,           // Sin relleno
+
+};
+
+
+function revisaWMSresponse(serv){
+//console.log(serv);
+fetch(serv)
+    .then(response => {
+        //console.log('Status Code:', response.status); // Muestra el código de estado
+        if (!response.ok) {
+        	return false;
+        }else{
+        	return true;
+        }
+    });
+}
+
+
+function squareCenter(){
+		var maxExtent = parent.map.getExtent();
+		var anchoTotal = maxExtent.getWidth();
+		var altoTotal = maxExtent.getHeight();
+		var ancho30 = anchoTotal * 0.1; // 10% del ancho
+		var alto30 = altoTotal * 0.1;  // 10% del alto
+		var centroX = maxExtent.getCenterLonLat().lon; // Coordenada X del centro
+		var centroY = maxExtent.getCenterLonLat().lat; // Coordenada Y del centro
+		var minX = centroX - ancho30 / 2; // Límite izquierdo
+		var maxX = centroX + ancho30 / 2; // Límite derecho
+		var minY = centroY - alto30 / 2; // Límite inferior
+		var maxY = centroY + alto30 / 2; // Límite superior
+		/*
+		var cuadro30 = new parent.OpenLayers.Bounds(minX, minY, maxX, maxY);
+		// Dibujar el cuadro en el mapa (opcional)
+		var cuadroFeature = new parent.OpenLayers.Feature.Vector(
+		    cuadro30.toGeometry(), 
+		    {}, 
+		    {
+		        strokeColor: "#FF0000", // Rojo para el contorno
+		        strokeWidth: 2,         // Ancho de la línea
+		        fillColor: "#FF0000",   // Relleno rojo (transparente si lo deseas)
+		        fillOpacity: 0.3        // Opacidad del relleno
+		    }
+		);
+		parent.puntogen.addFeatures([cuadroFeature]);
+		*/
+		//x1 y1, x2 y2, x3 y3, x1 y1
+		return (minX+" "+minY+","+maxX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+minX+" "+minY);
+}
+
+function squareCentertotal(){
+		var maxExtent = parent.map.getExtent();
+		var minX = maxExtent.left; // Límite izquierdo
+		var maxX = maxExtent.right; // Límite derecho
+		var minY = maxExtent.bottom; // Límite inferior
+		var maxY = maxExtent.top; // Límite superior
+
+		//x1 y1, x2 y2, x3 y3, x1 y1
+		return (minX+" "+minY+","+maxX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+minX+" "+minY);
+}
+
+
+
+//document.addEventListener("click", printMousePos(0,event));  zedit-pass
+
+function abre_ce(event) {
+
+	parent.document.getElementById('ventana-flotante_ce').className = 'mostrar_ce';
+	parent.document.getElementById("ventana-flotante_ce").style.top = (event.clientY) + "px";
+parent.document.getElementById('ventana-flotante_pre').className = 'oculto_pre';
+
+}
+
+function abre_pre(event) {
+
+	parent.document.getElementById('ventana-flotante_pre').className = 'mostrar_pre';
+	parent.document.getElementById("ventana-flotante_pre").style.top = (event.clientY) + "px";
+	parent.document.getElementById('ventana-flotante_ce').className = 'oculto_ce';
+
+
+}
+
+</script>
+</html>

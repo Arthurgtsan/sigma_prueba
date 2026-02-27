@@ -1,0 +1,31 @@
+# Maven
+target/
+*.log
+*.class
+*.jar
+*.war
+*.ear
+
+# Package Files (incluye zips y otros archivos comprimidos)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.bz2
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Otros comunes
+*.bak
+*.tmp
+.DS_Store  # si usas Mac
+Thumbs.db  # si usas Windows
+
+*.doc   # o *.docx si aplica
+manuales/   # si quieres ignorar toda la carpeta manuales/

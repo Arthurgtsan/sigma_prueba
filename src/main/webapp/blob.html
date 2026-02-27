@@ -1,0 +1,24 @@
+<script src="OpenLayers/OpenLayers.js"></script>
+<div id="map" style="width:100%; height:500px;"></div>
+
+<script>
+  const map = new OpenLayers.Map("map", {
+    projection: new OpenLayers.Projection("EPSG:3857"),
+    displayProjection: new OpenLayers.Projection("EPSG:4326")
+  });
+
+  const oneAtlasLayer = new OpenLayers.Layer.XYZ(
+    "OneAtlas XYZ vía Proxy",
+    "http://localhost:3001/wmts/tiles/34/33/1.0.0/default/rgb/EPSG3857/${z}/${x}/${y}.png",
+    {
+      sphericalMercator: true,
+      isBaseLayer: true,
+      wrapDateLine: true
+    }
+  );
+
+  map.addLayer(oneAtlasLayer);
+
+  // Centra el mapa (ajusta si necesitas)
+  map.setCenter(new OpenLayers.LonLat(-11377671, 2495864), 10);
+</script>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+      <session-config>
+        <session-timeout>
+            120
+        </session-timeout>
+    </session-config>
+
+<servlet>
+  <servlet-name>proxy</servlet-name>
+  <servlet-class>mx.org.inegi_nuevo_sigma_historicos_prueba.dao.ProxyServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>proxy</servlet-name>
+  <url-pattern>/cgi-bin/proxy.cgi</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>ProxyWMS</servlet-name>
+    <servlet-class>ProxyWMS</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ProxyWMS</servlet-name>
+    <url-pattern>/proxywms</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>ChatGPTServlet</servlet-name>
+    <servlet-class>ChatGPTServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ChatGPTServlet</servlet-name>
+    <url-pattern>/ask</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>DeepSeekServlet</servlet-name>
+    <servlet-class>DeepSeekServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DeepSeekServlet</servlet-name>
+    <url-pattern>/deepseek</url-pattern>
+</servlet-mapping>
+
+
+</web-app>

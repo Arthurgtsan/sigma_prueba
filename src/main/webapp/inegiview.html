@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<title>Visor Inegi View</title>
+<!--<script src="wheelzoom.js"></script>-->
+</head>
+<body onunload="inegiUnload()">
+<center>
+<table width=600 border=0><tr><td width=20%>
+<img id="imgizquierda" onclick='cambiavista(1)' title='Vista Izquierda' src="OpenLayers/theme/default/img/izquierda.png";></img>
+<img id="imgfrente" onclick='cambiavista(2)' title='Vista Frente' src="OpenLayers/theme/default/img/frente.png";></img>
+<img id="imgderecha" onclick='cambiavista(3)' title='Vista Derecha' src="OpenLayers/theme/default/img/derecha.png";></img>
+<td align=center><!--<img id="idatras" onclick='atras()' title='Imagen Anterior' src="OpenLayers/theme/default/img/anterior.png";></img>-->
+				 <img id="idplay" onclick='play()' title='Play/Pause' src="OpenLayers/theme/default/img/play.png";></img>
+				 <!--<img id="idadelante" onclick='adelante()' title='Imagen Siguiente' src="OpenLayers/theme/default/img/adelante.png";></img>-->
+<td align=right width=20%><img id="imgsal" onclick='entra()' title='Meter ventana' src="OpenLayers/theme/default/img/ventana_entra.png";></img>
+</table>
+<div name="pano" id="pano"></div>
+</center>
+
+<script type="text/javascript">
+//wheelzoom(document.querySelector('img.zoom'));
+window.resizeTo(680,540);
+opener.winInegi=1;
+var lat_param = gup('lat');
+var long_param = gup('lon');
+var bandera = 0;
+var ruta = 0;
+var gid = 0;
+var num = 0;
+var tiporuta = 0;
+var v;
+
+var result = "null";
+var archivo='video';
+
+
+function cambiavista(n){
+	v.pause();
+switch (n){
+	case 1:archivo='videoi';break;
+	case 2:archivo='video';break;
+	case 3:archivo='videod';break;
+	}
+	queryImg(gid,num-1,ruta,1);
+	if (inter==1){
+		setTimeout(function(){ 
+			document.getElementById("idplay").src="OpenLayers/theme/default/img/pausa.png";
+			v.play();
+			inter=1;
+		}, 1000);
+	}
+}
+
+
+function entra(){
+	inter=0;
+	opener.min_ventana_inegi(long_param,lat_param);
+	window.close();
+}
+
+
+function inegiUnload(){
+	opener.winInegi=0;
+}
+
+function nuevoAjax()
+{
+    /* Crea el objeto AJAX. Esta funcion es generica para cualquier utilidad de este tipo, por
+    lo que se puede copiar tal como esta aqui */
+    var xmlhttp=false;
+    try {
+        // Creacion del objeto AJAX para navegadores no IE
+        xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }catch(e){
+        try {
+            // Creacion del objet AJAX para IE
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }catch(E){
+            if (!xmlhttp && typeof XMLHttpRequest!=undefined) xmlhttp=new XMLHttpRequest();
+        }
+    }return xmlhttp;
+}
+
+
+function gup(name)
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
+
+
+function atras(){
+if (bandera==1){
+	inter=0;
+	queryImg(gid,num,ruta,3);
+}
+}
+
+function adelante(){
+if (bandera==1){
+	inter=0;
+	queryImg(gid,num,ruta,2);
+}
+}
+
+var inter=0;
+function play(){
+if (tiporuta==1){
+	if (bandera==1){
+		if (inter==0){ //sin play lo activa
+			document.getElementById("idplay").src="OpenLayers/theme/default/img/pausa.png";
+			inter=1;
+			play2();
+		}else{
+			document.getElementById("idplay").src="OpenLayers/theme/default/img/play.png";
+			inter=0;
+			}
+	}
+}else if (tiporuta==2){
+		if (inter==0){ //sin play lo activa
+			document.getElementById("idplay").src="OpenLayers/theme/default/img/pausa.png";
+			v.play();
+			inter=1;
+		}else{
+			document.getElementById("idplay").src="OpenLayers/theme/default/img/play.png";
+			v.pause();
+			inter=0;
+			}
+}
+}
+
+function play2(){
+if (bandera==1){
+	if (inter==1){ //sin play lo activa
+		queryImg(gid,num,ruta,2);
+		setTimeout(function(){ 
+			play2();
+		}, 2000);
+	}
+}
+}
+
+var seg=0;
+
+function queryImg(v_gid,v_num,v_ruta,tipo){
+	var ajax=nuevoAjax();
+	var ajax1=nuevoAjax();
+	ajax.open("GET",'obt_inegipoint.jsp?x='+long_param+'&y='+lat_param+'&gid='+v_gid+'&num='+v_num+'&ruta='+v_ruta+'&tipo='+tipo, true);
+	ajax.onreadystatechange=function()
+	{
+		if(ajax.readyState==4)  {
+			 var val=ajax.responseText.trim();
+			if (val=='x'){
+				bandera=0;
+				ruta=0;
+				archivo='video';
+				num=0;
+				tiporuta=0;
+				gid=0;
+				inter=0;
+				document.getElementById("idplay").src="OpenLayers/theme/default/img/play.png";
+				panoDiv.innerHTML = '<br><center>No hay informacion de Mapas para esta ubicacion.</center>';
+			}else{
+				var res = val.split("|");
+				bandera=1;
+				tiporuta=2;     //tiporuta=res[0];
+				gid=res[0];
+				ruta=res[1];
+				num=res[2];
+				long_param=res[3];
+				lat_param=res[4];
+				//panoDiv.innerHTML = "<img  class='zoom' src='http://geoicr011456w:8070/bcuu/rutas/"+ruta+"/"+archivo+"' onclick=\"window.open('http://geoicr011456w:8070/bcuu/rutas/"+ruta+"/"+archivo+"','Imagen');\" width=600 height=400></img>";
+				if (tiporuta==1){
+					panoDiv.innerHTML = "<img class='zoom' src='http://dc046068asdggma.inegi.gob.mx:8070/rutas/"+ruta+"/"+archivo+".mp4' width=600 height=400></img>";
+					//wheelzoom(document.querySelector('img.zoom'));
+				}else if (tiporuta==2){
+					panoDiv.innerHTML = "<video src='http://dc046068asdggma.inegi.gob.mx:8070/rutas/"+ruta+"/"+archivo+".mp4' controls width='600' height='400'>Tu navegador no implementa el elemento video</video>";
+					v = document.getElementsByTagName("video")[0];
+					//document.getElementById("idatras").style.display = 'none'
+					//document.getElementById("idadelante").style.display = 'none'
+					v.currentTime = num;
+					seg=num;
+					v.addEventListener("timeupdate",function(ev){
+						var entero=parseInt(v.currentTime);
+						if (seg!=entero){
+							ajax1.open("GET",'obt_inegipoint_video.jsp?num='+entero+'&ruta='+ruta, true);
+							ajax1.onreadystatechange=function(){
+								if(ajax1.readyState==4)  {
+								 var val=ajax1.responseText.trim();
+								if (val=='x'){
+									bandera=0;
+									ruta=0;
+									archivo='video';
+									num=0;
+									gid=0;
+									inter=0;
+									document.getElementById("idplay").src="OpenLayers/theme/default/img/play.png";
+									panoDiv.innerHTML = '<br><center>No hay informacion de Mapas para esta ubicacion.</center>';
+								}else{
+									var res = val.split("|");
+									bandera=1;
+									tiporuta=2;     //tiporuta=res[0];
+									gid=res[0];
+									ruta=res[1];
+									num=res[2];
+									long_param=res[3];
+									lat_param=res[4];
+									var size = new opener.OpenLayers.Size(13,20);
+									var icon = new opener.OpenLayers.Icon('images/inegiv.png',size);
+									if (opener.markers.markers.length>0){  //si ya existe solo la muevo
+										opener.markers.clearMarkers();
+									}
+									geometry = new opener.OpenLayers.Geometry.Point(long_param, lat_param);
+									//geometry.transform(new opener.OpenLayers.Projection('EPSG:32800'),new opener.OpenLayers.Projection('EPSG:900913'));
+									opener.markers.addMarker(new opener.OpenLayers.Marker(new opener.OpenLayers.LonLat( geometry.x,geometry.y),icon));
+								}
+								}
+							}
+							ajax1.send(null);
+							seg=entero;
+						}
+					},true);
+				}
+				var size = new opener.OpenLayers.Size(13,20);
+				var icon = new opener.OpenLayers.Icon('images/inegiv.png',size);
+				if (opener.markers.markers.length>0){  //si ya existe solo la muevo
+					opener.markers.clearMarkers();
+				}
+				geometry = new opener.OpenLayers.Geometry.Point(long_param, lat_param);
+				//geometry.transform(new opener.OpenLayers.Projection('EPSG:32800'),new opener.OpenLayers.Projection('EPSG:900913'));
+				opener.markers.addMarker(new opener.OpenLayers.Marker(new opener.OpenLayers.LonLat( geometry.x,geometry.y),icon));
+			}
+		}
+	}
+	ajax.send(null);
+}
+
+   var panoDiv = document.getElementById("pano");
+       panoDiv.style.width = '600px';
+       panoDiv.style.height = '400px';
+	queryImg(gid,num,ruta,1);
+
+</script>
+</body>
+</html>

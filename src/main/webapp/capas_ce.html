@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Selector de Capas</title>
+</head>
+<script type="text/javascript">
+var img=0;
+document.write("<body><form name='capas'>");
+document.write("<table style='font-family: Arial; sans-serif;font-size: 12px;margin:0;padding:0;border:0;font-weight: normal;border-spacing:0;' cellspacing=0 cellpadding=0><tr><td nowrap>&nbsp;&nbsp;&nbsp;<td nowrap><b>CAPAS CE 2024</b>");
+var nom="";
+
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:200,000''><input name='pe1' class='boton' type='checkbox' onclick='envia(1,\"ce_c1\",this.checked,1)'> <img src='images/cepunto.png'></img> Locs. Economicas");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:20,000''><input name='pe2' class='boton' type='checkbox' onclick='envia(2,\"ce_c2\",this.checked,1)'> <img src='images/cepol.png'></img> Parques Industriales");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:20,000''><input name='pe3' class='boton' type='checkbox' onclick='envia(3,\"ce_c3\",this.checked,1)'> <img src='images/cepunto.png'></img> Puntos de Arribo");
+document.write("<tr><td nowrap><td nowrap title='Se visualiza a una escala menor de 1:20,000''><input name='pe4' class='boton' type='checkbox' onclick='envia(4,\"ce_c4\",this.checked,1)'> <img src='images/denue.png'></img> Puntos DENUE");
+
+document.write("</table></form></body>");
+setTimeout(continua, 1000);
+
+function continua(){
+	//console.log(parent.puntosel_ce);
+	for (n=0;n<parent.puntosel_ce.length;n++){
+		if (parent.puntosel_ce[n]=='1'){
+			eval ('document.capas.pe'+(n+1)+'.checked=true');
+		}
+	}
+}
+
+function envia(num,capa,val,tipo) {
+	parent.changeFeatureVisibilitypunto_ce(num,capa,val,tipo);
+}
+
+
+</script>
+</html>

@@ -1,0 +1,1259 @@
+/**
+ * CSS Reset
+ * From Blueprint reset.css
+ * http://blueprintcss.googlecode.com
+ */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr, th, td {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
+table {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
+body {line-height:1.5;}
+table {border-collapse:separate;border-spacing:0;}
+caption, th, td {text-align:left;font-weight:normal;}
+table, td, th {vertical-align:middle;}
+blockquote:before, blockquote:after, q:before, q:after {content:"";}
+blockquote, q {quotes:"" "";}
+a img {border:none;}
+
+/**
+ * Basic Typography
+ */
+body {
+    font-family: "Lucida Grande", Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    color: #222;
+    margin: 3px 3px;
+}
+pre, code {
+    margin: 1.5em 0;
+    white-space: pre;
+}
+pre, code {
+    font: 1em 'andale mono', 'lucida console', monospace;
+    line-height:1.5;
+}
+a[href] {
+    color: #436976;
+    background-color: transparent;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #003a6b;
+    background-color: transparent;
+    font: 100% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 0.5em;
+}
+h1 {
+    font-size: 130%;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #fcb100;
+}
+h2 {
+    font-size: 120%;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #aaa;
+}
+h3 {
+    font-size: 110%;
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+}
+h4 {
+    font-size: 100%;
+    font-weight: bold;
+}
+h5 {
+    font-size: 100%;
+    font-weight: bold;
+}
+h6 {
+    font-size: 80%;
+    font-weight: bold;
+}
+
+/**
+ * Map Examples Specific
+ */
+.smallmap {
+    width: 512px;
+    height: 256px;
+    border: 1px solid #ccc;
+}
+#tags {
+    display: none;
+}
+
+#docs p {
+    margin-bottom: 0.5em;
+}
+/* mobile specific */
+@media only screen and (max-width: 600px) {
+    body {
+        height           : 100%;
+        margin           : 0;
+        padding          : 0;
+        width            : 100%;
+    }
+    #map {
+        background : #7391ad;
+        width      : 100%;
+    }
+    #map {
+        border : 0;
+        height : 250px;
+    }
+    #title {
+        font-size   : 1.3em;
+        line-height : 2em;
+        text-indent : 1em;
+        margin      : 0;
+        padding     : 0;
+    }
+    #docs {
+        bottom     : 0;
+        padding    : 1em;
+    }
+    #shortdesc {
+        color      : #aaa;
+        font-size  : 0.8em;
+        padding    : 1em;
+        text-align : right;
+    }
+    #tags {
+        display : none;
+    }
+}
+@media only screen and (orientation: landscape) and (max-width: 600px) {
+    #shortdesc {
+       float: right;
+       width: 25%;
+    }
+    #map {
+        width: 70%;
+    }
+    #docs {
+        font-size: 12px;
+    }
+}
+body {
+    -webkit-text-size-adjust: none;
+}
+html, body { height: 99% }
+    #map {
+      width: 100%;
+      height: 95%;
+      /*border: 1px solid black;*/
+      }
+    #coords {
+      font-family: Arial;
+      font-size: 0.75em;
+      color: black;
+      }
+    #output {
+      font-family: Arial;
+      font-size: 10px;
+      color: black;
+	  text-align : right;
+      }
+
+.search {      font-family: Arial;      font-size: 8pt;      color: black;	 line-height: 1.6 }
+.search1 {      font-family: Arial;      font-size: 1em;      color: black;	  }
+.boton{font-family: Arial; font-size: 10px; line-height: 1.3; font-weight: normal;}
+.input{font-family: Verdana,sans-serif; font-size: 10px; line-height: 1.3;font-weight: normal;}
+    div.olControlMousePosition {
+      font-family: Arial;
+      font-size: 0.75em;
+      color: black;
+      }
+
+    div.olControlScaleLine {
+      font-family: Arial;
+      font-size: 0.75em;
+      color: black;
+      }
+     .olControlScale {
+    font-family: Arial;
+      font-size: 0.75em;
+      color: black;
+        }
+        .customEditingToolbar {
+            float: right;
+            right: 0px;
+            height: 30px;
+            width: 600px;
+        }
+        .customEditingToolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+        .olControlNavigationItemActive {
+            background-image: url("OpenLayers/theme/default/img/editing_tool_bar.png");
+            background-repeat: no-repeat;
+            background-position: -103px -23px;
+        }
+        .olControlNavigationItemInactive {
+            background-image: url("OpenLayers/theme/default/img/editing_tool_bar.png");
+            background-repeat: no-repeat;
+            background-position: -103px -0px;
+        }
+        .olControlDrawFeaturePointItemInactive {
+            background-image: url("OpenLayers/theme/default/img/editing_tool_bar.png");
+            background-repeat: no-repeat;
+            background-position: -77px 0px;
+        }
+        .olControlDrawFeaturePointItemActive {
+            background-image: url("OpenLayers/theme/default/img/editing_tool_bar.png");
+            background-repeat: no-repeat;
+            background-position: -77px -23px ;
+        }
+        .olControlModifyFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifyFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifylimFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_lim_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifylimFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_lim_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeleteFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/remove_point_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeleteFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/remove_point_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeleteFeaturecasItemActive {
+            background-image: url("OpenLayers/theme/default/img/cas_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeleteFeaturecasItemInactive {
+            background-image: url("OpenLayers/theme/default/img/cas_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeletemultiFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/remove_multi_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeletemultiFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/remove_multi_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSelectFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/info_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSelectFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/info_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+		.olControlZoomBoxItemInactive {
+			background-image: url('OpenLayers/theme/default/img/drag-rectangle-off.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlZoomBoxItemActive {
+			background-image: url('OpenLayers/theme/default/img/drag-rectangle-on.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlZoomToMaxExtentItemInactive {
+			background-image: url('OpenLayers/theme/default/img/zoom-world-mini.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlMeasureItemActive {
+			background-image: url('OpenLayers/theme/default/img/measuring-stick-on.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlMeasureItemInactive {
+			background-image: url('OpenLayers/theme/default/img/measuring-stick-off.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlButmpItemInactive {
+			background-image: url('OpenLayers/theme/default/img/md.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlButgeItemInactive {
+			background-image: url('OpenLayers/theme/default/img/ge.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlprintMappdfItemInactive {
+			background-image: url('OpenLayers/theme/default/img/pdf.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+		.olControlprintMapjpgItemInactive {
+            background-image: url('OpenLayers/theme/default/img/jpg.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlprintMaplanoItemInactive {
+            background-image: url('OpenLayers/theme/default/img/plano.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlprintMaplanoactItemInactive {
+            background-image: url('OpenLayers/theme/default/img/plano2.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlVentanaErrorItemInactive {
+            background-image: url('OpenLayers/theme/default/img/error.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlVentanaTempItemInactive {
+            background-image: url('OpenLayers/theme/default/img/lcla.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+		.olControlpuntoItemInactive {
+			background-image: url('OpenLayers/theme/default/img/punto.png');
+			background-repeat: no-repeat;
+            background-position: 0px 1px;
+		}
+        .olControleditarItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_point_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarCancelItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_point_cancel.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_point_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarmzItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControldeshabilitadoItemInactive {
+            background-image: url('OpenLayers/theme/default/img/deshabilitado.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarmzCancelItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_cancel.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarmzItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarcdItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarcdCancelItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_cancel.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarcdItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_manz_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSaveFeaturesItemInactive {
+            background-image: url("OpenLayers/theme/default/img/save_features_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+		.olControlNavigationHistoryPreviousItemInactive{
+            background-image: url("OpenLayers/theme/default/img/view_previous_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+	   .olControlNavigationHistoryPreviousItemActive{
+            background-image: url("OpenLayers/theme/default/img/view_previous_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+		.olControlNavigationHistoryNextItemInactive{
+            background-image: url("OpenLayers/theme/default/img/view_next_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlNavigationHistoryNextItemActive{
+            background-image: url("OpenLayers/theme/default/img/view_next_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlEditManualItemInactive {
+            background-image: url('OpenLayers/theme/default/img/editman.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlStreetvItemActive{
+            background-image: url("OpenLayers/theme/default/img/streetv_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlStreetvItemInactive {
+            background-image: url('OpenLayers/theme/default/img/streetv_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        
+        .olControlInegivItemActive{
+            background-image: url("OpenLayers/theme/default/img/inegiv_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlInegivItemInactive {
+            background-image: url('OpenLayers/theme/default/img/inegiv_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlAltitudItemActive{
+            background-image: url("OpenLayers/theme/default/img/altitud_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAltitudItemInactive {
+            background-image: url('OpenLayers/theme/default/img/altitud_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlCapastemActive{
+            background-image: url("OpenLayers/theme/default/img/capas.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCapasItemInactive {
+            background-image: url('OpenLayers/theme/default/img/capas.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlValItemActive{
+            background-image: url("OpenLayers/theme/default/img/vali_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlValItemInactive {
+            background-image: url('OpenLayers/theme/default/img/vali_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlPenItemActive{
+            background-image: url("OpenLayers/theme/default/img/pen_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlPenItemInactive {
+            background-image: url('OpenLayers/theme/default/img/pen_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlCloseItemActive{
+            background-image: url("OpenLayers/theme/default/img/close.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCloseItemInactive {
+            background-image: url('OpenLayers/theme/default/img/close.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlCoordsItemActive{
+            background-image: url("OpenLayers/theme/default/img/coor_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCoordsItemInactive {
+            background-image: url('OpenLayers/theme/default/img/coor_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlCoordsFItemActive{
+            background-image: url("OpenLayers/theme/default/img/drawF_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCoordsFItemInactive {
+            background-image: url('OpenLayers/theme/default/img/drawF_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlAddsapItemActive{
+            background-image: url("OpenLayers/theme/default/img/sap_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAddsapItemInactive {
+            background-image: url('OpenLayers/theme/default/img/sap_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+       .olControlBookmarksItemActive{
+            background-image: url("OpenLayers/theme/default/img/mark_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlBookmarksItemInactive {
+            background-image: url('OpenLayers/theme/default/img/mark_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlSplitItemInactive {
+            background-image: url("OpenLayers/theme/default/img/split_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSplitItemActive {
+            background-image: url("OpenLayers/theme/default/img/split_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlMergeItemInactive {
+            background-image: url("OpenLayers/theme/default/img/merge_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlMergeItemActive {
+            background-image: url("OpenLayers/theme/default/img/merge_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlTextItemInactive {
+            background-image: url("OpenLayers/theme/default/img/text_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlTextItemActive {
+            background-image: url("OpenLayers/theme/default/img/text_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawFeaturePolygonItemInactive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygon_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawFeaturePolygonItemActive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygon_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+        .olControlDrawmultiFeaturePolygonItemInactive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygonmulti_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawmultiFeaturePolygonItemActive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygonmulti_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+        .olControlModify2FeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModify2FeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifymzFeatureItemActive {
+            background-image: url("OpenLayers/theme/default/img/edit_polygon_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifymzFeatureItemInactive {
+            background-image: url("OpenLayers/theme/default/img/edit_polygon_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSubmulItemActive {
+            background-image: url("OpenLayers/theme/default/img/submul_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlSubmulItemInactive {
+            background-image: url("OpenLayers/theme/default/img/submul_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlRecargarItemInactive {
+            background-image: url("OpenLayers/theme/default/img/recargar.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlManualItemInactive {
+            background-image: url("OpenLayers/theme/default/img/man.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAtrasItemInactive {
+            background-image: url("OpenLayers/theme/default/img/atras.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlShapeItemActive {
+            background-image: url("OpenLayers/theme/default/img/shape_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlShapeItemInactive {
+            background-image: url("OpenLayers/theme/default/img/shape_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+            .olControlQRItemInactive {
+            background-image: url("OpenLayers/theme/default/img/QR_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlModcarItemInactive {
+            background-image: url("OpenLayers/theme/default/img/modcar.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAgmzItemActive {
+            background-image: url("OpenLayers/theme/default/img/agm_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAgmzItemInactive {
+            background-image: url("OpenLayers/theme/default/img/agm_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAgmz_preItemActive {
+            background-image: url("OpenLayers/theme/default/img/agmpre_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlAgmz_preItemInactive {
+            background-image: url("OpenLayers/theme/default/img/agmpre_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlInv_puntoItemActive {
+            background-image: url("OpenLayers/theme/default/img/inv_punto_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlInv_puntoItemInactive {
+            background-image: url("OpenLayers/theme/default/img/inv_punto_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+       .olControlFechadgItemActive{
+            background-image: url("OpenLayers/theme/default/img/dg_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlFechadgItemInactive {
+            background-image: url('OpenLayers/theme/default/img/dg_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControldesurbItemActive {
+            background-image: url('OpenLayers/theme/default/img/desu_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControldesurbItemInactive {
+            background-image: url('OpenLayers/theme/default/img/desu_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarFItemActive {
+            background-image: url('OpenLayers/theme/default/img/drawF_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarFItemInactive {
+            background-image: url('OpenLayers/theme/default/img/drawF_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarEItemActive {
+            background-image: url('OpenLayers/theme/default/img/drawE_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarEItemInactive {
+            background-image: url('OpenLayers/theme/default/img/drawE_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarOItemActive {
+            background-image: url('OpenLayers/theme/default/img/drawO_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarOItemInactive {
+            background-image: url('OpenLayers/theme/default/img/drawO_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+        .olControlDrawFeatureLineItemInactive {
+            background-image: url("OpenLayers/theme/default/img/draw_line_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawFeatureLineItemActive {
+            background-image: url("OpenLayers/theme/default/img/draw_line_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+
+
+
+
+        .olControlButdigaItemActive {
+            background-image: url('OpenLayers/theme/default/img/repdig_a_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButdigaItemInactive {
+            background-image: url('OpenLayers/theme/default/img/repdig_a_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlButdigqItemInactive {
+            background-image: url('OpenLayers/theme/default/img/repdig_q.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+        .olControlButAvDigItemActive {
+            background-image: url('OpenLayers/theme/default/img/avance_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButAvDigItemInactive {
+            background-image: url('OpenLayers/theme/default/img/avance_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+        .olControlButcoberturaItemActive {
+            background-image: url('OpenLayers/theme/default/img/cober_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButcoberturaItemInactive {
+            background-image: url('OpenLayers/theme/default/img/cober_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlButcoberturaceItemActive {
+            background-image: url('OpenLayers/theme/default/img/cober_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButcoberturaceItemInactive {
+            background-image: url('OpenLayers/theme/default/img/cober_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlButcoberturapobItemActive {
+            background-image: url('OpenLayers/theme/default/img/censo_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButcoberturapobItemInactive {
+            background-image: url('OpenLayers/theme/default/img/censo_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+
+
+        .olControlButcoberturapobcensoItemActive {
+            background-image: url('OpenLayers/theme/default/img/censo_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlButcoberturapobcensoItemInactive {
+            background-image: url('OpenLayers/theme/default/img/censo_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlButSnapItemInactive {
+            background-image: url('OpenLayers/theme/default/img/snap.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+
+         .olControleditarauItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_agebu_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarauCancelItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_agebu_cancel.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarauItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_agebu_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+         .olControleditarprItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_polr_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarprCancelItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_polr_cancel.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControleditarprItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_polr_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCoversvItemInactive {
+            background-image: url('OpenLayers/theme/default/img/coverSv_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlCoversvItemActive {
+            background-image: url('OpenLayers/theme/default/img/coverSv_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlmzcasosItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_casos_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlmzcasosItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_casos_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+        .olControlmzcasosChgFormItemInactive {
+            background-image: url('OpenLayers/theme/default/img/draw_casoschnform_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlmzcasosChgFormItemActive {
+            background-image: url('OpenLayers/theme/default/img/draw_casoschnform_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlmzcasosJItemInactive {
+            background-image: url('OpenLayers/theme/default/img/j_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlmzcasosJItemActive {
+            background-image: url('OpenLayers/theme/default/img/j_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlButloc_claItemInactive{
+            background-image: url('OpenLayers/theme/default/img/lcla.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+
+
+        .olControlcutpolItemInactive{
+            background-image: url('OpenLayers/theme/default/img/cut_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlcutpolItemActive{
+            background-image: url('OpenLayers/theme/default/img/cut_on.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+       .olControlBajaMzItemActive{
+            background-image: url("OpenLayers/theme/default/img/baja_mza_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlBajaMzItemInactive {
+            background-image: url('OpenLayers/theme/default/img/baja_mza_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+    .olControlBajaLocItemActive{
+            background-image: url("OpenLayers/theme/default/img/baja_loc_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlBajaLocItemInactive {
+            background-image: url('OpenLayers/theme/default/img/baja_loc_off.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+
+
+
+        .olControlButpremzaItemInactive {
+            background-image: url('images/premanz.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+            /*background-color: #eae9e4;*/
+            background-position: center;
+        }
+
+                .olControlButprepolItemInactive {
+            background-image: url('images/prepol.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+            /*background-color: #eae9e4;*/
+            background-position: center;
+        }
+
+                .olControlButprepunItemInactive {
+            background-image: url('images/prepun.png');
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+            /*background-color: #eae9e4;*/
+            background-position: center;
+        }
+/* BOTONES DEL PEM */
+        .olControlDrawFeaturePolygonPEMItemInactive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygon_off_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawFeaturePolygonPEMItemActive {
+            background-image: url("OpenLayers/theme/default/img/draw_polygon_on_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+
+        .olControlModifymzFeaturePEMItemActive {
+            background-image: url("OpenLayers/theme/default/img/edit_polygon_on_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModifymzFeaturePEMItemInactive {
+            background-image: url("OpenLayers/theme/default/img/edit_polygon_off_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlModify2FeaturePEMItemActive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_on_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlModify2FeaturePEMItemInactive {
+            background-image: url("OpenLayers/theme/default/img/move_feature_off_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+
+        .olControlDeleteFeaturePEMItemActive {
+            background-image: url("OpenLayers/theme/default/img/remove_point_on_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDeleteFeaturePEMItemInactive {
+            background-image: url("OpenLayers/theme/default/img/remove_point_off_PEM.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+/* BOTONES DEL PEM */
+
+
+        .olControlDrawFeaturePolygonRegistraItemInactive {
+            background-image: url("OpenLayers/theme/default/img/draw_registra_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlDrawFeaturePolygonRegistraItemActive {
+            background-image: url("OpenLayers/theme/default/img/draw_registra_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+
+        .olControlcdsimplifyItemInactive {
+            background-image: url("OpenLayers/theme/default/img/cd_simplify_off.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .olControlcdsimplifyItemActive {
+            background-image: url("OpenLayers/theme/default/img/cd_simplify_on.png");
+            background-repeat: no-repeat;
+            background-position: 0px 1px ;
+        }
+
+.t{font-size: 10pt; font-family: Arial; font-weight: bold; color: #000000;}
+.titulo { font-family: Arial; font-size: 20px; font-style: normal; font-weight: bold; color: #555555; }
+.titulomg { font-family: Arial; font-size: 25px; font-style: normal; font-weight: bold; color: #333333; }
+.error {font-weight: bold;font-size:12px;color:red;}
+.usuario{font-family: Arial;  text-align: center; font-size: 8pt; line-height: 1.6; font-weight: bold;}
+a.liga1:link { font-size: 7pt; text-decoration: underline;color: black;}
+a.liga1:visited {font-size: 7pt;  text-decoration: underline;color: black;}
+a.liga1:hover {font-size: 7pt; text-decoration: underline;color: black;}
+
+a.liga2:link { font-size: 10pt; text-decoration: underline;font-weight: bold;color: black;}
+a.liga2:visited {font-size: 10pt;  text-decoration: underline;font-weight: bold;color: black;}
+a.liga2:hover {font-size: 10pt; text-decoration: underline;font-weight: bold;color: black;}
+
+.olControlLayerSwitcher
+    {
+        font-size: 9px;
+    }
+
+.msg{
+    font-family: Arial;
+    text-align: center;
+    font-size: 8pt;
+    line-height: 1.6;
+    font-weight: bold;
+    background: #F4FA58;}
+
+.panel2Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 300px;
+
+        }
+.panel2Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+.panel3Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 380px;
+
+        }
+.panel3Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+.panel4Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 440px;
+
+        }
+.panel4Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+.panel7Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 440px;
+
+        }
+.panel7Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+.panel5Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 440px;
+
+        }
+.panel5Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+.panel6Toolbar {
+            float: right;
+            top: 0px;
+            right: 580px;
+            height: 24px;
+            width: 440px;
+
+        }
+.panel6Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+
+.panelStreetView {
+            float: right;
+            top: 26px;
+            right: 252px;
+            height: 24px;
+            width: 24px;
+
+        }
+.panelStreetView div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+
+.panelDigToolbar {
+            float: right;
+            left: 58px;
+            height: 30px;
+            width: 280px;
+        }
+.panelDigToolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+.panelDig2Toolbar {
+            float: right;
+            top: 26px;
+            left: 56px;
+            height: 24px;
+            width: 282px;
+
+        }
+.panelDig2Toolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+
+.panel_locToolbar {
+            float: left;
+            left: 4px;
+            top: 326px;
+            height: 124px;
+            width: 24px;
+
+        }
+.panel_locToolbar div {
+            float: right;
+            margin: 1px;
+            width: 24px;
+            height: 24px;
+        }
+
+.panelOculto {
+            float: right;
+            right: 0px;
+            height: 0px;
+            width: 0px;
+        }
+.panelOculto div {
+            float: right;
+            margin: 0px;
+            width: 0px;
+            height: 0px;
+        }
+.panelInegiView {
+            float: right;
+            top: 26px;
+            right: 280px;
+            height: 24px;
+            width: 24px;
+
+        }
+.panelInegiView div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }
+
+.panelfmToolbar  {
+            float: right;
+            top: 26px;
+            right: 860px;
+            height: 100px;
+            width: 24px;
+
+        }
+.panelfmToolbar div {
+            float: right;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+        }

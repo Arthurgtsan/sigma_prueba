@@ -1,0 +1,2338 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"drawdigregistra_",
+				"drawdigregistra_pe"
+			],
+			[
+				"drawdigregistra_p",
+				"drawdigregistra_point"
+			],
+			[
+				"dis",
+				"displayClass"
+			],
+			[
+				"por",
+				"porpoligono"
+			],
+			[
+				"Int",
+				"int"
+			],
+			[
+				"filfe",
+				"filfe2"
+			],
+			[
+				"in",
+				"inicia"
+			],
+			[
+				"ch",
+				"changeReg"
+			],
+			[
+				"tipo",
+				"tipote"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"cve_m",
+				"cve_mza"
+			],
+			[
+				"edita",
+				"edita_off"
+			],
+			[
+				"su",
+				"submit	.submit()"
+			],
+			[
+				"active",
+				"activate"
+			],
+			[
+				"ac",
+				"active"
+			],
+			[
+				"han",
+				"Handler"
+			],
+			[
+				"tri",
+				"trigger	.trigger()"
+			],
+			[
+				"cierr",
+				"cierraban"
+			],
+			[
+				"editardi",
+				"editardigE"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"cve",
+				"cveconca"
+			],
+			[
+				"get",
+				"getCentroid"
+			],
+			[
+				"getCe",
+				"getCenterLonLat"
+			],
+			[
+				"des",
+				"destroy"
+			],
+			[
+				"street",
+				"streetview"
+			],
+			[
+				"but",
+				"butalt"
+			],
+			[
+				"Stre",
+				"streetview"
+			],
+			[
+				"aciva",
+				"activate"
+			],
+			[
+				"cgo",
+				"cgoant"
+			],
+			[
+				"max",
+				"max_mz"
+			],
+			[
+				"obtener",
+				"obtener_maximos_au_pr_mz"
+			],
+			[
+				"filtro",
+				"filtroid"
+			],
+			[
+				"the",
+				"theHTML"
+			],
+			[
+				"trbuteditarau",
+				"trbuteditaraupr"
+			],
+			[
+				"pol",
+				"polr_gen"
+			],
+			[
+				"agebu",
+				"agebu_gen"
+			],
+			[
+				"id",
+				"iduser"
+			],
+			[
+				"att",
+				"attributes"
+			],
+			[
+				"editar",
+				"editardigF"
+			],
+			[
+				"alert",
+				"alertmsg"
+			],
+			[
+				"carta",
+				"cartas5"
+			],
+			[
+				"nomloc",
+				"nombreloc"
+			],
+			[
+				"subs",
+				"substr"
+			],
+			[
+				"text",
+				"TEXTAREA	Tag"
+			],
+			[
+				"bd_loc",
+				"bd_loc_obs"
+			],
+			[
+				"chec",
+				"checked"
+			],
+			[
+				"pagi",
+				"_pagi_cuantos"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"va",
+				"validIdentifier"
+			],
+			[
+				"con",
+				"console"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/todo.js",
+			"settings":
+			{
+				"buffer_size": 199316,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_predig.js",
+			"settings":
+			{
+				"buffer_size": 12140,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_loc_baja.jsp",
+			"settings":
+			{
+				"buffer_size": 1769,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/registra_invmz.jsp",
+			"settings":
+			{
+				"buffer_size": 3421,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_polrur.js",
+			"settings":
+			{
+				"buffer_size": 15614,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_mz.jsp",
+			"settings":
+			{
+				"buffer_size": 1248,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_mz_baja.jsp",
+			"settings":
+			{
+				"buffer_size": 1323,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/index.jsp",
+			"settings":
+			{
+				"buffer_size": 29066,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/capas.html",
+			"settings":
+			{
+				"buffer_size": 19353,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/verobsmzval.jsp",
+			"settings":
+			{
+				"buffer_size": 7465,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/tem.jsp",
+			"settings":
+			{
+				"buffer_size": 56771,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/modcar.jsp",
+			"settings":
+			{
+				"buffer_size": 32586,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/modpre.jsp",
+			"settings":
+			{
+				"buffer_size": 25738,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_modpre.jsp",
+			"settings":
+			{
+				"buffer_size": 1502,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/mod_casosCd.jsp",
+			"settings":
+			{
+				"buffer_size": 1631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtcve.jsp",
+			"settings":
+			{
+				"buffer_size": 3633,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/descarga.jsp",
+			"settings":
+			{
+				"buffer_size": 19163,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/avance_act.jsp",
+			"settings":
+			{
+				"buffer_size": 12435,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_manzanas.js",
+			"settings":
+			{
+				"buffer_size": 83413,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/php.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"snipp",
+				"Snippet: case …"
+			],
+			[
+				"sni",
+				"Snippet: if …"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"goto",
+				"Goto Documentation"
+			],
+			[
+				"jslin",
+				"JSLint: Run JSLint"
+			]
+		],
+		"width": 528.0
+	},
+	"console":
+	{
+		"height": 266.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Sitio/Tomcat/webapps/openlayers_server/js_manzanas.js",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/obtcve.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/descarga.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/js_localidades.js",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/valida_predig.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/avance_preedo_us.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/modaupr.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/js_agebu.js",
+		"/D/Sitio/Tomcat/webapps/openlayers_server/style.css",
+		"/D/Sitio/Tomcat/webapps/coverturaCE/capas.html",
+		"/D/Sitio/Tomcat/webapps/capacitacion/capas.html",
+		"/D/Sitio/apps/catalogos/corrige_ed.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtfedg.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_caserios.js",
+		"/D/Sitio/apps/catalogos/loc-nom.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/descarga.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_polrur.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_agebu.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/todo2.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/index.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_manzanas.js",
+		"/D/neatil/SW/Portable/Sublime Text 2.0.1 x64/ST2projects/catalogos.sublime-project",
+		"/D/Sitio/Tomcat/webapps/openlayers2/todo.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/regresamz.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/capas.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/style.css",
+		"/D/Sitio/Tomcat/webapps/openlayers2/menu_reporte.css",
+		"/D/Sitio/Tomcat/webapps/openlayers2/tem_cambia.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtgeo.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_valreg.jsp",
+		"/D/Sitio/apps/catalogos/MCC.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/descargazip.jsp",
+		"/D/Sitio/apps/catalogos/FRENT_MZA.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_act_mg.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_act.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_valoc.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/tem.jsp",
+		"/D/Sitio/apps/catalogos/MCC_POBLACION_TCAR.php",
+		"/D/Sitio/apps/catalogos/MCC_POBLACION_RA_SE.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/registra_mz.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/regresaaupr.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/agregacgo.jsp",
+		"/D/Sitio/apps/catalogos/MCC_POBLACION.php",
+		"/D/Sitio/apps/catalogos/MCC2.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/campro.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtgeo_mz.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtmza.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_act_mod.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/imprime.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/monitoreo_cancel.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/monitoreo.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/real.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/modcar.jsp",
+		"/D/Sitio/apps/catalogos/consulta.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_vermapa.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtcve.jsp",
+		"/D/Sitio/apps/catalogos/captura.php",
+		"/D/Sitio/apps/catalogos/loc-con.php",
+		"/D/Sitio/apps/catalogos/reporte.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_predig.jsp",
+		"/D/Sitio/apps/catalogos/google.php",
+		"/D/Sitio/apps/catalogos/xajax/xajax_core/xajaxResponse.inc.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/buscar.jsp",
+		"/D/Sitio/apps/catalogos/loc-cap.php",
+		"/D/Sitio/apps/catalogos/loc-capC.php",
+		"/D/Sitio/apps/catalogos/cat_loc_con.php",
+		"/D/Sitio/apps/catalogos/cat.server.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/regresa.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/valida_te.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/exp_csv.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/chg_motivo.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtmza_no.jsp",
+		"/D/Sitio/apps/wwwroot/geoservers.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/verobsmz.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/verobsmzval.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/verobspre.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/verrespmcc.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/rep_listar.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/reg_repdig.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_predig.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_vermapa.php",
+		"/D/Sitio/apps/catalogos/loc-real-nom.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/google1.jsp",
+		"/D/Sitio/apps/catalogos/niveles.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/modvalmz.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/real_2.jsp",
+		"/D/Sitio/apps/catalogos/loc-real-nom_1.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/modaupr.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/js_localidades.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/mod_casosCd.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtgeo_fr.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtmza_pre.jsp",
+		"/D/Sitio/apps/catalogos/loc-rev.php",
+		"/D/Sitio/apps/catalogos/loc-inf.php",
+		"/D/Sitio/apps/catalogos/cat_via_con.php",
+		"/D/Sitio/apps/catalogos/cat_mzn_con.php",
+		"/D/Sitio/apps/catalogos/cat_ent_con.php",
+		"/D/Sitio/apps/catalogos/cat_ageb_con.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obt_maximos.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/borra_mark.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtalt.jsp",
+		"/D/Sitio/apps/catalogos/calperiodo.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/reg_repmun.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_preedo.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/mapate.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/valida_teCD.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/vermanuales.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtmza_pre_no.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obtcveCD.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obt_inegipoint.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/streetview_dentro.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/obt_inegipoint_video.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/streetview.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/inegiview_dentro.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/inegiview.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/tel.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/mod_casos.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/real_3.jsp",
+		"/D/Sitio/apps/catalogos/loc-real-nom_2.php",
+		"/D/Sitio/Tomcat/webapps/openlayers2/versiones.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/EPS32800.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance.html",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_precarta20_carta.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/avance_precarta20.jsp",
+		"/D/Sitio/Tomcat/webapps/openlayers2/proj4js.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/projCode/aea.js",
+		"/D/Sitio/Tomcat/webapps/openlayers2/projCode/utm.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"D:\\Sitio\\apps\\catalogos\\",
+			"D:\\Sitio\\apps\\",
+			"D:\\Sitio\\apps\\catalogos",
+			"D:\\Sitio\\apps",
+			"<open folders>",
+			"D:\\Sitio\\apps",
+			"<open files>,<open folders>",
+			"<open files>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"porpoligono",
+			"no proceden",
+			"postgres",
+			"baja",
+			"cat_manz_modcar",
+			"MCC",
+			"attributes.baja",
+			"seguireinvpre",
+			"800",
+			"porpoligono",
+			"registra",
+			"BCUU",
+			"asentamiento",
+			"2471435.69771, 1086393.50567",
+			"posible",
+			"PRE",
+			"ca_ni",
+			"buscazoom",
+			"buscazoomte",
+			"buscazoomtemz",
+			"try",
+			"consulta",
+			"obt_geom",
+			"ver",
+			"order by tipo,gid",
+			"moda",
+			"modaur",
+			"tr",
+			"BBBBBB",
+			",st_buffer(the_geom,1) as the_geom",
+			"img",
+			"conviv,the_geom",
+			"conviv,the_geom as the_geom",
+			"try",
+			"order by tipo,cve_ent,cve_mun,cve_loc,cve_ageb,gid",
+			"select gid,cve_ent,cve_mun,cve_loc,cve_ageb,tipo,fact,img,fdg,ban,obs,err,case when the_geom is null then '0' else '1' end as geom,cveold,ext from (select *,1 as tipo from edit_ploc.v_agebu_gen where ban!='4' union select *,2 as tipo from edit_ploc.v_locpr_gen where ban!='4' ) t1",
+			"select gid,cve_ent,cve_mun,cve_loc,cve_ageb,tipo,fact,img,fdg,ban,obs,err,case when the_geom is null then '0' else '1' end as geom,cveold,ext from (select *,1 as tipo from edit_ploc.v_agebu_gen where ban!='4' union select *,2 as tipo from edit_ploc.v_locpr_gen  where ban!='4' ) t1",
+			"modulocc",
+			"predig",
+			"seguireinv",
+			"numerodeviviendaspre",
+			"seguireinvpre",
+			"DeleteFeatureDig",
+			"trbuteditardig",
+			"editarM",
+			"delete",
+			"console.log",
+			"idpop",
+			"onPopupClosepr",
+			"obtCvePr",
+			"onFeatureSelectPr",
+			"draw",
+			"console.log",
+			"seguireinvpre",
+			"drawdigregistra",
+			"featureadded",
+			"drawdigregistra",
+			"drawdigregistra_pe",
+			"drawdigregistra",
+			"obs",
+			"drawdigregistra",
+			"saveStrategy",
+			"predig",
+			"saveStrategy",
+			"editardigM",
+			"unselectAll",
+			"save",
+			"WFS",
+			"wfs",
+			"trbuteditardig",
+			".register('activate',null,valCtrleditmz);",
+			".selectControl.unselectAll();",
+			"saveStrategypo",
+			"saveStrategypo ",
+			"valCtrleditmz",
+			"trbuteditarpr",
+			"trbuteditardig",
+			"editardigM",
+			"trbuteditardig",
+			"editarpr",
+			"editar",
+			"editarau",
+			"escala",
+			"trbuteditarau",
+			"editardigM",
+			"escala",
+			"editarcd",
+			"editarmz",
+			"escala",
+			"off",
+			"editarau",
+			"edita_off",
+			"valCtrleditmz",
+			"but_repdig_agrega",
+			"obtfr",
+			"del",
+			"botonvacio",
+			"tipofil",
+			"saveSuccessPredig",
+			"seguireinvpre",
+			"drawdigregistra",
+			"filtroid",
+			"filter",
+			"drawdigregistra",
+			"select",
+			"drawdigregistra",
+			"trbuteditardig",
+			"pre",
+			"modiatmz",
+			"OJO",
+			"croquis",
+			"edita_off",
+			"txt1",
+			"ban",
+			"pass",
+			"seltext",
+			"inicia.seltext",
+			"textsel",
+			"change",
+			"remotehost",
+			"console",
+			"croquis",
+			"ban",
+			"croquis",
+			"regchange",
+			"rechange",
+			"regchange",
+			"ADMIN"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"order by tipo,cve_ent,gid",
+			"",
+			"conviv",
+			"order by tipo,gid",
+			"select * from (select 1 as tipo,gid,cve_ent,fact,img,fdg,baja,cve_baja,conviv,the_geom as the_geom from  z_digmz union select 2 as tipo,gid,cve_ent,fact,img,fdg,0,cve_ent||cve_mun||cve_ageb||cve_loc,conviv,the_geom  from  z_digpe union select 3 as tipo,gid,cve_ent,fact,img,fdg,baja,cve_baja,0,st_buffer(the_geom,1) as the_geom from  z_digmp) t2",
+			".selectControl.unselectAll();",
+			"singleTile: false",
+			"8070/geoserver214/INEGI",
+			"$g1 = curl_exec($c);",
+			"piloto_cpv2020_act",
+			"\");\nout.println(\"<td",
+			"\");\nout.println(\"<td>",
+			"\");\nout.println(\"<th>",
+			"\");\nout.println(\"<th",
+			"\");\nout.println(\"<th ",
+			"\");\nout.println(\"<th",
+			"tipo,*,'geoigb042489d' as host",
+			"query,pid,'geoigb042489d'",
+			", pid integer, host text",
+			", query text, pid integer",
+			"waiting,query,pid",
+			"",
+			"\"",
+			"",
+			" union ",
+			"consulta1+=\"",
+			"correo,tipte,obsoc,obsre,obsed",
+			"ilerr2",
+			"filerrq",
+			"if (!($link1 = pg_connect(\"host=10.153.3.6 port=5432 dbname=bd_mgn2017 user=mgn2016_con password=ConsultA\"))){",
+			"'\"+edo+\"'",
+			"AS correo,reobs,ocobs",
+			"Regional",
+			") || ",
+			".equals(",
+			"\"",
+			"id",
+			"",
+			"0 as nm",
+			"",
+			"ne,voc,( SELECT nombre FROM usuarios WHERE usuarios.cons = us) AS usuario,( SELECT correo FROM usuarios WHERE cons = us) AS correo ",
+			"",
+			"clave1!='000000000000-0000' and clave2!='000000000000-0000'",
+			"\" max(case when clave1!='000000000000-0000' then oid END) OVER (PARTITION BY clave1 order by oid desc) as max1,\"+\n        \" max(case when clave2!='000000000000-0000' then oid END) OVER (PARTITION BY clave1 order by oid desc) as max2,\"+\n        \" max(case when clave1!='000000000000-0000' then oid END) OVER (PARTITION BY clave2 order by oid desc) as max3,\"+\n        \" max(case when clave2!='000000000000-0000' then oid END) OVER (PARTITION BY clave2 order by oid desc) as max4",
+			"consulta+=\" where",
+			"'",
+			"() && cartas.minScale>=escala)",
+			"usuario,fdg,correo",
+			"'0' else '1' end as geom,cveold",
+			"select *,'' as cveold",
+			"from edit_ploc.v_agebu_gen where ban!='4'",
+			"union select *,'',2 as tipo from edit_ploc.v_locpr_gen",
+			"[i]",
+			"'INEGI:asentamientos'",
+			"anotaciones",
+			"'\"+ filfe2 +\"' and us=\"+us+\" and",
+			"'\"+ filfe2 +\"' and us=\"+us+\" ",
+			"fact",
+			"gid,cve_ent,descripcion,fact,fact,ST_AsText(the_geom) from cat_marks",
+			"order by gid",
+			"SIGMA",
+			"ne,voc from",
+			"rep_listar",
+			"z_tempmz_intersects where st_intersects(geom,st_transform(t1.geom,32800))) as nm",
+			"ne from a_rep_cardig t1 where",
+			"order by cve_ent,carta",
+			"select gid,cve_ent,carta,sup,fact,(select count(*) from z_tempmz_intersects where st_intersects(geom,st_transform(t1.geom,32800))) as nf,(select count(*) from z_digf where st_intersects(the_geom,st_transform(t1.geom,32800))) as nf,(select count(*) from z_dige where st_intersects(the_geom,st_transform(t1.geom,32800))) as ne",
+			"fdg,ban,obs,err,case",
+			"order by tipo,cve_ent,cve_mun,cve_loc,cve_ageb,gid",
+			"vialidades",
+			"http://geoigb011371w:8888",
+			"http://geoigb011371w:8070",
+			"&valor='.$row[ac_vals_1].'\")';",
+			"lon",
+			"lat",
+			"if (!(get_magic_quotes_gpc ()))$value=addslashes($value);$variable = \"\\$\".$key.\"='\".$value.\"';\";",
+			" ",
+			"tr",
+			"   \n",
+			"}\n",
+			"			\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 12,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/todo.js",
+					"settings":
+					{
+						"buffer_size": 199316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136844,
+								136844
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 33049.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_predig.js",
+					"settings":
+					{
+						"buffer_size": 12140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10458,
+								10458
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2766.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_loc_baja.jsp",
+					"settings":
+					{
+						"buffer_size": 1769,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								222,
+								222
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/registra_invmz.jsp",
+					"settings":
+					{
+						"buffer_size": 3421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1060,
+								982
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_polrur.js",
+					"settings":
+					{
+						"buffer_size": 15614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13794,
+								13797
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3495.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_mz.jsp",
+					"settings":
+					{
+						"buffer_size": 1248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								689,
+								691
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_mz_baja.jsp",
+					"settings":
+					{
+						"buffer_size": 1323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								940,
+								940
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/index.jsp",
+					"settings":
+					{
+						"buffer_size": 29066,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9681,
+								9687
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1596.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/capas.html",
+					"settings":
+					{
+						"buffer_size": 19353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1077.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/verobsmzval.jsp",
+					"settings":
+					{
+						"buffer_size": 7465,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7465,
+								7465
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 312.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/tem.jsp",
+					"settings":
+					{
+						"buffer_size": 56771,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11370,
+								11376
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3365.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/modcar.jsp",
+					"settings":
+					{
+						"buffer_size": 32586,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28886,
+								28857
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6251.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/modpre.jsp",
+					"settings":
+					{
+						"buffer_size": 25738,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4375,
+								4381
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1409.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtgeo_modpre.jsp",
+					"settings":
+					{
+						"buffer_size": 1502,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1443,
+								1443
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/mod_casosCd.jsp",
+					"settings":
+					{
+						"buffer_size": 1631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/obtcve.jsp",
+					"settings":
+					{
+						"buffer_size": 3633,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1498,
+								1498
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/descarga.jsp",
+					"settings":
+					{
+						"buffer_size": 19163,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14377,
+								14377
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2401.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/avance_act.jsp",
+					"settings":
+					{
+						"buffer_size": 12435,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1242,
+								1242
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Java/Java Server Pages (JSP).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "/D/Sitio/Tomcat/webapps/openlayers_server/js_manzanas.js",
+					"settings":
+					{
+						"buffer_size": 83413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12976,
+								12976
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2262.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.jslint_result_view":
+	{
+		"height": 100.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"loc-",
+				"catalogos/loc-con.php"
+			],
+			[
+				"consulta",
+				"2005/consulta0.htm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/D/Sitio/Tomcat/webapps/mnv/mnvmapa.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 204.0,
+	"status_bar_visible": false
+}

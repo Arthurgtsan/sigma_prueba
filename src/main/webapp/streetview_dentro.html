@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<title>Visor Street View</title>
+</head>
+<body onunload="streetUnload()">
+<center>
+<table width=600 border=0><tr><td>&nbsp;
+<td align=right><img id="imgsal" onclick='sal()' title='Sacar ventana' src="OpenLayers/theme/default/img/ventana_sal.png";></img>
+</table>
+<div name="pano" id="pano"></div>
+</center>
+<!--<script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyAL8-CvaNgh7c1C7Zh7X4AFxrLxsXZNDO4&callback=initPano' async defer></script>-->
+<script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDmr2x0FWWydp93kDtbO3tgadydoc9bQVc&callback=initPano' async defer></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&amp;ext=.js&amp;key=AIzaSyADJ0lFja0kXonle44Bd5ZUru_2miDmS2A"></script>-->
+<script type="text/javascript">
+parent.winStreet=1;
+var lat_param = gup('lat');
+var long_param = gup('lon');
+var result = "null";
+
+
+function sal(){
+	parent.max_ventana(panoClient.getPosition().lng(),panoClient.getPosition().lat());
+}
+
+function terminar(){
+		parent.terminar_rasgo();
+}
+
+
+function streetUnload(){
+	parent.winStreet=0;
+}
+
+var panoClient;
+
+function initPano() {
+  revisa();
+   var queryloc = new google.maps.LatLng(lat_param,long_param);
+   var panoDiv = document.getElementById("pano");
+       panoDiv.style.width = '600px';
+       panoDiv.style.height = '400px';
+    var panoOptions = {
+      position: panoClient
+      ,linksControl: true
+      //,panControl: false,
+      //,enableCloseButton: false
+    };
+      var size = new parent.OpenLayers.Size(23,25);
+      var icon;
+
+     panoClient = new google.maps.StreetViewPanorama(panoDiv,panoOptions);
+     panoClient.setPosition(queryloc);
+
+
+    panoClient.addListener('pov_changed', function() {
+      //console.log("heading: "+panoClient.getPov().heading);
+      //console.log("pitch: "+panoClient.getPov().pitch);
+      if (panoClient.getPov().heading<22.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_0.png',size);
+      }else if (panoClient.getPov().heading>=22.5 && panoClient.getPov().heading<67.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_45.png',size);
+      }else if (panoClient.getPov().heading>=67.5 && panoClient.getPov().heading<112.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_90.png',size);
+      }else if (panoClient.getPov().heading>=112.5 && panoClient.getPov().heading<157.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_135.png',size);
+      }else if (panoClient.getPov().heading>=157.5 && panoClient.getPov().heading<202.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_180.png',size);
+      }else if (panoClient.getPov().heading>=202.5 && panoClient.getPov().heading<247.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_225.png',size);
+      }else if (panoClient.getPov().heading>=247.5 && panoClient.getPov().heading<292.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_270.png',size);
+      }else if (panoClient.getPov().heading>=292.5 && panoClient.getPov().heading<337.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_315.png',size);
+      }else if (panoClient.getPov().heading>=337.5){
+        icon = new parent.OpenLayers.Icon('images/streetv_315.png',size);
+      }
+      if (parent.markers.markers.length>0){  //si ya existe solo la muevo
+          parent.markers.clearMarkers();
+      }
+      geometry = new parent.OpenLayers.Geometry.Point(panoClient.getPosition().lng(), panoClient.getPosition().lat());
+      geometry.transform(new parent.OpenLayers.Projection('EPSG:4326'),new parent.OpenLayers.Projection('EPSG:900913'));
+      parent.markers.addMarker(new parent.OpenLayers.Marker(new parent.OpenLayers.LonLat( geometry.x,geometry.y),icon));
+  });
+
+    panoClient.addListener('position_changed', function() {
+      //console.log("position: "+panoClient.getPosition());
+      if (icon==undefined){
+        icon = new parent.OpenLayers.Icon('images/streetv_0.png',size);
+      }
+      if (parent.markers.markers.length>0){  //si ya existe solo la muevo
+          parent.markers.clearMarkers();
+      }
+      geometry = new parent.OpenLayers.Geometry.Point(panoClient.getPosition().lng(), panoClient.getPosition().lat());
+      geometry.transform(new parent.OpenLayers.Projection('EPSG:4326'),new parent.OpenLayers.Projection('EPSG:900913'));
+      parent.markers.addMarker(new parent.OpenLayers.Marker(new parent.OpenLayers.LonLat( geometry.x,geometry.y),icon));
+
+  });
+
+
+
+}
+
+
+function revisa(){
+    var queryloc = new google.maps.LatLng(lat_param,long_param);
+    var panoDiv = document.getElementById("pano");
+    var sv = new google.maps.StreetViewService();
+    sv.getPanoramaByLocation(queryloc, 50, processSVData);
+
+    function processSVData(data, status) {
+      if (status != google.maps.StreetViewStatus.OK) {
+            panoDiv.innerHTML = '<br><center>No hay informacion de Street Map para esta ubicacion.</center>';
+
+      }
+    }
+}
+
+
+function gup(name)
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
+</script>
+</body>
+</html>
