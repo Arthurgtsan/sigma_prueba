@@ -60,6 +60,7 @@ SIGMA
 
 
 
+
 function enviarkey(e){
   /*key = (document.all) ? e.keyCode : e.which;
   if (key==13){
