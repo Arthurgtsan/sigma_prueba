@@ -55,7 +55,7 @@ SIGMA
 // Comentario nuevo para probar el push
 // Segundo push
 // tercer push
-// de reversa (pull)
+// cambio RICHARRD
 
 
 
