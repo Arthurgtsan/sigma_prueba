@@ -40,7 +40,7 @@ ahora se encuentran en las siguientes direcciones:
 
 <tr><td colspan=2><br><br>Gracias!!<br><br>
 <tr><td colspan=2><b>Atte: Neatil Ceballos </b>
-	<tr><td colspan=2><b>Departamento de Procesamiento de Informacion Cartografica</b>
+	<tr><td colspan=2><b>Departamento de Procesamiento de Informacion Cartografica1</b>
 
 </table></center>
 </body>
