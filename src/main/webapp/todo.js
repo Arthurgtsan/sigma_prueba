@@ -3073,12 +3073,13 @@ if (escala < 10000){
 
     if (nivel==1){
                 var filtroed = new OpenLayers.Filter.Logical({type: OpenLayers.Filter.Logical.AND,filters: [
-                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "cve_ent",value: filtroid}),
-                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "inv_fte",value: "0"})]});
+                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "cve_ent",value: filtroid})
+                        //,new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "inv_fte",value: "0"})
+                    ]});
     }else{
                 var filtroed = new OpenLayers.Filter.Logical({type: OpenLayers.Filter.Logical.AND,filters: [
-                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO,property: "cve_ent",value: '00'}),
-                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "inv_fte",value: "0"})
+                        new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO,property: "cve_ent",value: '00'})
+                        //,new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: "inv_fte",value: "0"})
                     ]});
     }
             wfs =   new OpenLayers.Layer.Vector("MODIFICAR",{
@@ -6351,6 +6352,3 @@ function maxzindex(){
   let max=Math.max.apply(null,allIndexes);
 return max;
 }
-
-
-
