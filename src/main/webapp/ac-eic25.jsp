@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -86,7 +91,7 @@ String  ent = "",regid = "",
          filfe2="",
          where="",
          obs="",observa="",lobs="",obs1="";
-      consultapas = "select nivel,edicion,id,regid,nombre from usuarios where md5(password) = '"+pass+"';";
+      //consultapas = "select nivel,edicion,id,regid,nombre from usuarios where md5(password) = '"+pass+"';";
 
 
 //declare variables
@@ -122,23 +127,30 @@ if ((sesion != null && !sesion.isNew())) {
 String remotehost  = session.getAttribute("remotehost").toString();
 String regionalid  = session.getAttribute("regionalid").toString();
 
+CachedRowSet rs = null;
+
 try {
-      Statement str = null;
-      ResultSet rs = null;
-      Connection conexion = null;
-      Class.forName("org.postgresql.Driver");
-      String hostbd  = session.getAttribute("hostbd").toString();
-      String remotehostbd  = session.getAttribute("remotehostbd").toString();
-      conexion = DriverManager.getConnection("jdbc:postgresql://10.153.3.25:5434/actcargeo10","arcgis","arcgis");
-      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-    rs = str.executeQuery( consultapas );
-    rs.next();
-    String s1=rs.getObject(1).toString();
-      Integer s2=(Integer) rs.getObject(2);
+      /*
+	      Statement str = null;
+	      ResultSet rs = null;
+	      Connection conexion = null;
+	      Class.forName("org.postgresql.Driver");
+	      String hostbd  = session.getAttribute("hostbd").toString();
+	      String remotehostbd  = session.getAttribute("remotehostbd").toString();
+	      conexion = DriverManager.getConnection("jdbc:postgresql://10.153.3.25:5434/actcargeo10","arcgis","arcgis");
+	      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+	      rs = str.executeQuery( consultapas );
+	   */
+	   
+	   rs = Constructor_de_Consultas2.consulta_ac_eic25("act10", pass);
+	   
+       rs.next();
+       String s1=rs.getObject(1).toString();
+       Integer s2=(Integer) rs.getObject(2);
 
       ent=rs.getObject(3).toString();
-    regid=rs.getObject(4).toString();
-    String nombre=rs.getObject(5).toString();
+      regid=rs.getObject(4).toString();
+      String nombre=rs.getObject(5).toString();
 
 //out.println( consultapas );
 sesion.setAttribute("script", "modcar");
@@ -443,7 +455,8 @@ if ((ent.equals("00"))){
 
 
   if (ban!=null){
-      rs = str.executeQuery( consulta );
+      //rs = str.executeQuery( consulta );
+      rs = Constructor_de_Consultas2.consulta_ac_eic25_02("act10", consulta);
       //paginacion
       //get total rows
       rs.last();
@@ -458,7 +471,9 @@ if ((ent.equals("00"))){
 
     consulta  += " limit " + numRecordsPerPage+ " offset "+ startIndex ;
     //out.println( " limit " + numRecordsPerPage+ " offset "+ startIndex );
-    rs = str.executeQuery( consulta );
+    //rs = str.executeQuery( consulta );
+    rs = Constructor_de_Consultas2.consulta_ac_eic25_03("act10", consulta);
+    
     while(rs.next()){
     //gid,cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza,tipomza,cgo,f_registro,proc,fresp,geom
       //String gid=rs.getObject(1).toString();
@@ -573,8 +588,9 @@ out.println(barra+"<br><br>");
    out.println ("</table><table class='n'><tr><td><br><br><tr><td>Genera la consulta y presiona \"Buscar\"");
 
 }
-    str.close();
-    conexion.close();
+    //str.close();
+    //conexion.close();
+    rs.close();
  }//try
 
     catch (SQLException ex){

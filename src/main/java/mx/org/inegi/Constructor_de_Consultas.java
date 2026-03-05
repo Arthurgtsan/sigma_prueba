@@ -1685,7 +1685,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+		ps.setString(1, gid);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();

@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -129,7 +134,7 @@ String  ent = "",regid = "",
          filfe2="",
          where="",
          obs="",observa="",lobs="",obs1="";
-      consultapas = "select nivel,edicion,id,regid,nombre,cons from usuarios where md5(password) = '"+pass+"';";
+   //   consultapas = "select nivel,edicion,id,regid,nombre,cons from usuarios where md5(password) = '"+pass+"';";
 
 
 //declare variables
@@ -167,6 +172,7 @@ if ((sesion != null && !sesion.isNew())) {
 
     }
 
+	/*
       ResultSet rs = null;
       Statement str = null;
       Connection conexion = null;
@@ -175,10 +181,11 @@ if ((sesion != null && !sesion.isNew())) {
       String remotehostbd  = session.getAttribute("remotehostbd").toString();
       conexion = DriverManager.getConnection("jdbc:postgresql://"+remotehostbd+":5434/"+hostbd,"actcar","actcar");
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-    rs = str.executeQuery( consultapas );
-    rs.next();
-
-
+      rs = str.executeQuery( consultapas );
+    */
+      CachedRowSet rs = null;
+      rs = Constructor_de_Consultas.consulta_anotaciones_01("act10_ed", pass);
+      rs.next();
 
     String s1=rs.getObject(1).toString();
       Integer s2=(Integer) rs.getObject(2);
@@ -226,7 +233,9 @@ if (filfe2==null){filfe2=fec2;}
   out.println("<th>&nbsp;&nbsp;Ver&nbsp;&nbsp;<th>&nbsp;&nbsp;Gid&nbsp;&nbsp;<th>&nbsp;&nbsp;Estado/&nbsp;&nbsp;<br>&nbsp;&nbsp;Regional&nbsp;&nbsp;<th>&nbsp;&nbsp;Fecha&nbsp;&nbsp;<th>&nbsp;&nbsp;Descripcion&nbsp;&nbsp;");
   out.println("<th><img src=images/borra.gif>");
   if (ban!=null){
-      rs = str.executeQuery( consulta );
+      //rs = str.executeQuery( consulta );
+      rs = Constructor_de_Consultas.consulta_anotaciones_02("act10", loc, filniv);
+      
       //paginacion
       //get total rows
       rs.last();
@@ -239,9 +248,10 @@ if (filfe2==null){filfe2=fec2;}
         numPages = numPages+ 1;  // if there is remind   1 page.
       }
 
-    consulta  += " limit " + numRecordsPerPage+ " offset "+ startIndex ;
+  //  consulta  += " limit " + numRecordsPerPage+ " offset "+ startIndex ;
     //out.println( " limit " + numRecordsPerPage+ " offset "+ startIndex );
-    rs = str.executeQuery( consulta );
+   // rs = str.executeQuery( consulta );
+   rs = Constructor_de_Consultas.consulta_anotaciones_03("act10", loc, filniv, numRecordsPerPage, startIndex);
 //    out.println(consulta);
 
     while(rs.next()){
@@ -305,8 +315,9 @@ out.println(barra+"<br><br>");
    out.println ("</table><table class='n'><tr><td><br><br><tr><td>Genera la consulta y presiona \"Buscar\"");
 
 }
-    str.close();
-    conexion.close();
+   // str.close();
+    //conexion.close();
+    rs.close();
 
 
 

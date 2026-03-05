@@ -209,8 +209,91 @@ public class Constructor_de_Consultas2 {
 	}
 
 	// -----------------------------------------------------------------------------------
+	
+	public static CachedRowSet consulta_ac_eic25(String cnx, String pass) {
 
+		String consultapas = "select nivel,edicion,id,regid,nombre from usuarios where md5(password) = '"+pass+"';";
+		
+		ResultSet _rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		CachedRowSet rs = null;
+		
+		try {
+		
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consultapas);
+			//ps.setString(1, pass);
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			   rs = RowSetProvider.newFactory().createCachedRowSet();
+			   rs.populate(_rs);
+			return rs;
+	
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_ac_eic25_02(String cnx, String consulta) {
 
+		
+		ResultSet _rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		CachedRowSet rs = null;
+		
+		try {
+		
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			//ps.setString(1, pass);
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			   rs = RowSetProvider.newFactory().createCachedRowSet();
+			   rs.populate(_rs);
+			return rs;
+	
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_ac_eic25_03(String cnx, String consulta) {
+
+		
+		ResultSet _rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		CachedRowSet rs = null;
+		
+		try {
+		
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			//ps.setString(1, pass);
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			   rs = RowSetProvider.newFactory().createCachedRowSet();
+			   rs.populate(_rs);
+			return rs;
+	
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+
+	
+	// -----------------------------------------------------------------------------------
 	
 	public static CachedRowSet consulta_consulta_ac_ca22_01(String cnx, String pass) {
 
