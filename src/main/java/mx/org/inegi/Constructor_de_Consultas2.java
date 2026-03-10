@@ -212,7 +212,7 @@ public class Constructor_de_Consultas2 {
 	
 	public static CachedRowSet consulta_ac_eic25(String cnx, String pass) {
 
-		String consultapas = "select nivel,edicion,id,regid,nombre from usuarios where md5(password) = '"+pass+"';";
+		String consultapas = "select nivel,edicion,id,regid,nombre from usuarios where md5(password) = ? ";
 		
 		ResultSet _rs = null;
 		Connection con = null;
@@ -223,7 +223,9 @@ public class Constructor_de_Consultas2 {
 		
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consultapas);
-			//ps.setString(1, pass);
+			
+			ps.setString(1, pass);
+			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
 			   rs = RowSetProvider.newFactory().createCachedRowSet();

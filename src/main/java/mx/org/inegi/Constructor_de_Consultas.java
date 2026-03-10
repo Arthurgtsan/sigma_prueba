@@ -1546,7 +1546,7 @@ public class Constructor_de_Consultas {
 	// ARCHIVO agregacgo.jsp
 	public static CachedRowSet consulta_agregacgo_01(String cnx, String id) {
 
-		String consulta = "select a_agrega_cgo("+id+")";
+		String consulta = "select a_agrega_cgo(?)";
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
@@ -1559,7 +1559,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, id);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1578,7 +1578,7 @@ public class Constructor_de_Consultas {
 	// ARCHIVO anotaciones.jsp
 	public static CachedRowSet consulta_anotaciones_01(String cnx, String pass) {
 
-		String consultapas = "select nivel,edicion,id,regid,nombre,cons from usuarios where md5(password) = '"+pass+"';";
+		String consultapas = "select nivel,edicion,id,regid,nombre,cons from usuarios where md5(password) = ?";
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
@@ -1591,7 +1591,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consultapas);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, pass);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1607,9 +1607,19 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_anotaciones_02(String cnx, String loc, String filniv) {
+	public static CachedRowSet consulta_anotaciones_02(String cnx, String filfe1, String filfe2, String fec2, String loc, String filniv) {
 
-		String consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike '" + loc + "%' "+filniv+" order by gid";
+		String consulta; 
+		
+		if (filfe2==null){filfe2=fec2;}
+		    
+		consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where fact between ? and ? "+filniv+" order by gid";
+
+		if(loc != null && !loc.isEmpty()){
+		      consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike ?  "+filniv+" order by gid";
+		}
+
+		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
@@ -1622,7 +1632,12 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+			if(loc != null && !loc.isEmpty()){
+				ps.setString(1, loc + "%");
+			} else {
+				ps.setString(1, filfe1);
+				ps.setString(2, filfe2);
+			}
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1638,10 +1653,19 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_anotaciones_03(String cnx, String loc, String filniv, int numRecordsPerPage, int startIndex) {
+	public static CachedRowSet consulta_anotaciones_03(String cnx,  String filfe1, String filfe2, String fec2, String loc, String filniv, int numRecordsPerPage, int startIndex) {
 
-	    String consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike '" + loc + "%' "+filniv+" order by gid limit " + numRecordsPerPage + " offset " + startIndex;
-		ResultSet _rs = null;
+		String consulta; 
+		
+		if (filfe2==null){filfe2=fec2;}
+		    
+		consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where fact between ? and ? "+filniv+" order by gid limit ? offset ?";
+
+		if(loc != null && !loc.isEmpty()){
+		      consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike ?  "+filniv+" order by gid limit ? offset ?";
+		}
+	    
+	    ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
 		CachedRowSet rs = null;
@@ -1653,7 +1677,16 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+			if(loc != null && !loc.isEmpty()){
+				ps.setString(1, loc + "%");
+				ps.setInt(2, numRecordsPerPage);
+				ps.setInt(3, startIndex);
+			} else {
+				ps.setString(1, filfe1);
+				ps.setString(2, filfe2);
+				ps.setInt(3, numRecordsPerPage);
+				ps.setInt(4, startIndex);
+			}
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1670,9 +1703,12 @@ public class Constructor_de_Consultas {
 	}
 	
 	// ARCHIVO asigna_loc_baja 
+	//mia
 	public static CachedRowSet consulta_asigna_loc_baja_01(String cnx, String gid) {
 
-		String consulta = "update cat_manz set vienede=(select substring(figura,1,1)||gid from mcc_poblacion.cat_manz_modcar where gid="+gid+") where cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza =(select cvegeo  from mcc_poblacion.cat_manz_modcar where gid="+gid+") and ban='3'";
+		String  consulta = "update cat_manz set vienede=(select substring(figura,1,1)||gid from mcc_poblacion.cat_manz_modcar where gid=?) "
+				+ "where cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza =(select cvegeo  from mcc_poblacion.cat_manz_modcar where gid=?) and ban='3'";
+		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
@@ -1685,7 +1721,8 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-		ps.setString(1, gid);
+			ps.setString(1, gid);
+			ps.setString(2, gid);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1701,10 +1738,42 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
+	// claude
+	/*public static int consulta_asigna_loc_baja_01(String cnx, String gid) {
+
+		String consulta = "update cat_manz set vienede=(select substring(figura,1,1)||gid from mcc_poblacion.cat_manz_modcar where gid=?) "
+				+ "where cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza =(select cvegeo  from mcc_poblacion.cat_manz_modcar where gid=?) and ban='3'";
+
+	    Connection con = null;
+	    PreparedStatement ps = null;
+
+	    try {
+	        con = AdministradorDataSource_Sigma.getConnection(cnx);
+	        ps = con.prepareStatement(consulta);
+
+	        ps.setString(1, gid);   
+	        ps.setString(2, gid);  
+
+	        ps.setQueryTimeout(3000);
+	        return ps.executeUpdate();  
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (ps  != null) try { ps.close();  } catch (SQLException e) { e.printStackTrace(); }
+	        if (con != null) try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+	    }
+	    return 0;
+	}*/
+	
 	// ARCHIVO asigna_loc_cd 
+	// deberia de checarse porque es UPDATE
 	public static CachedRowSet consulta_asigna_loc_cd_01(String cnx, String gid) {
 
-		String consulta = "update mcc_poblacion.cat_manz_modcar set proc=1,fresp=current_date,cgo_def='L' where gid="+gid+" and cve_ent||cve_mun||cve_loc not in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ban not in ('X','3','1','5','6','Y','E','D','H','G','M','I','N','O','K','R','T','C') union (select distinct cve_ent||cve_mun||cve_loc from cat_cd)) RETURNING gid";
+		String consulta = "update mcc_poblacion.cat_manz_modcar set proc=1,fresp=current_date,cgo_def='L' where gid=? and "
+				+ "cve_ent||cve_mun||cve_loc not in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ban not in "
+				+ "('X','3','1','5','6','Y','E','D','H','G','M','I','N','O','K','R','T','C') union (select distinct cve_ent||cve_mun||cve_loc from cat_cd)) "
+				+ "RETURNING gid";
 
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -1718,7 +1787,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, gid);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -1730,7 +1799,8 @@ public class Constructor_de_Consultas {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} 
+		catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
 		return rs;
 	}
 	

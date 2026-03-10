@@ -215,12 +215,15 @@ filfe1 = request.getParameter("filfe1");
 filfe2 = request.getParameter("filfe2");
 
 if (filfe1==null){filfe1=fec1; filfe1="2016-12-01";}
-if (filfe2==null){filfe2=fec2;}
-    consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where fact between '"+filfe1+"' and '"+ filfe2 +"' "+filniv+" order by gid";
-    String filult="";
-  if(loc != null && !loc.isEmpty()){
-      consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike '" + loc + "%' "+filniv+" order by gid";
-}
+
+/*
+	if (filfe2==null){filfe2=fec2;}
+	    consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where fact between '"+filfe1+"' and '"+ filfe2 +"' "+filniv+" order by gid";
+	    String filult="";
+	  if(loc != null && !loc.isEmpty()){
+	      consulta="select gid,cve_ent,descripcion,fact,ST_AsText(the_geom) from cat_marks where descripcion ilike '" + loc + "%' "+filniv+" order by gid";
+	}
+  */
 
        out.println( "<center class='t'>Anotaciones</center>"
                 + "<form action=\"anotaciones.jsp\" method=\"post\" name=\"enviar\">"
@@ -234,7 +237,7 @@ if (filfe2==null){filfe2=fec2;}
   out.println("<th><img src=images/borra.gif>");
   if (ban!=null){
       //rs = str.executeQuery( consulta );
-      rs = Constructor_de_Consultas.consulta_anotaciones_02("act10", loc, filniv);
+      rs = Constructor_de_Consultas.consulta_anotaciones_02("act10", filfe1, filfe2, fec2, loc, filniv);
       
       //paginacion
       //get total rows
@@ -251,7 +254,7 @@ if (filfe2==null){filfe2=fec2;}
   //  consulta  += " limit " + numRecordsPerPage+ " offset "+ startIndex ;
     //out.println( " limit " + numRecordsPerPage+ " offset "+ startIndex );
    // rs = str.executeQuery( consulta );
-   rs = Constructor_de_Consultas.consulta_anotaciones_03("act10", loc, filniv, numRecordsPerPage, startIndex);
+   rs = Constructor_de_Consultas.consulta_anotaciones_03("act10", filfe1, filfe2, fec2, loc, filniv, numRecordsPerPage, startIndex);
 //    out.println(consulta);
 
     while(rs.next()){
