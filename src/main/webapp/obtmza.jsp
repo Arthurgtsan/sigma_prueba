@@ -63,7 +63,7 @@ consulta = "select * from ( ";
 	consulta += " select gid,tip_act,cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza,f_registro,fresp,proc,cve_def,ST_AsText(st_transform(geom,3857)) as geom, ";
 	consulta += " ST_AsText(st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),3857)) as punto,a_sinacentos(tipo),'','',cgo_def,status,mal,'1' as ord, '2ACU' as tipocm";
 	//consulta += " from act_cu.bcu_bd_manzana where (proc !=1 or f_registro>(select fecha from vista_fecha_corte where tipo='inicia')) and st_intersects(geom,st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),32800)) and 1="+capa2;
-	consulta += " from act_cu.bcu_bd_manzana where f_registro>(select fecha from vista_fecha_corte where tipo='inicia') and st_intersects(geom,st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),32800)) and 1="+capa2;
+	consulta += " from act_cu.bcu_bd_manzana where (proc=0 or f_registro>(select fecha from vista_fecha_corte where tipo='inicia')) and st_intersects(geom,st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),32800)) and 1="+capa2;
 //	consulta += " union ";
 //	consulta += " select gid,'P',cve_ent,substring(cvegeo,3,3),'0000',substring(cvegeo,6,5),'000',fact,fact,'0','0',ST_AsText(st_transform(st_multi(the_geom),3857)),";
 //	consulta += " ST_AsText(st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),3857)) as punto,'0','0','0','0','1',0,'2' as ord, '3PRE' as tipocm";
