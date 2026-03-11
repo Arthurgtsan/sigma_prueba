@@ -22,11 +22,11 @@ try {
 consulta = "select clave from ( "+
 "select clave,the_geom from ( "+
 "select cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza as clave,the_geom from cat_manz where inv_fte='2' AND ban not in ('1', '3', '5', '6', 'E', 'D', 'H', 'I', 'K', 'M', 'N', 'O', 'R', 'T', 'C', 'Y', 'G', 'K', 'X', 'J') "+
-"and vienede::integer in (select gid from act_cu.bcu_bd_manzana where f_registro between '2026-01-01' and '2026-02-20') "+
+"and vienede::integer in (select gid from act_cu.bcu_bd_manzana where (proc=0 and f_registro between '2026-01-01' and '2026-02-20')) "+
 "and st_intersects(the_geom,st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),32800)) "+
 "union "+
 "select cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza as clave,the_geom from cat_manz where inv_fte='2' AND ban not in ('1', '3', '5', '6', 'E', 'D', 'H', 'I', 'K', 'M', 'N', 'O', 'R', 'T', 'C', 'Y', 'G', 'K', 'X', 'J') "+
-"and cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza in (select cvegeo from act_cu.bcu_bd_manzana where f_registro > '2026-01-01' and left(tip_act,1) = '1') "+
+"and cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza in (select cvegeo from act_cu.bcu_bd_manzana where (proc=0 or f_registro > '2026-01-01' and left(tip_act,1) = '1')) "+
 "and st_intersects(the_geom,st_transform(ST_SetSRID(ST_Point("+x+","+y+"), 4326),32800)) "+
 ") tt "+
 "order by st_Area(the_geom) limit 1 "+
