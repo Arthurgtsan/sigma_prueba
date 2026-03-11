@@ -1,6 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -77,33 +82,36 @@ if (entrega!=null){
 if (filfe2==null)filfe2=fec2;
 filfe2 += " 23:59:59";
 
-String consulta1 = "select cve_ent,"; 
-consulta1 += "(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc=1 ) as modcar1,";
-consulta1 += "(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc=2 ) as modcar2, ";
-consulta1 += "count(*) as total, 0,";
-consulta1 += "max(vocs) as ValOC,";
-consulta1 += "max(vregs) as ValREG, ";
-consulta1 += "(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent) as forma,";
-consulta1 += "max(cod4) as cod4, ";
-consulta1 += "max(cod2) as cod2,";
-consulta1 += "max(cod1) as cod1, ";
-consulta1 += "max(cod3) as cod3 ";
-consulta1 += "from ";
-consulta1 += "(select cve_ent,count(case when voc='S' then voc END) OVER (PARTITION BY cve_ent) as vocS,";
-consulta1 += "count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,";
-consulta1 += "count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR, ";
-consulta1 += "count(case when t2.cgo_act in ('4','B','A') then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod4, ";
-consulta1 += "count(case when t2.cgo_act='2' then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod2, ";
-consulta1 += "count(case when t2.cgo_act='1' then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod1,";
-consulta1 += "count(case when t2.cgo_act in ('3','C','K','R','T') then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod3 ";
-consulta1 += "from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act ";
-consulta1 += "where status=1  order by t1.cve_ent) t1 group by cve_ent";
-
+/*
+	String consulta1 = "select cve_ent,"; 
+	consulta1 += "(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc=1 ) as modcar1,";
+	consulta1 += "(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc=2 ) as modcar2, ";
+	consulta1 += "count(*) as total, 0,";
+	consulta1 += "max(vocs) as ValOC,";
+	consulta1 += "max(vregs) as ValREG, ";
+	consulta1 += "(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent) as forma,";
+	consulta1 += "max(cod4) as cod4, ";
+	consulta1 += "max(cod2) as cod2,";
+	consulta1 += "max(cod1) as cod1, ";
+	consulta1 += "max(cod3) as cod3 ";
+	consulta1 += "from ";
+	consulta1 += "(select cve_ent,count(case when voc='S' then voc END) OVER (PARTITION BY cve_ent) as vocS,";
+	consulta1 += "count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,";
+	consulta1 += "count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR, ";
+	consulta1 += "count(case when t2.cgo_act in ('4','B','A') then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod4, ";
+	consulta1 += "count(case when t2.cgo_act='2' then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod2, ";
+	consulta1 += "count(case when t2.cgo_act='1' then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod1,";
+	consulta1 += "count(case when t2.cgo_act in ('3','C','K','R','T') then t2.cgo_act END) OVER (PARTITION BY cve_ent) as cod3 ";
+	consulta1 += "from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act ";
+	consulta1 += "where status=1  order by t1.cve_ent) t1 group by cve_ent";
+*/
 
 //out.println("<center><img src='images/reporte2.png' width='100px'  height='100px'></img>");
 
 
 //out.println(consulta1);
+
+/*
       Statement str = null;
 	  Statement str1 = null;
       ResultSet rs = null;
@@ -118,7 +126,13 @@ consulta1 += "where status=1  order by t1.cve_ent) t1 group by cve_ent";
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       //out.println(consulta1);
       rs = str.executeQuery( consulta1 );
-	  
+*/
+
+
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas.consulta_avance_act_2022_CA_01("act10_ed");
+
+
       out.println("<form method=\"post\" name=\"enviar\"><CENTER CLASS=T ALIGN=CENTER>Avance de la Actualizacion Cartografica (Manzanas Aceptadas)<!-- a la fecha: <input class='boton' name='filfe2' type='text' id='p1id' onClick=\"popUpCalendar(this, enviar.p1id, 'yyyy-mm-dd');\" size='10' readOnly value='"+filfe2.substring(0,10)+"'>&nbsp;&nbsp;<input class='boton' type=submit value='Ir'>-->");
 out.println("<br><br><center><table border=1 class=table><tr class=titulo2>");
 out.println("<th rowspan=3 bgcolor=#dadeda>&nbsp;Entidad&nbsp;");
@@ -237,10 +251,13 @@ out.println("<td>"+formateador.format(sum7)+"");
 out.println(imprimir);
 
 
-   String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
- str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+//String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
+///str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+//str.executeUpdate(consulta9);
 
- str.executeUpdate(consulta9);
+	Constructor_de_Consultas.consulta_avance_act_2022_CA_02("act10_ed", request.getRemoteAddr());
+
+
 
   out.println("</table><font class=c align=left> <br>");
 
@@ -249,8 +266,11 @@ out.println("</form>");
 
 
   
-      str.close();
-      conexion.close();
+     //str.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
 
 %>
 

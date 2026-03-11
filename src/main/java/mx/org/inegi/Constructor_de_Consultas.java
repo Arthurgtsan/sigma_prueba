@@ -1703,8 +1703,8 @@ public class Constructor_de_Consultas {
 	}
 	
 	// ARCHIVO asigna_loc_baja 
-	//mia
-	public static CachedRowSet consulta_asigna_loc_baja_01(String cnx, String gid) {
+
+	public static void consulta_asigna_loc_baja_01(String cnx, String gid) {
 
 		String  consulta = "update cat_manz set vienede=(select substring(figura,1,1)||gid from mcc_poblacion.cat_manz_modcar where gid=?) "
 				+ "where cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza =(select cvegeo  from mcc_poblacion.cat_manz_modcar where gid=?) and ban='3'";
@@ -1712,7 +1712,7 @@ public class Constructor_de_Consultas {
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -1726,49 +1726,21 @@ public class Constructor_de_Consultas {
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		     //rs.populate(_rs);	
 						
-			return rs;
+		//	return 0;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return 0;
 	}
 	
-	// claude
-	/*public static int consulta_asigna_loc_baja_01(String cnx, String gid) {
 
-		String consulta = "update cat_manz set vienede=(select substring(figura,1,1)||gid from mcc_poblacion.cat_manz_modcar where gid=?) "
-				+ "where cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza =(select cvegeo  from mcc_poblacion.cat_manz_modcar where gid=?) and ban='3'";
-
-	    Connection con = null;
-	    PreparedStatement ps = null;
-
-	    try {
-	        con = AdministradorDataSource_Sigma.getConnection(cnx);
-	        ps = con.prepareStatement(consulta);
-
-	        ps.setString(1, gid);   
-	        ps.setString(2, gid);  
-
-	        ps.setQueryTimeout(3000);
-	        return ps.executeUpdate();  
-
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        if (ps  != null) try { ps.close();  } catch (SQLException e) { e.printStackTrace(); }
-	        if (con != null) try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
-	    }
-	    return 0;
-	}*/
-	
 	// ARCHIVO asigna_loc_cd 
-	// deberia de checarse porque es UPDATE
-	public static CachedRowSet consulta_asigna_loc_cd_01(String cnx, String gid) {
+	public static void consulta_asigna_loc_cd_01(String cnx, String gid) {
 
 		String consulta = "update mcc_poblacion.cat_manz_modcar set proc=1,fresp=current_date,cgo_def='L' where gid=? and "
 				+ "cve_ent||cve_mun||cve_loc not in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ban not in "
@@ -1778,7 +1750,7 @@ public class Constructor_de_Consultas {
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -1791,17 +1763,17 @@ public class Constructor_de_Consultas {
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} 
 		catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	// ARCHIVO avance_act_2021
@@ -1870,15 +1842,15 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_2021_02(String cnx, String remoteAddr) {
+	public static void consulta_avance_act_2021_02(String cnx, String remoteAddr) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remoteAddr+"',current_timestamp,'Avance_Actualiza')";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ? ,current_timestamp,'Avance_Actualiza')";
 
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -1887,20 +1859,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remoteAddr);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		   //  rs.populate(_rs);	
 						
-			return rs;
+		//	return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_2022_CA_ant_01(String cnx) {
@@ -1936,15 +1908,15 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_2022_CA_ant_02(String cnx, String remote) {
+	public static void consulta_avance_act_2022_CA_ant_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Avance_Act');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ? ,current_timestamp,'Avance_Act');";
 
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -1953,20 +1925,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_2022_CA_01(String cnx) {
@@ -2022,14 +1994,14 @@ public class Constructor_de_Consultas {
 	}
 	
 	
-	public static CachedRowSet consulta_avance_act_2022_CA_02(String cnx, String remote) {
+	public static void consulta_avance_act_2022_CA_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Avance_Act');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ?,current_timestamp,'Avance_Act');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2038,20 +2010,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_2022_01(String cnx) {
@@ -2086,14 +2058,14 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_2022_02(String cnx, String remote) {
+	public static void consulta_avance_act_2022_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Avance_Act');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ? ,current_timestamp,'Avance_Act');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2102,20 +2074,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		   //  rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_2024_ant_01(String cnx) {
@@ -2150,14 +2122,14 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_2024_ant_02(String cnx, String remote) {
+	public static void consulta_avance_act_2024_ant_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Avance_Act');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ?,current_timestamp,'Avance_Act');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2166,20 +2138,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_2024_01(String cnx) {
@@ -2214,14 +2186,14 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_2024_02(String cnx, String remote) {
+	public static void consulta_avance_act_2024_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Avance_Act');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ?,current_timestamp,'Avance_Act');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2230,28 +2202,28 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			// rs = RowSetProvider.newFactory().createCachedRowSet();
+		   //  rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_act_mg_01(String cnx, String fechapre) {
 
 		String consulta1 = "select cve_ent,"
-				+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent "+fechapre+") as pre1, "
-				+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre2, "
-				+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre3, "
+				+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent and fact>=?) as pre1, "
+				+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent and fact>=?) as pre2, "
+				+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent and fact>=?) as pre3, "
 				+"(select count(*)||','||sum(predig::integer)||','||sum(mza_pre::integer)||','||sum(actual::integer)||','||sum(mza_act::integer)||','||sum(mza_dig::integer) from rep_actualizacion t2 where t2.digital='0' and t2.cve_ent=t1.cve_ent) as c1, "
 				+"(select loc_bufer||','||loc_total||','||loc_por_30||','||loc_pre||','||loc_act||','||loc_dig from rep_loc_no_mza t2 where t2.cve_ent=t1.cve_ent) as c2, "
 				+"count(*) as total, "
@@ -2278,7 +2250,9 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, fechapre);
+			ps.setString(2, fechapre);
+			ps.setString(3, fechapre);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();

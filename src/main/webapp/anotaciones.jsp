@@ -321,6 +321,7 @@ out.println(barra+"<br><br>");
    // str.close();
     //conexion.close();
     rs.close();
+    rs = null;
 
 
 

@@ -22,13 +22,13 @@ try {
     str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
     str.executeUpdate( consulta );
     */
-    CachedRowSet rs = null;
-    rs = Constructor_de_Consultas.consulta_asigna_loc_baja_01("act10_ed", gid);
+    //CachedRowSet rs = null;
+    Constructor_de_Consultas.consulta_asigna_loc_baja_01("act10_ed", gid);
     
     out.print("0");
     
-    rs.close();
-    
+   // rs.close();
+   // rs = null;
     //str.close();
     //conexion.close();
     }

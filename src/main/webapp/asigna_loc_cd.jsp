@@ -25,18 +25,18 @@ try {
     //str.executeUpdate( consulta );
     rs = str.executeQuery( consulta );*/
     String remotehostbd  = session.getAttribute("remotehostbd").toString();
-    CachedRowSet rs = null;
-    rs = Constructor_de_Consultas.consulta_asigna_loc_cd_01(remotehostbd, gid);
+   // CachedRowSet rs = null;
+    Constructor_de_Consultas.consulta_asigna_loc_cd_01(remotehostbd, gid);
 
-   
     String ban="1";
     while(rs.next()){
       ban="2";
     }
+    
     out.print(ban);
     //str.close();
     //conexion.close();
-    rs.close();
+   // rs.close();
     
     }
     catch (SQLException ex){

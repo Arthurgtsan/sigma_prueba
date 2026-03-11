@@ -1,6 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -79,7 +84,7 @@ if (entrega!=null){
 if (filfe2==null)filfe2=fec2;
 filfe2 += " 23:59:59";
 
-String consulta1 = "select * from proyectos.avance_act order by cve_ent";
+//String consulta1 = "select * from proyectos.avance_act order by cve_ent";
 
 
 //out.println("<center><img src='images/reporte2.png' width='856px'  height='943px'></img>");
@@ -87,6 +92,8 @@ String consulta1 = "select * from proyectos.avance_act order by cve_ent";
 //"jdbc:postgresql://10.153.3.25:5434/actcargeo10",
 // $cadena="host=10.153.3.25 port=5434 dbname=actcargeo10  user=actcar password=actcar";
 //out.println(consulta1);
+
+/*
       Statement str = null;
 	  Statement str1 = null;
       ResultSet rs = null;
@@ -102,6 +109,10 @@ String consulta1 = "select * from proyectos.avance_act order by cve_ent";
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       //out.println(consulta1);
       rs = str.executeQuery( consulta1 );
+*/
+
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas.consulta_avance_act_2022_01("act10_ed");
 	  
       out.println("<form method=\"post\" name=\"enviar\"><CENTER CLASS=T ALIGN=CENTER>Avance de la Actualizacion Cartografica (Manzanas Aceptadas)<!-- a la fecha: <input class='boton' name='filfe2' type='text' id='p1id' onClick=\"popUpCalendar(this, enviar.p1id, 'yyyy-mm-dd');\" size='10' readOnly value='"+filfe2.substring(0,10)+"'>&nbsp;&nbsp;<input class='boton' type=submit value='Ir'>-->");
 out.println("<br><br><center><table border=1 class=table><tr class=titulo2>");
@@ -281,11 +292,13 @@ out.println(imprimir);
 
 //out.println("<td>"+formateador.format(sum13));
 
-   String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
+//String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
    //out.println(consulta9);
- str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+//str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
  //rs = str.executeQuery( consulta9 );
- str.executeUpdate(consulta9);
+//str.executeUpdate(consulta9);
+
+	Constructor_de_Consultas.consulta_avance_act_2022_02("act10", request.getRemoteAddr());
 
   out.println("</table><font class=c align=left> <br>");
   //out.println("<div align='center' style='position:absolute;left:0;right:0;margin-left:auto;margin-right:auto;top:300;opacity:0.3;'><center><img src='http://dc046068asdggma.inegi.gob.mx:8070/geoserver/INEGI/wms?LAYERS=INEGI%3AESTADOS%2CINEGI%3Aa_rep_mun&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=estados%2Ca_rep_mun_av&FORMAT=image%2Fpng&SRS=EPSG%3A900913&bbox=-1.3181079254380183E7,1635334.4672155518,-9652558.161913535,3858019.1970224283&WIDTH=2871&HEIGHT=1480' width=800 height=512></img></center></div>");
@@ -297,8 +310,11 @@ out.println("</form>");
   //out.println("");
 
   
-      str.close();
-      conexion.close();
+      //str.close();
+     // conexion.close();
+     
+     rs.close();
+     rs = null;
 
 %>
 

@@ -1,6 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -77,13 +82,14 @@ if (entrega!=null){
 if (filfe2==null)filfe2=fec2;
 filfe2 += " 23:59:59";
 
-String consulta1 = "select * from proyectos.avance_act order by cve_ent";
+//String consulta1 = "select * from proyectos.avance_act order by cve_ent";
 
 
 //out.println("<center><img src='images/reporte2.png' width='100px'  height='100px'></img>");
 
 
 //out.println(consulta1);
+/*
       Statement str = null;
 	  Statement str1 = null;
       ResultSet rs = null;
@@ -98,6 +104,10 @@ String consulta1 = "select * from proyectos.avance_act order by cve_ent";
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       //out.println(consulta1);
       rs = str.executeQuery( consulta1 );
+*/
+
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas.consulta_avance_act_2022_CA_ant_01("act10_ed");
 	  
       out.println("<form method=\"post\" name=\"enviar\"><CENTER CLASS=T ALIGN=CENTER>Avance de la Actualizacion Cartografica (Manzanas Aceptadas)<!-- a la fecha: <input class='boton' name='filfe2' type='text' id='p1id' onClick=\"popUpCalendar(this, enviar.p1id, 'yyyy-mm-dd');\" size='10' readOnly value='"+filfe2.substring(0,10)+"'>&nbsp;&nbsp;<input class='boton' type=submit value='Ir'>-->");
 out.println("<br><br><center><table border=1 class=table><tr class=titulo2>");
@@ -214,10 +224,11 @@ out.println("<td>"+formateador.format(sum14)+"");
 out.println(imprimir);
 
 
-   String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
- str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-
- str.executeUpdate(consulta9);
+ //String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Avance_Act');";
+ //str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+ //str.executeUpdate(consulta9);
+ 
+ 	Constructor_de_Consultas.consulta_avance_act_2022_CA_ant_02("act10_ed", request.getRemoteAddr());
 
   out.println("</table><font class=c align=left> <br>");
 
@@ -226,8 +237,11 @@ out.println("</form>");
 
 
   
-      str.close();
-      conexion.close();
+   //   str.close();
+    //  conexion.close();
+    
+    rs.close();
+    rs = null;
 
 %>
 

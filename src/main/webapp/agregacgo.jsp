@@ -33,6 +33,7 @@ try {
     //str.close();
     //conexion.close();
     rs.close();
+    rs = null;
     
     }
     catch (SQLException ex){

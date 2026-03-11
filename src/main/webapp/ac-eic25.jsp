@@ -591,6 +591,7 @@ out.println(barra+"<br><br>");
     //str.close();
     //conexion.close();
     rs.close();
+    rs = null;
  }//try
 
     catch (SQLException ex){

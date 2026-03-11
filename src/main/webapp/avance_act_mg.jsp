@@ -1,6 +1,12 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -38,43 +44,51 @@ if (entrega!=null){
   //filentrega=" and fact>='2018-08-06' ";
   //filentrega1=" and fresp>='2018-08-06' ";
   //filentrega2=" and f_registro>='2018-08-06' ";
-  fechapre=" and fact>='2019-02-01' ";
+  //fechapre=" and fact>='2019-02-01' ";
+	fechapre="2019-02-01";
 }
 //filfe1 += " 00:00:00";
 if (filfe2==null)filfe2=fec2;
 filfe2 += " 23:59:59";
 
+/*
+		String consulta1 = "select cve_ent,"
+		+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent "+fechapre+") as pre1, "
+		+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre2, "
+		+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre3, "
+		+"(select count(*)||','||sum(predig::integer)||','||sum(mza_pre::integer)||','||sum(actual::integer)||','||sum(mza_act::integer)||','||sum(mza_dig::integer) from rep_actualizacion t2 where t2.digital='0' and t2.cve_ent=t1.cve_ent) as c1, "
+		+"(select loc_bufer||','||loc_total||','||loc_por_30||','||loc_pre||','||loc_act||','||loc_dig from rep_loc_no_mza t2 where t2.cve_ent=t1.cve_ent) as c2, "
+		+"count(*) as total, "
+		+"max(vregs) as ValREG,"
+		+"max(vocs) as ValOC,"
+		+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent) as forma , "
+		+"(select count(*) from cat_loc_val_arcgis t2 where clave in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ambito='R') and t2.cve_ent=t1.cve_ent) as plan1 "
+		+"from "
+		+"(select cve_ent,count(case when voc='S' then voc END) OVER (PARTITION BY cve_ent) as vocS,"
+		+"count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,"
+		+"count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR "
+		+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
+		+"where status=1  order by t1.cve_ent) t1 group by cve_ent";
+		//out.println(consulta1);
+		      Statement str = null;
+		      ResultSet rs = null;
+		      Connection conexion = null;
+		      Class.forName("org.postgresql.Driver");
+		       conexion = DriverManager.getConnection(
+		                                             "jdbc:postgresql://10.153.3.25:5434/actcargeo10",
+		                                             "actcar",
+		                                             "actcar"
+		                                            );
+		      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+		      //out.println(consulta1);
+		      rs = str.executeQuery( consulta1 );
+		    
+*/
 
-String consulta1 = "select cve_ent,"
-+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent "+fechapre+") as pre1, "
-+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre2, "
-+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent "+fechapre+") as pre3, "
-+"(select count(*)||','||sum(predig::integer)||','||sum(mza_pre::integer)||','||sum(actual::integer)||','||sum(mza_act::integer)||','||sum(mza_dig::integer) from rep_actualizacion t2 where t2.digital='0' and t2.cve_ent=t1.cve_ent) as c1, "
-+"(select loc_bufer||','||loc_total||','||loc_por_30||','||loc_pre||','||loc_act||','||loc_dig from rep_loc_no_mza t2 where t2.cve_ent=t1.cve_ent) as c2, "
-+"count(*) as total, "
-+"max(vregs) as ValREG,"
-+"max(vocs) as ValOC,"
-+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent) as forma , "
-+"(select count(*) from cat_loc_val_arcgis t2 where clave in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ambito='R') and t2.cve_ent=t1.cve_ent) as plan1 "
-+"from "
-+"(select cve_ent,count(case when voc='S' then voc END) OVER (PARTITION BY cve_ent) as vocS,"
-+"count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,"
-+"count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR "
-+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
-+"where status=1  order by t1.cve_ent) t1 group by cve_ent";
-//out.println(consulta1);
-      Statement str = null;
-      ResultSet rs = null;
-      Connection conexion = null;
-      Class.forName("org.postgresql.Driver");
-       conexion = DriverManager.getConnection(
-                                             "jdbc:postgresql://10.153.3.25:5434/actcargeo10",
-                                             "actcar",
-                                             "actcar"
-                                            );
-      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-      //out.println(consulta1);
-      rs = str.executeQuery( consulta1 );
+		
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas.consulta_avance_act_mg_01("act10_ed", fechapre);
+		      
       out.println("<form method=\"post\" name=\"enviar\"><center><font class='titulo'>Seguimiento de la Actualizacion Rural 2019</font><br>");
 
 
@@ -260,8 +274,11 @@ out.println("<td>"+formateador.format(sum19)+"");
 
 
   //out.println("");
-      str.close();
-      conexion.close();
+      ///str.close();
+     // conexion.close();
+     
+     rs.close();
+     rs = null;
 
 %>
 <center><br>
