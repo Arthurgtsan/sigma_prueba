@@ -2483,10 +2483,20 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_inv_02(String cnx) {
+	public static CachedRowSet consulta_avance_inv_02(String cnx, String cons, String pass, String nivel) {
 
-		String consulta1 = "select inv_us, nombre, count(*) from v_cat_mza_inv t1, usuarios t2 where cons=inv_us and inv_us is not null ";
-		
+	    String consulta1="";
+	    if (cons.equals("44") || pass.equals("ara") || pass.equals("ARA") ){
+	     consulta1 = "select inv_us, nombre, count(*) from v_cat_mza_inv t1, usuarios t2 where cons=inv_us and inv_us is not null ";
+	       if (nivel == null){
+	       consulta1+="group by inv_us,nombre order by nombre ";
+	     }else{
+	       consulta1+=" and nivel=3 group by inv_us,nombre order by nombre ";
+	   }
+	   }else{
+	     consulta1 = "select inv_us, (select nombre from usuarios where cons=inv_us), count(*) from v_cat_mza_inv where inv_us=? group by inv_us order by inv_us,nombre";
+	   }
+	    
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
@@ -2499,7 +2509,9 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			if (!(cons.equals("44") || pass.equals("ara") || pass.equals("ARA"))) {
+			    ps.setString(1, cons);
+			}
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -2582,17 +2594,17 @@ public class Constructor_de_Consultas {
 	public static CachedRowSet consulta_avance_precarta20_carta(String cnx, String edo) {
 
 		String consulta1 = "select t1.carta ,";
-		consulta1+="(select count(*) from z_digmz_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digmz_respaldo.geom,t1.geom)) as cm , ";
-		consulta1+="(select count(*) from z_digf_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as cf , ";
-		consulta1+="(select count(*) from z_digf_respaldo   where nfr_noroe is null and cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as nf, ";
-		consulta1+="(select count(*) from z_dige_respaldo where cve_ent ='"+edo+"' and st_intersects(z_dige_respaldo.the_geom,t1.geom)) as ce,";
+		consulta1+="(select count(*) from z_digmz_respaldo where cve_ent = ? and st_intersects(z_digmz_respaldo.geom,t1.geom)) as cm , ";
+		consulta1+="(select count(*) from z_digf_respaldo where cve_ent = ? and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as cf , ";
+		consulta1+="(select count(*) from z_digf_respaldo   where nfr_noroe is null and cve_ent = ? and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as nf, ";
+		consulta1+="(select count(*) from z_dige_respaldo where cve_ent = ? and st_intersects(z_dige_respaldo.the_geom,t1.geom)) as ce,";
 		consulta1+="st_Area(t1.geom) as area1,";
 		consulta1+="((sum(CASE WHEN 1=1        THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as area2,";
 		consulta1+="((sum(CASE WHEN sup in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as vreg,";
 		consulta1+="((sum(CASE WHEN voc in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as voc,  ";
 		consulta1+="max(fact) as fact,pasada ";
 		consulta1+="from cat_cartas20 t1 left join a_rep_cardig t2 ";
-		consulta1+="on t1.carta=substring(t2.carta,1,7) where st_intersects((select the_geom from cat_ent where cve_ent='"+edo+"'),t1.geom)   ";
+		consulta1+="on t1.carta=substring(t2.carta,1,7) where st_intersects((select the_geom from cat_ent where cve_ent= ?),t1.geom)   ";
 		consulta1+="group by t1.carta,t1.geom,t1.pasada order by t1.carta";
 		
 		ResultSet _rs = null;
@@ -2607,7 +2619,11 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, edo);
+			ps.setString(2, edo);
+			ps.setString(3, edo);
+			ps.setString(4, edo);
+			ps.setString(5, edo);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();

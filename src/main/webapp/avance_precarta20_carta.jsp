@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -22,23 +27,24 @@ window.resizeTo(1100,700);
 <body style="background:url('images/fondo1.jpg'); background-repeat: no-repeat; background-size: cover;">
 <%
 String  edo = request.getParameter("filedo");
-
-String consulta1 = "select t1.carta ,";
-consulta1+="(select count(*) from z_digmz_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digmz_respaldo.geom,t1.geom)) as cm , ";
-consulta1+="(select count(*) from z_digf_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as cf , ";
-consulta1+="(select count(*) from z_digf_respaldo   where nfr_noroe is null and cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as nf, ";
-consulta1+="(select count(*) from z_dige_respaldo where cve_ent ='"+edo+"' and st_intersects(z_dige_respaldo.the_geom,t1.geom)) as ce,";
-consulta1+="st_Area(t1.geom) as area1,";
-consulta1+="((sum(CASE WHEN 1=1        THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as area2,";
-consulta1+="((sum(CASE WHEN sup in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as vreg,";
-consulta1+="((sum(CASE WHEN voc in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as voc,  ";
-consulta1+="max(fact) as fact,pasada ";
-consulta1+="from cat_cartas20 t1 left join a_rep_cardig t2 ";
-consulta1+="on t1.carta=substring(t2.carta,1,7) where st_intersects((select the_geom from cat_ent where cve_ent='"+edo+"'),t1.geom)   ";
-consulta1+="group by t1.carta,t1.geom,t1.pasada order by t1.carta";
-
+/*
+	String consulta1 = "select t1.carta ,";
+	consulta1+="(select count(*) from z_digmz_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digmz_respaldo.geom,t1.geom)) as cm , ";
+	consulta1+="(select count(*) from z_digf_respaldo where cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as cf , ";
+	consulta1+="(select count(*) from z_digf_respaldo   where nfr_noroe is null and cve_ent ='"+edo+"' and st_intersects(z_digf_respaldo.the_geom,t1.geom)) as nf, ";
+	consulta1+="(select count(*) from z_dige_respaldo where cve_ent ='"+edo+"' and st_intersects(z_dige_respaldo.the_geom,t1.geom)) as ce,";
+	consulta1+="st_Area(t1.geom) as area1,";
+	consulta1+="((sum(CASE WHEN 1=1        THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as area2,";
+	consulta1+="((sum(CASE WHEN sup in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as vreg,";
+	consulta1+="((sum(CASE WHEN voc in (1,2) THEN st_area(st_transform(t2.geom,32800)) else 0 END))) as voc,  ";
+	consulta1+="max(fact) as fact,pasada ";
+	consulta1+="from cat_cartas20 t1 left join a_rep_cardig t2 ";
+	consulta1+="on t1.carta=substring(t2.carta,1,7) where st_intersects((select the_geom from cat_ent where cve_ent='"+edo+"'),t1.geom)   ";
+	consulta1+="group by t1.carta,t1.geom,t1.pasada order by t1.carta";
+*/
 
 //out.println(consulta1);
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -50,6 +56,11 @@ consulta1+="group by t1.carta,t1.geom,t1.pasada order by t1.carta";
                                             );
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta1 );
+*/	
+
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas.consulta_avance_precarta20_carta("act10", edo);
+
       out.println("<center><font class='titulo'>Avance por carta 20,000 - Estado "+edo+" </font><br><br>");
             //out.println("<table border=1><tr class=titulo2><th>&nbsp;Carta&nbsp;<th>&nbsp;Frentes en manzanas&nbsp;<th>&nbsp;Frentes&nbsp;<br>&nbsp;sin&nbsp;manzana&nbsp;<th>&nbsp;Vialidades&nbsp;<th>&nbsp;Cubrimiento&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Regional&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Centrales&nbsp;<th>&nbsp;Ultima&nbsp;<br>&nbsp;Actividad&nbsp;<th>&nbsp;Numero de&nbsp;<br>&nbsp;pasadas&nbsp;");
       out.println("<table border=1><tr class=titulo2><th>&nbsp;Carta&nbsp;<th>&nbsp;Manzanas&nbsp;<br>Cerradas<th>&nbsp;Frentes&nbsp;<th>&nbsp;Frentes&nbsp;<br>&nbsp;sin&nbsp;manzana&nbsp;<th>&nbsp;Vialidades&nbsp;<th>&nbsp;Cubrimiento&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Regional&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Centrales&nbsp;<th>&nbsp;Ultima&nbsp;<br>&nbsp;Actividad&nbsp;<th>&nbsp;Numero de&nbsp;<br>&nbsp;pasadas&nbsp;<th><img src='images/s.png'></img>");
@@ -108,8 +119,11 @@ consulta1+="group by t1.carta,t1.geom,t1.pasada order by t1.carta";
         }
       }
       //out.println("</table><br><img src='http://dc046068asdggma.inegi.gob.mx:8070/geoserver/INEGI/wms?LAYERS=INEGI%3APOLIGONOS_URBANOS%2CINEGI%3AESTADOS%2CINEGI%3Acartas5rep&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A900913&bbox="+xmin+","+ymin+","+xmax+","+ymax+"&width="+((int) val1)+"&height="+((int) val2)+"'></img>");
-      str.close();
-      conexion.close();
+      //str.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
 
 %>
 </table>

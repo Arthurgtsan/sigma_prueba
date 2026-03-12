@@ -126,9 +126,12 @@ if (ban != null){
       out.println("<table>");
       out.println("<tr><td class=n3 align=right>TOTAL<td class=n3 align=right>&nbsp;"+sum2+"&nbsp;");
       out.println("</table><br>");
-      str.close();
+      //str.close();
     }
-      conexion.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
     }
 %>
 </form>
