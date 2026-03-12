@@ -1,6 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -73,6 +78,7 @@ if (entrega!=null){
   //filentrega1=" and fresp>='2018-08-06' ";
   //filentrega2=" and f_registro>='2018-08-06' ";
   fechapre=" and fact>='2019-02-01' ";
+  
 }
 //filfe1 += " 00:00:00";
 if (filfe2==null)filfe2=fec2;
@@ -107,7 +113,7 @@ String consulta1 = "select cve_ent,0,0,0,0,0,"
 +"max(vregs) as ValREG,"
 +"max(vregr) as RetREG,"
 //+"max(vregn) as SinREG,"
-+"(select count(*) from rep_avance.mz_arcgis_av t2 where substring(cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as arcgis,  "
++"(select count(*) from rep_avance.mz_arcgis_av t2 where substring(cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as arcgis,  "		
 +"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as forma,  "
 +"(select count(*) from respaldo_manz_bcu t2 where t2.cve_ent=t1.cve_ent and proc = 1 and fresp<='"+filfe2+"' "+filentrega1+") as bcu1,"
 +"(select count(*) from respaldo_manz_bcu t2 where t2.cve_ent=t1.cve_ent and proc > 1 and fresp<='"+filfe2+"' "+filentrega1+") as bcu2,"
@@ -126,6 +132,7 @@ String consulta1 = "select cve_ent,0,0,0,0,0,"
 +"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<='"+filfe2+"' "+filentrega+") t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
 +"where status=1  order by t1.cve_ent) t1 group by cve_ent";
 //out.println(consulta1);
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -138,6 +145,12 @@ String consulta1 = "select cve_ent,0,0,0,0,0,"
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       //out.println(consulta1);
       rs = str.executeQuery( consulta1 );
+*/
+
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas.consulta_avance_act_pob_01("act10_ed", filfe2);
+
+
       out.println("<form method=\"post\" name=\"enviar\"><br><CENTER CLASS=T ALIGN=CENTER>Avance de la Actualizaci&oacute;n Cartogr&aacute;fica a la fecha: <input class='boton' name='filfe2' type='text' id='p1id' onClick=\"popUpCalendar(this, enviar.p1id, 'yyyy-mm-dd');\" size='10' readOnly value='"+filfe2.substring(0,10)+"'>&nbsp;&nbsp;<input class='boton' type=submit value='Ir'>");
 out.println("<br><br><center><table border=1 class=table><tr class=titulo2>");
 out.println("<th rowspan=3 bgcolor=#dadeda>&nbsp;Entidad&nbsp;");
@@ -298,8 +311,11 @@ out.println(imprimir);
 out.println("</form>");
 
   //out.println("");
-      str.close();
-      conexion.close();
+      //str.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
 
 %>
 

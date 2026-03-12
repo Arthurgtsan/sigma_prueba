@@ -2268,7 +2268,7 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_pob_01(String cnx, String filfe2, String filentrega2, String filentrega) {
+	public static CachedRowSet consulta_avance_act_pob_01(String cnx, String filfe2) {
 
 		String consulta1 = "select cve_ent,0,0,0,0,0,"
 				//+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as pre1, "
@@ -2276,19 +2276,19 @@ public class Constructor_de_Consultas {
 				//+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as pre3, "
 				//+"(select count(*) from rep_avance.mz_predig_sin_act t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as faltantes, "  //pendientes de clave
 				//+"(select count(*) from rep_avance.mz_predig t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as enact, "  //pendientes de clave
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and (status=1 or status=0 or status=7) and f_registro<='"+filfe2+"' "+filentrega2+") as modcar1, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and status=2 and f_registro<='"+filfe2+"' "+filentrega2+") as modcar2, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and status in (3,4,5,6,8,9) and f_registro<='"+filfe2+"' "+filentrega2+") as modcar3, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and (fresp<='"+filfe2+"' "+filentrega2+" and(proc!=0) or status=0 or cgo='46')) as ensigma, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and (status=1 or status=0 or status=7) and f_registro<=?) as modcar1, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and status=2 and f_registro<=?) as modcar2, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='CENSOR' and status in (3,4,5,6,8,9) and f_registro<=?) as modcar3, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and (fresp<=? and(proc!=0) or status=0 or cgo='46')) as ensigma, "
 				+"count(*) as total, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='TCAR' and f_registro<='"+filfe2+"' "+filentrega2+") as modcar34, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and figura='TCAR' and f_registro<=?) as modcar34, "
 				//+"(select count(*) from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t2 where (t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_act) and (ent_ant||mun_ant||loc_ant in (select cve from a_cob_ce19_definitivo) or ent_act||mun_act||loc_act in (select cve from a_cob_ce19_definitivo)) and fact<='"+filfe2+"' "+filentrega+") as te_cober,  "
 				+"max(vocs) as ValOC,"
 				+"max(vregs) as ValREG, "
-				+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as forma,  "
-				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as desc, 0,"
+				+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<=?) as forma,  "
+				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and fact<=?) as desc, 0,"
 				//+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as desc_mcc, "
-				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and substring(cve_geo,1,5) in (select distinct cve_geo from rep_avance.mz_arcgis where substring(cve_geo,1,2)=t1.cve_ent) and fact<='"+filfe2+"' "+filentrega+") as mz_val "
+				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and substring(cve_geo,1,5) in (select distinct cve_geo from rep_avance.mz_arcgis where substring(cve_geo,1,2)=t1.cve_ent) and fact<=?) as mz_val "
 
 
 				/*
@@ -2299,7 +2299,7 @@ public class Constructor_de_Consultas {
 				+"max(vregs) as ValREG,"
 				+"max(vregr) as RetREG,"
 				//+"max(vregn) as SinREG,"
-				+"(select count(*) from rep_avance.mz_arcgis_av t2 where substring(cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as arcgis,  "
+				+"(select count(*) from rep_avance.mz_arcgis_av t2 where substring(cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as arcgis,  "		
 				+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as forma,  "
 				+"(select count(*) from respaldo_manz_bcu t2 where t2.cve_ent=t1.cve_ent and proc = 1 and fresp<='"+filfe2+"' "+filentrega1+") as bcu1,"
 				+"(select count(*) from respaldo_manz_bcu t2 where t2.cve_ent=t1.cve_ent and proc > 1 and fresp<='"+filfe2+"' "+filentrega1+") as bcu2,"
@@ -2315,7 +2315,7 @@ public class Constructor_de_Consultas {
 				+"count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,"
 				+"count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR "
 				//+",count(case when vreg='N' then vreg END) OVER (PARTITION BY cve_ent) as vregN "
-				+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<='"+filfe2+"' "+filentrega+") t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
+				+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<=?) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
 				+"where status=1  order by t1.cve_ent) t1 group by cve_ent";
 		
 		ResultSet _rs = null;
@@ -2330,7 +2330,15 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, filfe2);
+			ps.setString(2, filfe2);
+			ps.setString(3, filfe2);
+			ps.setString(4, filfe2);
+			ps.setString(5, filfe2);
+			ps.setString(6, filfe2);
+			ps.setString(7, filfe2);
+			ps.setString(8, filfe2);
+			ps.setString(9, filfe2);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -2346,26 +2354,26 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_act_01(String cnx, String filfe2, String filentrega2, String filentrega, String fechapre) {
+	public static CachedRowSet consulta_avance_act_01(String cnx, String filfe2, String fechapre) {
 
 		String consulta1 = "select cve_ent,"
-				+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as pre1, "
-				+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as pre2, "
-				+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as pre3, "
-				+"(select count(*) from rep_avance.mz_predig_sin_act t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as faltantes, "  //pendientes de clave
-				+"(select count(*) from rep_avance.mz_predig t2 where t2.cve_ent=t1.cve_ent and fact<='"+filfe2+"' "+fechapre+") as enact, "  //pendientes de clave
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and (status=1 or status=4) and f_registro<='"+filfe2+"' "+filentrega2+") as modcar1, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and status=2 and figura='CENSOR' and f_registro<='"+filfe2+"' "+filentrega2+") as modcar2, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and status=3 and f_registro<='"+filfe2+"' "+filentrega2+") as modcar3, "
-				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc>0 and fresp<='"+filfe2+"' "+filentrega2+") as modcar3, "
+				+"(select count(*) from respaldo_z_digmz t2 where (cve_baja!='BCUU' or cve_baja is null) and t2.cve_ent=t1.cve_ent and fact<=? and fact>=?) as pre1, "
+				+"(select count(*) from respaldo_z_digpe t2 where t2.cve_ent=t1.cve_ent and fact<=? and fact>=?) as pre2, "
+				+"(select count(*) from respaldo_z_digmp t2 where t2.cve_ent=t1.cve_ent and fact<=? and fact>=?) as pre3, "
+				+"(select count(*) from rep_avance.mz_predig_sin_act t2 where t2.cve_ent=t1.cve_ent and fact<=? and fact>=?) as faltantes, "  //pendientes de clave
+				+"(select count(*) from rep_avance.mz_predig t2 where t2.cve_ent=t1.cve_ent and fact<=? and fact>=?) as enact, "  //pendientes de clave
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and (status=1 or status=4) and f_registro<=?) as modcar1, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and status=2 and figura='CENSOR' and f_registro<=?) as modcar2, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and status=3 and f_registro<=?) as modcar3, "
+				+"(select count(*) from mcc_poblacion.cat_manz_modcar t2 where t2.cve_ent=t1.cve_ent and proc>0 and fresp<=?) as modcar3, "
 				+"count(*) as total, "
-				+"(select count(*) from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t2 where (t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_act) and (ent_ant||mun_ant||loc_ant in (select cve from a_cob_ce19_definitivo) or ent_act||mun_act||loc_act in (select cve from a_cob_ce19_definitivo)) and fact<='"+filfe2+"' "+filentrega+") as te_cober,  "
+				+"(select count(*) from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t2 where (t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_act) and (ent_ant||mun_ant||loc_ant in (select cve from a_cob_ce19_definitivo) or ent_act||mun_act||loc_act in (select cve from a_cob_ce19_definitivo)) and fact<=?) as te_cober,  "
 				+"max(vocs) as ValOC,"
 				+"max(vregs) as ValREG,"
-				+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as forma,  "
-				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as desc, "
-				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2, manz_afect_todas t3 where cve_geo=cvegeo_def and substring(t2.cve_geo,1,2)=t1.cve_ent and fact<='"+filfe2+"' "+filentrega+") as desc_mcc, "
-				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2, manz_afect_todas t3 where cve_geo=cvegeo_def and substring(t2.cve_geo,1,2)=t1.cve_ent and substring(cve_geo,1,5) in (select distinct cve_geo from rep_avance.mz_arcgis where substring(cve_geo,1,2)=t1.cve_ent) and fact<='"+filfe2+"' "+filentrega+") as mz_val "
+				+"(select count(*) from respaldo_te_mza_coord where substring(clave,1,2)=t1.cve_ent and fact<=?) as forma,  "
+				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2 where substring(t2.cve_geo,1,2)=t1.cve_ent and fact<=?) as desc, "
+				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2, manz_afect_todas t3 where cve_geo=cvegeo_def and substring(t2.cve_geo,1,2)=t1.cve_ent and fact<=?) as desc_mcc, "
+				+"(select count(*) from rep_avance.mz_descargadas_arcgis t2, manz_afect_todas t3 where cve_geo=cvegeo_def and substring(t2.cve_geo,1,2)=t1.cve_ent and substring(cve_geo,1,5) in (select distinct cve_geo from rep_avance.mz_arcgis where substring(cve_geo,1,2)=t1.cve_ent) and fact<=?) as mz_val "
 
 
 				/*
@@ -2392,7 +2400,7 @@ public class Constructor_de_Consultas {
 				+"count(case when vreg='S' then vreg END) OVER (PARTITION BY cve_ent) as vregS,"
 				+"count(case when vreg='R' then vreg END) OVER (PARTITION BY cve_ent) as vregR "
 				//+",count(case when vreg='N' then vreg END) OVER (PARTITION BY cve_ent) as vregN "
-				+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<='"+filfe2+"' "+filentrega+") t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
+				+"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<=?) t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
 				+"where status=1  order by t1.cve_ent) t1 group by cve_ent";
 		
 		ResultSet _rs = null;
@@ -2407,7 +2415,26 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, filfe2);
+			ps.setString(2, fechapre);
+			ps.setString(3, filfe2);
+			ps.setString(4, fechapre);
+			ps.setString(5, filfe2);
+			ps.setString(6, fechapre);
+			ps.setString(7, filfe2);
+			ps.setString(8, fechapre);
+			ps.setString(9, filfe2);
+			ps.setString(10, fechapre);
+			ps.setString(11, filfe2);
+			ps.setString(12, filfe2);
+			ps.setString(13, filfe2);
+			ps.setString(14, filfe2);
+			ps.setString(15, filfe2);
+			ps.setString(16, filfe2);
+			ps.setString(17, filfe2);
+			ps.setString(18, filfe2);
+			ps.setString(19, filfe2);
+			ps.setString(20, filfe2);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -2426,7 +2453,7 @@ public class Constructor_de_Consultas {
 	
 	public static CachedRowSet consulta_avance_inv_01(String cnx, String pass) {
 
-		String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
+		String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper(?)";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -2440,7 +2467,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, pass);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();

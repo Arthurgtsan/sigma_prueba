@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -49,8 +54,9 @@ String nivel = request.getParameter("nivel");
 if (ban != null){
  
  String cons="";
- String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
- //out.println(consulta);
+ /*
+	 String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
+	 //out.println(consulta);
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -63,6 +69,12 @@ if (ban != null){
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       int n2=0;
       rs = str.executeQuery( consulta );
+*/
+		
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas.consulta_avance_inv_01("act10_ed", pass);
+	int n2=0;
+
       while(rs.next()){
                 n2=1;
                 cons=rs.getObject(1).toString();
@@ -70,18 +82,10 @@ if (ban != null){
       if (n2==0){
         out.println("<br><font class='error'>-- USUARIO INCORRECTO --</font>");
     }else{
-    String consulta1="";
-   if (cons.equals("44") || pass.equals("ara") || pass.equals("ARA") ){
-    consulta1 = "select inv_us, nombre, count(*) from v_cat_mza_inv t1, usuarios t2 where cons=inv_us and inv_us is not null ";
-      if (nivel == null){
-      consulta1+="group by inv_us,nombre order by nombre ";
-    }else{
-      consulta1+=" and nivel=3 group by inv_us,nombre order by nombre ";
-  }
-  }else{
-    consulta1 = "select inv_us, (select nombre from usuarios where cons=inv_us), count(*) from v_cat_mza_inv where inv_us="+cons+" group by inv_us order by inv_us,nombre";
-  }
-      rs = str.executeQuery( consulta1 );
+    	
+      //rs = str.executeQuery( consulta1 );
+     rs = Constructor_de_Consultas.consulta_avance_inv_02("act10", cons, pass, nivel);
+     
       out.println("<input type=hidden name=pass value="+pass+">");
       out.println("<input type=hidden name=ban value="+ban+">");
       out.println("<input type=checkbox name=nivel onclick='document.enviar.submit();'");

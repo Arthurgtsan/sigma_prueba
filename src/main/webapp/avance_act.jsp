@@ -1,6 +1,12 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.DecimalFormat"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -32,7 +38,8 @@ if (entrega!=null){
   //filentrega=" and fact>='2018-08-06' ";
   //filentrega1=" and fresp>='2018-08-06' ";
   //filentrega2=" and f_registro>='2018-08-06' ";
-  fechapre=" and fact>='2019-02-01' ";
+  //fechapre=" and fact>='2019-02-01' ";
+	fechapre="2019-02-01";
 }
 //filfe1 += " 00:00:00";
 if (filfe2==null)filfe2=fec2;
@@ -86,7 +93,9 @@ String consulta1 = "select cve_ent,"
 +"from cat_ent t1 left join (select * from (select * from respaldo_te_mza union select * from respaldo_te_mza_cd) t5 where fact<='"+filfe2+"' "+filentrega+") t2 on t1.cve_ent=t2.ent_ant or t1.cve_ent=t2.ent_Act "
 +"where status=1  order by t1.cve_ent) t1 group by cve_ent";
 //out.println(consulta1);
-      Statement str = null;
+
+/*
+	  Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
       Class.forName("org.postgresql.Driver");
@@ -98,6 +107,10 @@ String consulta1 = "select cve_ent,"
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       //out.println(consulta1);
       rs = str.executeQuery( consulta1 );
+*/	
+	  CachedRowSet rs = null;
+	  rs = Constructor_de_Consultas.consulta_avance_act_01("act10", filfe2, fechapre);
+
       out.println("<form method=\"post\" name=\"enviar\"><center><font class='titulo'>Avance por Estado</font><br>");
 
 
@@ -252,8 +265,11 @@ out.println("<td>"+formateador.format(sum17)+"");
 out.println("</form>");
 
   //out.println("");
-      str.close();
-      conexion.close();
+      //str.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
 
 %>
 
