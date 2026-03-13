@@ -1,5 +1,15 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+
+<%@ page import="mx.org.inegi.AdministradorDataSource_Sigma"%>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
+
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <title>
@@ -47,6 +57,9 @@ SIGMA
 //      out.println ("window.location='"+salta+"';");
 
 //}
+
+
+//prueba 13/03/26
 
 
 %>
@@ -152,8 +165,10 @@ if (ban==null){
       //out.println("<a class=liga1 href=\"mailto:neatil.ceballos@inegi.org.mx?subject=MAPA\" title=\"Analisis, dise&ntilde;o y desarrollo\">Neatil Ceballos</a>");
       out.println("</center>");
 } else {
-
-          Statement str = null;
+	//Modificado por Arturo 12/03/2026. Se cambia para usar pool de conexiones > consulta_index_01
+          CachedRowSet rs = null;
+        /* 
+		  Statement str = null;
           ResultSet rs = null;
           Connection conexion = null;
           Class.forName("org.postgresql.Driver");
@@ -168,8 +183,16 @@ if (ban==null){
           regionalid = request.getParameter("regionalid");
           //672,673 son usuarios de capacitacion
           consulta = "select id,regid,nivel,nombre,edicion,cons,edicionmz,edicionpre,edicionagpr,restric,userdg,passdg,correo as correodg, encdg,anuncio from usuarios where cons not in (672,673) and md5(password) = '"+pass+"'";
-          rs = str.executeQuery( consulta );
-            while(rs.next()){
+          rs = str.executeQuery( consulta );*/
+          
+          try {
+        	  
+                  String consulta="";
+                  pass = request.getParameter("password");
+                  regionalid = request.getParameter("regionalid");
+        		  rs = Constructor_de_Consultas.consulta_index_01("act10", pass);  
+        		  
+          while(rs.next()){
                 n=1;
                 id=rs.getObject(1).toString();
                 regid=rs.getObject(2).toString();
@@ -296,7 +319,33 @@ if (ban==null){
                 sesion.setAttribute("hostbd", hostbd);
                 sesion.setAttribute("regionalid", regionalid);
 
-            }
+          } // end while
+          
+              }
+              catch(Exception ex){
+                out.println("<script>");
+                String error_sq  = AdministradorDataSource_Sigma.error_sql;
+                out.println("  alert(\"Se genero la expresion de SQL: "+error_sq+" !\");");
+                out.println("</script>");
+              }
+              
+          	finally {
+          	    // Cerrar el objeto ResultSet
+          		if (rs != null) {
+          	        try {
+          	           rs.close();
+          	           rs = null; // Eliminar referencia
+          	           //CachedRowSet rs2 = Constructor_de_Consultas.getRowSet();
+          	           
+          	       	
+          	        } catch (SQLException e) {
+          	            e.printStackTrace();
+          	        }
+          	    }
+          	}
+                
+                
+            //}
     /*    }
     catch (SQLException ex){
       out.println("<script>");
@@ -308,10 +357,15 @@ if (ban==null){
       out.println("  alert(\"Se genero la expresion: "+ex.getMessage().substring(0, ex.getMessage().length()-1)+" !\");");
       out.println("</script>");
     }*/
+    
+    java.util.Date currentDate = new java.util.Date(); // Modificado por Arturo el 12/03/2026,
+	java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDate.getTime()); // Modificado por Arturo el 12/03/2026,
+    
     if (n==0){  //SI ESTA MAL EL PASSWORD
 
            //registro el cheeck correcto
-              str.executeUpdate( "insert into usuarios_registro (usuario,ip,host,fecha,correcto,regional) values(0,'"+request.getRemoteAddr()+"','"+request.getRequestURL().toString() +"',CURRENT_TIMESTAMP(0),FALSE,'"+regionalid+"')");
+              //str.executeUpdate( "insert into usuarios_registro (usuario,ip,host,fecha,correcto,regional) values(0,'"+request.getRemoteAddr()+"','"+request.getRequestURL().toString() +"',CURRENT_TIMESTAMP(0),FALSE,'"+regionalid+"')");
+    	rs = Constructor_de_Consultas.consulta_index_03("act10_ed", 0,request.getRemoteAddr(),request.getRequestURL().toString(),timestamp,Boolean.FALSE,"00");
 
 
     out.println ("</head><body style=\"background:url('images/fondo1.jpg'); background-repeat: no-repeat; background-size: cover;\"><br><center><font class='titulomgnew'>SIGMA 2026&nbsp;</font><br><img src='images/sigma_v2ei.png' height='350'></img><br><br><font class='titulo'>Sistema de Informaci&oacute;n Geogr&aacute;fica del Marco Geoestad&iacute;stico</font><br><br>"
@@ -326,8 +380,11 @@ if (ban==null){
           out.println("<input type=hidden name=ban value=1></form><br><br><br><font class='error'>-- USUARIO INCORRECTO --</font>");
     }else{  //ENTRA AL MAPA
            //registro el cheeck correcto
-                  str.executeUpdate( "insert into usuarios_registro (usuario,ip,host,fecha,correcto,regional) values("+cons+",'"+request.getRemoteAddr()+"','"+request.getRequestURL().toString()+"',CURRENT_TIMESTAMP(0),TRUE,'"+regionalid+"')");
-
+                  //str.executeUpdate( "insert into usuarios_registro (usuario,ip,host,fecha,correcto,regional) values("+cons+",'"+request.getRemoteAddr()+"','"+request.getRequestURL().toString()+"',CURRENT_TIMESTAMP(0),TRUE,'"+regionalid+"')");
+		  rs = Constructor_de_Consultas.consulta_index_03("act10_ed",Integer.parseInt(cons),request.getRemoteAddr(),request.getRequestURL().toString(),timestamp,Boolean.TRUE,"00");
+	    
+    
+    
           if (nivel.equals("1")){
               txt1+=" (EDICION DE LA ENTIDAD "+id+") ";
               //txt1=" (ENTIDAD "+id+") ";
@@ -772,8 +829,8 @@ txt1+="<option value='10' title='CENTRO'";       if (regionalid.equals("10")){tx
      }
 
         rs.close();
-        str.close();
-        conexion.close();
+        //str.close();
+        //conexion.close();
      
      }   //ENTRA EL MAPA Y BAN
 
