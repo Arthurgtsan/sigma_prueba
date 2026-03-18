@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -127,94 +132,99 @@ if (filent.equals("00")){
 
 buscar = buscar.replace("-","");
 buscar = buscar.replace(";","");
-switch(capa){
-     case 1:    //cartas
-	if (tipo == 0){
-		consulta="SELECT cve_carta,nombre,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_cartas t1 where a_sinacentos(cve_carta) like '" + buscar + "%' order by cve_carta"+limit;
-	}else{
-		consulta="select cve_carta,nombre,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_cartas t1 where upper(a_sinacentos(cve_carta)) like '%" + buscar + "%'  order by cve_carta"+limit;
-	}
-	break;
-case 2:		//estados
-	if (tipo==0){
-		consulta="SELECT clave,nom_ent,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_ent t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
-	}else{
-		consulta="select clave,nom_ent,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_ent t1 where "+where1+" upper(a_sinacentos(nom_ent)) like '%" + buscar + "%'  and status=1 order by clave"+limit;
-	}
-	break;
-case 3:		//municipios
-	if (tipo==0){
-		consulta="SELECT clave,nom_mun,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_mun t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
-	}else{
-		consulta="select clave,nom_mun,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_mun t1 where "+where1+" upper(a_sinacentos(nom_mun)) like '%" + buscar + "%'  and status=1 order by clave"+limit;
-	}
-	break;
-case 4:		//agebs
-	if (tipo==0){
-		consulta="SELECT clave,cve_ageb,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito FROM (select clave,cve_ageb,ambito,the_geom from cat_ageb where "+where1+" status=1 union select clave,cve_ageb,ambito,the_geom from cat_agebu "+where2+") t1 where replace(clave,'-','') like '" + buscar + "%' order by ambito,clave"+limit;
-	}else{
-		consulta="select clave,cve_ageb,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito FROM (select clave,cve_ageb,ambito,the_geom from cat_ageb where "+where1+" status=1 union select clave,cve_ageb,ambito,the_geom from cat_agebu "+where2+") t1 where upper(a_sinacentos(replace(cve_ageb,'-',''))) like '%" + buscar + "%'  order by ambito,clave"+limit;
-	}
-	break;
-case 5:		//urbanas   --deshabilitado
-	if (tipo==0){
-		consulta="SELECT clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
-	}else{
-		consulta="select clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' and status=1 order by clave"+limit;
-	}
-	break;
-case 6:		//pol rurales  --deshabilitado
-	if (tipo==0){
-		consulta="SELECT clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" the_geom_pr NOT NULL and clave like '" + buscar + "%' and status=1 order by clave"+limit;
-	}else{
-		consulta="select clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" the_geom_pr NOT NULL and upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' and status=1 order by clave"+limit;
-	}
-	break;
-case 7:		//rurales   --lo modifique para que buscque tanto urbanas como rurales y poligonos rurales
-	if (tipo==0){
-            consulta = "SELECT clave,nom_loc,"
-            + "case "
-            + "	when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text "
-            + " else 'x' "
-            + "end "
-            + "as salida,status,ambito,cve_ageb "
-            + "FROM cat_loc t1 where "+where1+" replace(clave,'-','') like '" + buscar + "%' order by clave"+limit;
-	}else{
-            consulta = "SELECT clave,nom_loc,"
-            + "case "
-            + "	when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text "
-            + " else 'x' "
-            + "end "
-            + "as salida,status,ambito,cve_ageb "
-            + "FROM cat_loc t1 where "+where1+" upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' order by clave"+limit;
-	}
-	break;
-case 8:     //asentamiento
-	if (tipo==0){
-		consulta="SELECT clave,nom_asen,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_asen t1 where "+where1+" the_geom is NOT NULL and clave like '" + buscar + "%' order by clave"+limit;
 
-	}else{
-		consulta="select clave,nom_asen,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_asen t1 where "+where1+" the_geom is NOT NULL and upper(a_sinacentos(nom_asen)) like '%" + buscar + "%' order by clave"+limit;
-	}
-	break;
-case 9:   //vialidades
-	if (tipo==0){
-		consulta="SELECT clave,nom_via,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_vial t1 where "+where1+" the_geom is NOT NULL and clave like '" + buscar + "%' order by clave"+limit;
+/*
+	switch(capa){
+	     case 1:    //cartas
+		if (tipo == 0){
+			consulta="SELECT cve_carta,nombre,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_cartas t1 where a_sinacentos(cve_carta) like '" + buscar + "%' order by cve_carta"+limit;
+		}else{
+			consulta="select cve_carta,nombre,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_cartas t1 where upper(a_sinacentos(cve_carta)) like '%" + buscar + "%'  order by cve_carta"+limit;
+		}
+		break;
+	case 2:		//estados
+		if (tipo==0){
+			consulta="SELECT clave,nom_ent,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_ent t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
+		}else{
+			consulta="select clave,nom_ent,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_ent t1 where "+where1+" upper(a_sinacentos(nom_ent)) like '%" + buscar + "%'  and status=1 order by clave"+limit;
+		}
+		break;
+	case 3:		//municipios
+		if (tipo==0){
+			consulta="SELECT clave,nom_mun,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_mun t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
+		}else{
+			consulta="select clave,nom_mun,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_mun t1 where "+where1+" upper(a_sinacentos(nom_mun)) like '%" + buscar + "%'  and status=1 order by clave"+limit;
+		}
+		break;
+	case 4:		//agebs
+		if (tipo==0){
+			consulta="SELECT clave,cve_ageb,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito FROM (select clave,cve_ageb,ambito,the_geom from cat_ageb where "+where1+" status=1 union select clave,cve_ageb,ambito,the_geom from cat_agebu "+where2+") t1 where replace(clave,'-','') like '" + buscar + "%' order by ambito,clave"+limit;
+		}else{
+			consulta="select clave,cve_ageb,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito FROM (select clave,cve_ageb,ambito,the_geom from cat_ageb where "+where1+" status=1 union select clave,cve_ageb,ambito,the_geom from cat_agebu "+where2+") t1 where upper(a_sinacentos(replace(cve_ageb,'-',''))) like '%" + buscar + "%'  order by ambito,clave"+limit;
+		}
+		break;
+	case 5:		//urbanas   --deshabilitado
+		if (tipo==0){
+			consulta="SELECT clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" clave like '" + buscar + "%' and status=1 order by clave"+limit;
+		}else{
+			consulta="select clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' and status=1 order by clave"+limit;
+		}
+		break;
+	case 6:		//pol rurales  --deshabilitado
+		if (tipo==0){
+			consulta="SELECT clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" the_geom_pr NOT NULL and clave like '" + buscar + "%' and status=1 order by clave"+limit;
+		}else{
+			consulta="select clave,nom_loc,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_loc t1 where "+where1+" the_geom_pr NOT NULL and upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' and status=1 order by clave"+limit;
+		}
+		break;
+	case 7:		//rurales   --lo modifique para que buscque tanto urbanas como rurales y poligonos rurales
+		if (tipo==0){
+	            consulta = "SELECT clave,nom_loc,"
+	            + "case "
+	            + "	when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text "
+	            + " else 'x' "
+	            + "end "
+	            + "as salida,status,ambito,cve_ageb "
+	            + "FROM cat_loc t1 where "+where1+" replace(clave,'-','') like '" + buscar + "%' order by clave"+limit;
+		}else{
+	            consulta = "SELECT clave,nom_loc,"
+	            + "case "
+	            + "	when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text "
+	            + " else 'x' "
+	            + "end "
+	            + "as salida,status,ambito,cve_ageb "
+	            + "FROM cat_loc t1 where "+where1+" upper(a_sinacentos(nom_loc)) like '%" + buscar + "%' order by clave"+limit;
+		}
+		break;
+	case 8:     //asentamiento
+		if (tipo==0){
+			consulta="SELECT clave,nom_asen,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_asen t1 where "+where1+" the_geom is NOT NULL and clave like '" + buscar + "%' order by clave"+limit;
+	
+		}else{
+			consulta="select clave,nom_asen,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_asen t1 where "+where1+" the_geom is NOT NULL and upper(a_sinacentos(nom_asen)) like '%" + buscar + "%' order by clave"+limit;
+		}
+		break;
+	case 9:   //vialidades
+		if (tipo==0){
+			consulta="SELECT clave,nom_via,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_vial t1 where "+where1+" the_geom is NOT NULL and clave like '" + buscar + "%' order by clave"+limit;
+	
+		}else{
+			consulta="select clave,nom_via,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_vial t1 where "+where1+" the_geom is NOT NULL and upper(a_sinacentos(nom_via)) like '%" + buscar + "%' order by clave"+limit;
+		}
+		break;
+	case 10:   //bd_loc
+	    consulta="select id||' - '||cgo1||' - '||entidad as clave,nom_loc,box2d(ST_Transform(the_geom,3857))::text FROM a_bd_loc where entidad='"+buscar+"'";
+	      break;
+	case 11:   //manzanas
+	    consulta="select * from ( SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza,box2d(ST_Transform(st_union(the_geom),3857))::text as salida,tipo as ambito from cat_cd where "+where1+"  cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza like '" + buscar + "%' group by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza,tipo union  SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito from cat_manz where ban!='X' and "+where1+"  cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza like '" + buscar + "%' ) tt   order by cvegeo,cve_mza "+limit;
+	  break;
+	  }
+*/
 
-	}else{
-		consulta="select clave,nom_via,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida FROM cat_vial t1 where "+where1+" the_geom is NOT NULL and upper(a_sinacentos(nom_via)) like '%" + buscar + "%' order by clave"+limit;
-	}
-	break;
-case 10:   //bd_loc
-    consulta="select id||' - '||cgo1||' - '||entidad as clave,nom_loc,box2d(ST_Transform(the_geom,3857))::text FROM a_bd_loc where entidad='"+buscar+"'";
-      break;
-case 11:   //manzanas
-    consulta="select * from ( SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza,box2d(ST_Transform(st_union(the_geom),3857))::text as salida,tipo as ambito from cat_cd where "+where1+"  cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza like '" + buscar + "%' group by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza,tipo union  SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza,case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito from cat_manz where ban!='X' and "+where1+"  cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza like '" + buscar + "%' ) tt   order by cvegeo,cve_mza "+limit;
-  break;
-  }
 //out.println( consulta );
 
 try {
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -228,6 +238,11 @@ try {
       
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta );
+*/
+
+	 CachedRowSet rs = null;
+	 rs = Constructor_de_Consultas2.consulta_buscar("act10_ed", capa, tipo, buscar, filent, 100);
+	 
       out.println( "<form action=\"buscar.jsp\" method=\"post\" name=\"enviar\"><center class='t'>RESULTADOS<br><br>");
      if (capa!=1 && capa!=10){
                 select="<select name=filent class='boton' onChange='envia();''>";
@@ -351,9 +366,12 @@ out.println( "<table border=1><tr class=n bgcolor=#BBBBBB><th>&nbsp;&nbsp;Clave&
             ban=0;
             capa = Integer.parseInt(request.getParameter("capa"));
         }
-        rs.close();
-        str.close();
-        conexion.close();
+        
+		rs.close();
+        rs = null;
+        
+        //str.close();
+        //conexion.close();
 	      out.println( "</table><br><font class=n>Total de Registros: " + n +"</font>");
         if (n>=100 && capa!=10){
         out.println( "<br><font class=r>* La consulta tiene un limite de 100 registros. </font>");

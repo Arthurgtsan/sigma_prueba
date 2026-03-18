@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -75,11 +80,14 @@ reg="00";
   </form><br>
 <%
 if (!(reg.equals("00"))){
-String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi='"+reg+"'";
 
+	
+	String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi='"+reg+"'";
 
 //out.println(consulta1);
-      Statement str = null;
+      
+/*
+	  Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
       Class.forName("org.postgresql.Driver");
@@ -90,7 +98,12 @@ String consulta1 = " select * from (select usre, (select nombre from usuarios wh
                                             );
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta1 );
-	  
+*/
+
+
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas.consulta_avance_valreg_01("act10_ed", reg);
+
 	  
       //out.println("<center><font class='titulo'>Avance de validacion, regional "+reg+"</font><br><br>");
       out.println("<table border=1><tr class=titulo2><th>&nbsp;Nombre&nbsp;<th>&nbsp;Fecha&nbsp;<th>&nbsp;Validadas&nbsp;");
@@ -120,18 +133,21 @@ String consulta1 = " select * from (select usre, (select nombre from usuarios wh
       }
 
 
-	  String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Rep_val_TE');";
-	  str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-str.executeUpdate(consulta9);
-
+	  	//String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+request.getRemoteAddr()+"',current_timestamp,'Rep_val_TE');";
+	  	//str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+		//str.executeUpdate(consulta9);
+		Constructor_de_Consultas.consulta_avance_valreg02_02("act10_ed", request.getRemoteAddr());
+		
       sum2+=sum1;
       out.println("<tr><td class=n2>&nbsp;<td class=n3 align=right>TOTAL<td class=n3 align=right>&nbsp;"+sum1+"&nbsp;");
       out.println("</table><br>");
       out.println("<table>");
       out.println("<tr><td class=n3 align=right>TOTAL<td class=n3 align=right>&nbsp;"+sum2+"&nbsp;");
       out.println("</table><br>");
-      str.close();
-      conexion.close();
+      //str.close();
+      //conexion.close();
+      rs.close();
+      rs = null;
     }
 %>
 

@@ -124,7 +124,9 @@ try{
             out.println("</table><br>");
             str.close();
           }
-            conexion.close();
+            //conexion.close();
+            rs.close();
+            rs = null;
           }
     }//try
 

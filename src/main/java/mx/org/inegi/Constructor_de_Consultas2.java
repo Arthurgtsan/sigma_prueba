@@ -2137,7 +2137,207 @@ public class Constructor_de_Consultas2 {
 	}
 	
 	
+/* AQUI EMPIEZAN LAS CONSULTAS OFICIALES */ 
+	public static void consulta_borra_mark_01(String cnx, String gid) {
 
+		String consulta="delete from cat_marks where gid=?";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		//CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, gid);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);	
+						
+			//return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		//return rs;
+	}
+	
+	public static CachedRowSet consulta_buscar(
+	        String cnx, int capa, int tipo, String buscar, String filent, int limitValue) {
+
+	    StringBuilder sql = new StringBuilder();
+	    boolean usarFiltroEntidad = (filent != null && !filent.equals("00"));
+
+	    switch (capa) {
+
+	        case 1: // cartas
+	            sql.append("SELECT cve_carta,nombre, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_cartas t1 WHERE ");
+	            if (tipo == 0) {
+	                sql.append("a_sinacentos(cve_carta) LIKE ? ");
+	            } else {
+	                sql.append("upper(a_sinacentos(cve_carta)) LIKE ? ");
+	            }
+	            sql.append("ORDER BY cve_carta LIMIT ?");
+	            break;
+
+	        case 2: // estados
+	            sql.append("SELECT clave,nom_ent, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_ent t1 WHERE status=1 ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            if (tipo == 0) sql.append("AND clave LIKE ? ");
+	            else sql.append("AND upper(a_sinacentos(nom_ent)) LIKE ? ");
+	            sql.append("ORDER BY clave LIMIT ?");
+	            break;
+
+	        case 3: // municipios
+	            sql.append("SELECT clave,nom_mun, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_mun t1 WHERE status=1 ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            if (tipo == 0) sql.append("AND clave LIKE ? ");
+	            else sql.append("AND upper(a_sinacentos(nom_mun)) LIKE ? ");
+	            sql.append("ORDER BY clave LIMIT ?");
+	            break;
+
+	        case 4: // agebs
+	            sql.append("SELECT clave,cve_ageb, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito ")
+	               .append("FROM ( ")
+	               .append("SELECT clave,cve_ageb,ambito,the_geom FROM cat_ageb WHERE status=1 ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            sql.append(" UNION ")
+	               .append("SELECT clave,cve_ageb,ambito,the_geom FROM cat_agebu ");
+	            if (usarFiltroEntidad) sql.append("WHERE cve_ent = ? ");
+	            sql.append(") t1 WHERE ");
+	            if (tipo == 0)
+	                sql.append("replace(clave,'-','') LIKE ? ");
+	            else
+	                sql.append("upper(a_sinacentos(replace(cve_ageb,'-',''))) LIKE ? ");
+	            sql.append("ORDER BY ambito,clave LIMIT ?");
+	            break;
+
+	        case 5: // urbanas
+	        case 6: // rurales
+	        case 7: // mixto loc
+	            sql.append("SELECT clave,nom_loc, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_loc t1 WHERE status=1 ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            if (tipo == 0)
+	                sql.append("AND replace(clave,'-','') LIKE ? ");
+	            else
+	                sql.append("AND upper(a_sinacentos(nom_loc)) LIKE ? ");
+	            sql.append("ORDER BY clave LIMIT ?");
+	            break;
+
+	        case 8: // asentamientos
+	            sql.append("SELECT clave,nom_asen, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_asen t1 WHERE the_geom IS NOT NULL ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            if (tipo == 0)
+	                sql.append("AND clave LIKE ? ");
+	            else
+	                sql.append("AND upper(a_sinacentos(nom_asen)) LIKE ? ");
+	            sql.append("ORDER BY clave LIMIT ?");
+	            break;
+
+	        case 9: // vialidades
+	            sql.append("SELECT clave,nom_via, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida ")
+	               .append("FROM cat_vial t1 WHERE the_geom IS NOT NULL ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            if (tipo == 0)
+	                sql.append("AND clave LIKE ? ");
+	            else
+	                sql.append("AND upper(a_sinacentos(nom_via)) LIKE ? ");
+	            sql.append("ORDER BY clave LIMIT ?");
+	            break;
+
+	        case 10: // bd_loc
+	            sql.append("SELECT id||' - '||cgo1||' - '||entidad as clave,nom_loc, ")
+	               .append("box2d(ST_Transform(the_geom,3857))::text ")
+	               .append("FROM a_bd_loc WHERE entidad = ? LIMIT ?");
+	            break;
+
+	        case 11: // manzanas
+	            sql.append("SELECT * FROM ( ")
+	               .append("SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza, ")
+	               .append("box2d(ST_Transform(st_union(the_geom),3857))::text as salida,tipo as ambito ")
+	               .append("FROM cat_cd WHERE 1=1 ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            sql.append("AND cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza LIKE ? ")
+	               .append("GROUP BY cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza,tipo ")
+	               .append("UNION ")
+	               .append("SELECT cve_ent||' '||cve_mun||' '||cve_loc||' '||cve_ageb as cvegeo,cve_mza, ")
+	               .append("case when the_geom is not null THEN box2d(ST_Transform(the_geom,3857))::text else 'x' end as salida,ambito ")
+	               .append("FROM cat_manz WHERE ban!='X' ");
+	            if (usarFiltroEntidad) sql.append("AND cve_ent = ? ");
+	            sql.append("AND cve_ent||cve_mun||cve_loc||replace(cve_ageb,'-','')||cve_mza LIKE ? ")
+	               .append(") tt ORDER BY cvegeo,cve_mza LIMIT ?");
+	            break;
+
+	        default:
+	            throw new IllegalArgumentException("Capa no soportada: " + capa);
+	    }
+
+	    CachedRowSet rs = null;
+
+	    try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+	         PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+	        int index = 1;
+
+	        // filtros dinámicos
+	        if (capa == 4 && usarFiltroEntidad) {
+	            ps.setString(index++, filent);
+	            ps.setString(index++, filent);
+	        } else if (capa == 11 && usarFiltroEntidad) {
+	            ps.setString(index++, filent);
+	        } else if (usarFiltroEntidad && capa != 1 && capa != 10) {
+	            ps.setString(index++, filent);
+	        }
+
+	        // buscar
+	        String valorBusqueda = (tipo == 0) ? buscar + "%" : "%" + buscar + "%";
+	        ps.setString(index++, valorBusqueda);
+
+	        // casos especiales (case 11 tiene doble LIKE)
+	        if (capa == 11) {
+	            if (usarFiltroEntidad) ps.setString(index++, filent);
+	            ps.setString(index++, valorBusqueda);
+	        }
+
+	        // case 10
+	        if (capa == 10) {
+	            ps.setString(index++, filent);
+	        }
+
+	        // limit
+	        ps.setInt(index++, limitValue);
+
+	        ResultSet _rs = ps.executeQuery();
+	        rs = RowSetProvider.newFactory().createCachedRowSet();
+	        rs.populate(_rs);
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return rs;
+	}
 	
 	
 }
+
