@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -48,8 +53,10 @@ try{
 
       if (ban != null){
        String cons="";
-       String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
+      
+       //String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
        //out.println(consulta);
+/*
             Statement str = null;
             ResultSet rs = null;
             Connection conexion = null;
@@ -62,6 +69,11 @@ try{
             str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
             int n2=0;
             rs = str.executeQuery( consulta );
+*/
+			
+			CachedRowSet rs = null;
+			rs = Constructor_de_Consultas.consulta_avance_valoc_01("act10_ed", pass);
+
             while(rs.next()){
                       n2=1;
                       cons=rs.getObject(1).toString();
@@ -69,13 +81,16 @@ try{
             if (n2==0){
               out.println("<br><font class='error'>-- USUARIO INCORRECTO --</font>");
           }else{
-          String consulta1="";
-         if (cons.equals("44")){
-          consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
-        }else{
-          consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
-        }
-            rs = str.executeQuery( consulta1 );
+        	  rs = Constructor_de_Consultas.consulta_avance_valoc_02("act10_ed", cons);
+        	/*
+          		String consulta1="";
+         		if (cons.equals("44")){
+          			consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
+        		}else{
+          			consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
+        		}
+            	rs = str.executeQuery( consulta1 );
+            */
             out.println("<table border=1><tr class=titulo2><th>&nbsp;Nombre&nbsp;<th>&nbsp;Fecha&nbsp;<th>&nbsp;Validadas&nbsp;");
             String nombre,fecha,t1,nom="";
             int sum1=0;

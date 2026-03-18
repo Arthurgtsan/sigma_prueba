@@ -1742,7 +1742,7 @@ public class Constructor_de_Consultas {
 	// ARCHIVO asigna_loc_cd 
 	public static void consulta_asigna_loc_cd_01(String cnx, String gid) {
 
-		String consulta = "update mcc_poblacion.cat_manz_modcar set proc=1,fresp=current_date,cgo_def='L' where gid=? and "
+		String consulta = "update mcc_poblacion.cat_manz_modcar set proc=1,fresp=current_date,cgo_def='L', ban='2' where gid=? and "
 				+ "cve_ent||cve_mun||cve_loc not in (select distinct cve_ent||cve_mun||cve_loc from cat_manz where ban not in "
 				+ "('X','3','1','5','6','Y','E','D','H','G','M','I','N','O','K','R','T','C') union (select distinct cve_ent||cve_mun||cve_loc from cat_cd)) "
 				+ "RETURNING gid";
@@ -1764,8 +1764,8 @@ public class Constructor_de_Consultas {
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
 			 //rs = RowSetProvider.newFactory().createCachedRowSet();
-		    // rs.populate(_rs);	
-						
+		    // rs.populate(_rs);
+		
 			//return rs;
 			// con.close();
 		} catch (SQLException e) {
@@ -2730,7 +2730,7 @@ public class Constructor_de_Consultas {
 	
 	public static CachedRowSet consulta_avance_preedo_us_01(String cnx, String edo ) {
 
-		String consulta1 = "select * from (select cons,nombre,correo,case when (select min(fact) from respaldo_z_digmz where us=cons)=null then (select min(fact) from respaldo_z_digmp where us=cons) else (select min(fact) from respaldo_z_digmz where us=cons) end as minf, case when (select max(fact) from respaldo_z_digmz where us=cons)=null then (select max(fact) from respaldo_z_digmp where us=cons) else (select max(fact) from respaldo_z_digmz where us=cons) end as maxf,  (select count(*) from respaldo_z_digmz where us=cons) as nf,  (select count(*) from respaldo_z_digpe where us=cons) as ne,  (select count(*) from respaldo_z_digmp where us=cons) as cartas  from usuarios  where id='"+edo+"' and nivel=1 group by cons,nombre,correo  order by cons ) c1 where nf>0 or ne>0 or cartas>0";
+		String consulta1 = "select * from (select cons,nombre,correo,case when (select min(fact) from respaldo_z_digmz where us=cons) IS NULL then (select min(fact) from respaldo_z_digmp where us=cons) else (select min(fact) from respaldo_z_digmz where us=cons) end as minf, case when (select max(fact) from respaldo_z_digmz where us=cons) IS NULL then (select max(fact) from respaldo_z_digmp where us=cons) else (select max(fact) from respaldo_z_digmz where us=cons) end as maxf,  (select count(*) from respaldo_z_digmz where us=cons) as nf,  (select count(*) from respaldo_z_digpe where us=cons) as ne,  (select count(*) from respaldo_z_digmp where us=cons) as cartas  from usuarios  where id=? and nivel=1 group by cons,nombre,correo  order by cons ) c1 where nf>0 or ne>0 or cartas>0";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -2744,7 +2744,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, edo);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -2762,7 +2762,18 @@ public class Constructor_de_Consultas {
 	
 	public static CachedRowSet consulta_avance_preedo_01(String cnx, String edo) {
 
-		String consulta1 = "select cve_ent, (select count(*) from respaldo_z_digmz where cve_ent ='"+edo+"') as cm, (select count(*) from z_digpe_respaldo where cve_ent ='"+edo+"') as cf,(select count(*) from z_digpe_respaldo where cve_ent ='"+edo+"') as ce, (select count(*) from cat_loc where status=1 and ambito='U' and cve_ent='"+edo+"') as locu, (select count(distinct(clave)) from cat_loc t3,a_rep_cardig t2 where status=1 and t3.cve_ent='"+edo+"' and t2.cve_ent='"+edo+"' and ambito='U' and t3.cve_ent='"+edo+"' and t1.cve_ent='"+edo+"' and t2.cve_ent='"+edo+"' and t1.cve_ent='"+edo+"' and the_geom_pu && st_transform(geom,32800)) as locu_rep, (select count(*) from cat_loc where status=1 and ambito='R' and the_geom_pr is not null and cve_ent='"+edo+"') as locr, (select count(distinct(clave)) from cat_loc t3,a_rep_cardig t2 where status=1 and t3.cve_ent='"+edo+"' and t2.cve_ent='"+edo+"' and ambito='R' and the_geom_pr is not null and t3.cve_ent='"+edo+"' and t1.cve_ent='"+edo+"' and t2.cve_ent='"+edo+"' and t1.cve_ent='"+edo+"' and the_geom_pr && st_transform(geom,32800)) as locr_rep, ST_XMax(st_transform(the_geom,3857)),ST_YMax(st_transform(the_geom,3857)),ST_XMin(st_transform(the_geom,3857)), ST_YMin(st_transform(the_geom,3857)),st_distance(ST_MakePoint(st_xmin(the_geom),st_ymin(the_geom)),ST_MakePoint(st_xmax(the_geom),st_ymin(the_geom))) as distx,  st_distance(ST_MakePoint(st_xmin(the_geom),st_ymin(the_geom)),ST_MakePoint(st_xmin(the_geom),st_ymax(the_geom))) as disty from (select cve_ent,ST_Envelope((ST_Dump(the_geom)).geom) as the_geom  from cat_ent where cve_ent='"+edo+"' and status=1 order by st_area(ST_Envelope((ST_Dump(the_geom)).geom)) desc limit 1) t1";
+		String consulta1 = "select cve_ent, (select count(*) from respaldo_z_digmz where cve_ent = ?) as cm, "
+				+ "(select count(*) from z_digpe_respaldo where cve_ent = ?) as cf,"
+				+ "(select count(*) from z_digpe_respaldo where cve_ent = ?) as ce, "
+				+ "(select count(*) from cat_loc where status=1 and ambito='U' and cve_ent= ?) "
+				+ "as locu, (select count(distinct(clave)) from cat_loc t3,a_rep_cardig t2 where status=1 and t3.cve_ent=? "
+				+ "and t2.cve_ent=? and ambito='U' and t3.cve_ent=? and t1.cve_ent=? and t2.cve_ent=? "
+				+ "and t1.cve_ent=? and the_geom_pu && st_transform(geom,32800)) as locu_rep, "
+				+ "(select count(*) from cat_loc where status=1 and ambito='R' and the_geom_pr is not null and cve_ent=?) "
+				+ "as locr, (select count(distinct(clave)) from cat_loc t3,a_rep_cardig t2 where status=1 and t3.cve_ent=? "
+				+ "and t2.cve_ent=? and ambito='R' and the_geom_pr is not null and t3.cve_ent=? and t1.cve_ent=? "
+				+ "and t2.cve_ent=? and t1.cve_ent=? and the_geom_pr && st_transform(geom,32800)) as "
+				+ "locr_rep, ST_XMax(st_transform(the_geom,3857)),ST_YMax(st_transform(the_geom,3857)),ST_XMin(st_transform(the_geom,3857)), ST_YMin(st_transform(the_geom,3857)),st_distance(ST_MakePoint(st_xmin(the_geom),st_ymin(the_geom)),ST_MakePoint(st_xmax(the_geom),st_ymin(the_geom))) as distx,  st_distance(ST_MakePoint(st_xmin(the_geom),st_ymin(the_geom)),ST_MakePoint(st_xmin(the_geom),st_ymax(the_geom))) as disty from (select cve_ent,ST_Envelope((ST_Dump(the_geom)).geom) as the_geom  from cat_ent where cve_ent=? and status=1 order by st_area(ST_Envelope((ST_Dump(the_geom)).geom)) desc limit 1) t1";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -2776,7 +2787,81 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			for (int i=1; i<=17; i++) {
+				ps.setString(i, edo);
+			}
+			
+
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_avance_valoc_01(String cnx, String pass) {
+
+		String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper(?)";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, pass);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_avance_valoc_02(String cnx, String cons) {
+
+		String consulta1="";
+        if (cons.equals("44")){
+         consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
+       }else{
+         consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc=? and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc=? and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc=? and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
+       }
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta1);
+			
+			ps.setString(1, cons);
+			ps.setString(2, cons);
+			ps.setString(3, cons);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -3671,101 +3756,6 @@ public static CachedRowSet consulta_buscar_06(String cnx, String buscar, String 
 			return rs;
 		}
 		
-		public static CachedRowSet consulta_avance_valoc_01(String cnx, String pass) {
-
-			String consulta = "select cons from usuarios where nivel=3 and upper(password) = upper('"+pass+"')";
-			ResultSet _rs = null;
-			//ResultSet rs2 = null;
-			//PreparedStatement ps2;
-			CachedRowSet rs = null;
-			Connection con = null;
-			PreparedStatement ps = null;
-			
-			//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
-			try {	
-				con = AdministradorDataSource_Sigma.getConnection(cnx);
-				ps = con.prepareStatement(consulta);
-				
-				//ps.setString(1, pass);
-				
-				ps.setQueryTimeout(3000);
-				_rs = ps.executeQuery();
-				 rs = RowSetProvider.newFactory().createCachedRowSet();
-			     rs.populate(_rs);	
-							
-				return rs;
-				// con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-			return rs;
-		}
-		
-		public static CachedRowSet consulta_avance_valoc_02(String cnx) {
-
-			String consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
-
-			ResultSet _rs = null;
-			//ResultSet rs2 = null;
-			//PreparedStatement ps2;
-			CachedRowSet rs = null;
-			Connection con = null;
-			PreparedStatement ps = null;
-			
-			//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
-			try {	
-				con = AdministradorDataSource_Sigma.getConnection(cnx);
-				ps = con.prepareStatement(consulta1);
-				
-				//ps.setString(1, pass);
-				
-				ps.setQueryTimeout(3000);
-				_rs = ps.executeQuery();
-				 rs = RowSetProvider.newFactory().createCachedRowSet();
-			     rs.populate(_rs);	
-							
-				return rs;
-				// con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-			return rs;
-		}
-		
-		public static CachedRowSet consulta_avance_valoc_03(String cnx, String cons) {
-
-	        String consulta1 = "select usoc, (select nombre from usuarios where cons=usoc),fvoc,sum(count) from (select usoc,fvoc,count(*) from respaldo_te_mza where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_coord where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc union select usoc,fvoc,count(*) from respaldo_te_mza_cd where usoc!=44 and usoc="+cons+" and usoc is not null group by usoc,fvoc ) t2 group by usoc,fvoc order by usoc,nombre,fvoc";
-
-			ResultSet _rs = null;
-			//ResultSet rs2 = null;
-			//PreparedStatement ps2;
-			CachedRowSet rs = null;
-			Connection con = null;
-			PreparedStatement ps = null;
-			
-			//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
-			try {	
-				con = AdministradorDataSource_Sigma.getConnection(cnx);
-				ps = con.prepareStatement(consulta1);
-				
-				//ps.setString(1, pass);
-				
-				ps.setQueryTimeout(3000);
-				_rs = ps.executeQuery();
-				 rs = RowSetProvider.newFactory().createCachedRowSet();
-			     rs.populate(_rs);	
-							
-				return rs;
-				// con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-			return rs;
-		}
-	
 		public static CachedRowSet consulta_cd_simplify_01(String cnx, String cve_ent, String cve_mun, String cve_loc, String tole, String us) {
 
 			String consulta = "select _a_weed_cd('"+cve_ent+cve_mun+cve_loc+"',"+tole+","+us+")";

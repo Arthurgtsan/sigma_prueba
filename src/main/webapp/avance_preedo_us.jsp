@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -22,10 +27,12 @@ window.resizeTo(900,700);
 <body style="background:url('images/fondo1.jpg'); background-repeat: no-repeat; background-size: cover;">
 <%
 String  edo = request.getParameter("filedo");
+
 String consulta1 = "select * from (select cons,nombre,correo,case when (select min(fact) from respaldo_z_digmz where us=cons)=null then (select min(fact) from respaldo_z_digmp where us=cons) else (select min(fact) from respaldo_z_digmz where us=cons) end as minf, case when (select max(fact) from respaldo_z_digmz where us=cons)=null then (select max(fact) from respaldo_z_digmp where us=cons) else (select max(fact) from respaldo_z_digmz where us=cons) end as maxf,  (select count(*) from respaldo_z_digmz where us=cons) as nf,  (select count(*) from respaldo_z_digpe where us=cons) as ne,  (select count(*) from respaldo_z_digmp where us=cons) as cartas  from usuarios  where id='"+edo+"' and nivel=1 group by cons,nombre,correo  order by cons ) c1 where nf>0 or ne>0 or cartas>0";
 
 
 //out.println(consulta1);
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -37,6 +44,12 @@ String consulta1 = "select * from (select cons,nombre,correo,case when (select m
                                             );
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta1 );
+*/
+
+	   CachedRowSet rs = null;
+	   rs = Constructor_de_Consultas.consulta_avance_preedo_us_01("act10_ed", edo);
+
+
       out.println("<center><font class='titulo'>Avance por usuarios - "+edo+" </font><br><br>");
       out.println("<table border=1><tr class=titulo2><th>&nbsp;Usuario&nbsp;<th>&nbsp;Fecha&nbsp;<br>&nbsp;Inicio&nbsp;<th>&nbsp;Fecha&nbsp;<br>&nbsp;Fin&nbsp;<th>&nbsp;Manzanas&nbsp;<th>&nbsp;Poligonos&nbsp;<br>Externos<th>&nbsp;Puntos&nbsp;");
       String cve_ent,n1,n2,n3,n4,n5,n6,n7,n8;
@@ -68,8 +81,12 @@ String consulta1 = "select * from (select cons,nombre,correo,case when (select m
         out.println("<tr class=n2><td>&nbsp;"+n1+"&nbsp;<td>&nbsp;"+n2+"&nbsp;<td>&nbsp;"+n3+"&nbsp;<td>&nbsp;"+n4+"&nbsp;<td>&nbsp;"+n5+"&nbsp;<td>&nbsp;"+n6+"&nbsp;");
       }
       out.println("<tr class=n3><td colspan=3>TOTAL<td>"+sum6+"<td>"+sum7+"<td>"+sum8);
-      str.close();
-      conexion.close();
+      
+      //str.close();
+      //conexion.close();
+      
+      rs.close();
+      rs = null;
 
 %>
 <br>

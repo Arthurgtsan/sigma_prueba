@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <title>
@@ -20,31 +25,35 @@ function abre2(cve){
 <body style="background:url('images/fondo1.jpg'); background-repeat: no-repeat; background-size: cover;">
 <%
 
-String consulta1 = "";
+/*
+	String consulta1 = "";
+	
+	consulta1+="select cve_ent";
+	consulta1+=",case when c20 is null then 0 else c20 end as c20 ";
+	consulta1+=",case when cm is null then 0 else cm end as cm ";
+	consulta1+=",case when cf is null then 0 else cf end as cf ";
+	consulta1+=",case when nf is null then 0 else nf end as nf ";
+	consulta1+=",case when ce is null then 0 else ce end as ce ";
+	consulta1+=",area ";
+	consulta1+=",case when arep is null then 0 else arep end as arep ";
+	consulta1+=",case when areg is null then 0 else areg end as areg ";
+	consulta1+=",case when aoc is null then 0 else aoc end as aoc ";
+	consulta1+="from (select cve_ent ";
+	consulta1+=",(select count(*) from cat_cartas20 where st_intersects(geom,t1.the_geom)) as c20 ";
+	consulta1+=",(select count(*) from z_digmz_respaldo where cve_ent =t1.cve_ent) as cm ";
+	consulta1+=",(select count(*) from z_digf_respaldo where cve_ent =t1.cve_ent) as cf ";
+	consulta1+=",(select count(*) from z_digf_respaldo where nfr_noroe is null and cve_ent =t1.cve_ent) as nf ";
+	consulta1+=",(select count(*) from z_dige_respaldo where cve_ent =t1.cve_ent) as ce ";
+	consulta1+=",st_Area(the_geom) as area ";
+	consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where cve_ent=t1.cve_ent group by the_geom) as arep ";
+	consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where sup in (1,2) and cve_ent=t1.cve_ent group by the_geom) as areg ";
+	consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where voc in (1,2) and cve_ent=t1.cve_ent group by the_geom) as aoc  ";
+	consulta1+="from cat_ent t1 where status=1 order by cve_ent ) c1 ";
 
-consulta1+="select cve_ent";
-consulta1+=",case when c20 is null then 0 else c20 end as c20 ";
-consulta1+=",case when cm is null then 0 else cm end as cm ";
-consulta1+=",case when cf is null then 0 else cf end as cf ";
-consulta1+=",case when nf is null then 0 else nf end as nf ";
-consulta1+=",case when ce is null then 0 else ce end as ce ";
-consulta1+=",area ";
-consulta1+=",case when arep is null then 0 else arep end as arep ";
-consulta1+=",case when areg is null then 0 else areg end as areg ";
-consulta1+=",case when aoc is null then 0 else aoc end as aoc ";
-consulta1+="from (select cve_ent ";
-consulta1+=",(select count(*) from cat_cartas20 where st_intersects(geom,t1.the_geom)) as c20 ";
-consulta1+=",(select count(*) from z_digmz_respaldo where cve_ent =t1.cve_ent) as cm ";
-consulta1+=",(select count(*) from z_digf_respaldo where cve_ent =t1.cve_ent) as cf ";
-consulta1+=",(select count(*) from z_digf_respaldo where nfr_noroe is null and cve_ent =t1.cve_ent) as nf ";
-consulta1+=",(select count(*) from z_dige_respaldo where cve_ent =t1.cve_ent) as ce ";
-consulta1+=",st_Area(the_geom) as area ";
-consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where cve_ent=t1.cve_ent group by the_geom) as arep ";
-consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where sup in (1,2) and cve_ent=t1.cve_ent group by the_geom) as areg ";
-consulta1+=",(select sum(st_area(st_transform(geom,32800))) from a_rep_cardig where voc in (1,2) and cve_ent=t1.cve_ent group by the_geom) as aoc  ";
-consulta1+="from cat_ent t1 where status=1 order by cve_ent ) c1 ";
+*/
 
 //out.println(consulta1);
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -56,7 +65,12 @@ consulta1+="from cat_ent t1 where status=1 order by cve_ent ) c1 ";
                                             );
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta1 );
-      out.println("<center><font class='titulo'>Avance por estado y cartas involucradas</font><br><br>");
+*/
+
+	  CachedRowSet rs = null;
+	  rs = Constructor_de_Consultas.consulta_avance_precarta20_01("act10_ed");
+
+	  out.println("<center><font class='titulo'>Avance por estado y cartas involucradas</font><br><br>");
       out.println("<table border=1><tr class=titulo2><th>&nbsp;Entidad&nbsp;<th>&nbsp;Numero de cartas&nbsp;<br>&nbsp;20,000 involucradas&nbsp;<th>&nbsp;Manzanas&nbsp;<br>Cerradas<th>&nbsp;Frentes&nbsp;<br>&nbsp;Digitalizados&nbsp;<th>&nbsp;Frentes&nbsp;<br>&nbsp;sin manzana&nbsp;<th>&nbsp;Vialidades&nbsp;<br>&nbsp;Digitalizadas&nbsp;<th>&nbsp;Cubrimiento&nbsp;<br>&nbsp;reportado&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Regional&nbsp;<th>&nbsp;Validado&nbsp;<br>&nbsp;Centrales&nbsp;");
       String cve_ent,c20,cf,ce,area,arep,areg,aoc,nf,cm;
       int sumc20=0;
@@ -101,8 +115,11 @@ consulta1+="from cat_ent t1 where status=1 order by cve_ent ) c1 ";
       }
       out.println("<tr class=n3><td colspan=2>TOTAL<td>"+sumcm+"<td>"+sumcf+"<td>"+sumnf+"<td>"+sumce+"<td>"+Math.round((sumarep*100)/sumarea)+"%<td>"+Math.round((sumareg*100)/sumarea)+"%<td>"+Math.round((sumaoc*100)/sumarea)+"%");
 //out.println("</table><br><img src='http://dc046068asdggma.inegi.gob.mx:8070/geoserver/INEGI/wms?LAYERS=INEGI%3AESTADOS%2CINEGI%3Acartas5rep&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A900913&bbox=-1.3181079254380183E7,1635334.4672155518,-9652558.161913535,3858019.1970224283&WIDTH=2871&HEIGHT=1480' width=800 height=512></img>");
-      str.close();
-      conexion.close();
+     
+	rs.close();
+	rs = null;
+	//str.close();
+    //conexion.close();
 
 %></table>
 </body>
