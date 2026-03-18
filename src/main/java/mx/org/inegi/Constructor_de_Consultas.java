@@ -2879,7 +2879,7 @@ public class Constructor_de_Consultas {
 	
 	public static CachedRowSet consulta_avance_valreg_01(String cnx, String reg) {
 
-		String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi='"+reg+"'";
+		String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi=?";
 
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -2909,14 +2909,14 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_valreg_02(String cnx, String remote) {
+	public static void consulta_avance_valreg_02(String cnx, String remote) {
 
-		String consulta9 = "insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Rep_val_TE');";
+		String consulta9 = "insert into usuarios_reporte values (DEFAULT, ?,current_timestamp,'Rep_val_TE');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2929,21 +2929,21 @@ public class Constructor_de_Consultas {
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		     //rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_avance_valreg02_01(String cnx, String reg) {
 
-		String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi='"+reg+"'";
+		String consulta1 = " select * from (select usre, (select nombre from usuarios where cons=usre),fvre,sum(count),(select regid from usuarios where cons=usre) as regi from (select usre,fvre,count(*) from respaldo_te_mza where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_coord where usre is not null group by usre,fvre union all select usre,fvre,count(*) from respaldo_te_mza_cd where usre is not null group by usre,fvre ) t2  group by usre,fvre order by usre,nombre,fvre ) tt where regi=?";
 
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
@@ -2957,7 +2957,7 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta1);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, reg);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
@@ -2973,14 +2973,14 @@ public class Constructor_de_Consultas {
 		return rs;
 	}
 	
-	public static CachedRowSet consulta_avance_valreg02_02(String cnx, String remote) {
+	public static void consulta_avance_valreg02_02(String cnx, String remote) {
 
-		String consulta9 ="insert into usuarios_reporte values (DEFAULT, '"+remote+"',current_timestamp,'Rep_val_TE');";
+		String consulta9 ="insert into usuarios_reporte values (DEFAULT, ? ,current_timestamp,'Rep_val_TE');";
 		
 		ResultSet _rs = null;
 		//ResultSet rs2 = null;
 		//PreparedStatement ps2;
-		CachedRowSet rs = null;
+		//CachedRowSet rs = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -2989,20 +2989,20 @@ public class Constructor_de_Consultas {
 			con = AdministradorDataSource_Sigma.getConnection(cnx);
 			ps = con.prepareStatement(consulta9);
 			
-			//ps.setString(1, pass);
+			ps.setString(1, remote);
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
-			 rs = RowSetProvider.newFactory().createCachedRowSet();
-		     rs.populate(_rs);	
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		     //rs.populate(_rs);	
 						
-			return rs;
+			//return rs;
 			// con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
-		return rs;
+		//return rs;
 	}
 	
 	public static CachedRowSet consulta_borra_mark_01(String cnx, String gid) {
@@ -8719,6 +8719,70 @@ public static CachedRowSet consulta_buscar_06(String cnx, String buscar, String 
 				return rs;
 			}
             
+         // -----------------------------------------------------------------------------------
+            
+            
+            public static CachedRowSet zedit_act_consulta(String cnx, String pass, String correo, String valor, int id_cons) {
+
+        		ResultSet _rs = null;
+        		Connection con = null;
+        		PreparedStatement ps = null;
+        		CachedRowSet rs = null;
+        		String sql = "";
+        		try {
+        			con = AdministradorDataSource_Sigma.getConnection(cnx);
+        			switch (id_cons) {
+        			    case 0:
+        			        sql = "select count(*) from usuarios where password = ?";
+        			        ps = con.prepareStatement(sql);
+        			        ps.setString(1, pass);
+        			        break;
+        			    case 1:
+        			        sql = "select count(*) from usuarios where password = ? and encdg = ?";
+        			        ps = con.prepareStatement(sql);
+        			        ps.setString(1, pass);
+        			        ps.setString(2, correo);
+        			        break;
+        			    case 2:
+        			        sql = "select correo,encdg,userdg from usuarios where password = ? and encdg = ?";
+        			        ps = con.prepareStatement(sql);
+        			        ps.setString(1, pass);
+        			        ps.setString(2, correo);
+        			        break;
+        			    case 3:
+        			        sql = "select count(*) from usuarios where userdg= ?";
+        			        ps = con.prepareStatement(sql);
+        			        ps.setString(1, valor);
+        			        break;
+        			    case 4:
+        			        sql = "update usuarios set passdg = ? where userdg= ?";
+        			        ps = con.prepareStatement(sql);
+        			        ps.setString(1, pass);
+        			        ps.setString(2, valor);
+        			        break;
+
+        			    default:
+        			        throw new IllegalArgumentException("id_cons no válido");
+        			}
+        			
+        			
+        			ps.setQueryTimeout(3000);
+        			_rs = ps.executeQuery();
+        			rs = RowSetProvider.newFactory().createCachedRowSet();
+        			rs.populate(_rs);
+        			return rs;
+        	
+        		} catch (SQLException e) {
+        			e.printStackTrace();
+        		}
+        		
+        		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+        		return rs;
+
+        		}
+
+        	// -----------------------------------------------------------------------------------
+
             
          
 }
