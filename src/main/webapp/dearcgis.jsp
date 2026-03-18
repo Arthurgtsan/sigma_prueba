@@ -2,6 +2,11 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.security.MessageDigest" %>
 
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
+
 <%
 float c1 = Float.parseFloat(request.getParameter("c1")),
         c2 = Float.parseFloat(request.getParameter("c2")),
@@ -15,6 +20,7 @@ String consulta= "",url="",
         punto4="";
 int pos=0;
 try {
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -28,6 +34,10 @@ try {
       consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT("+c1+" "+c2+")',32800),3857)) as punto1,"
               + "ST_AsText(ST_Transform(ST_GeomFromText('POINT("+c3+" "+c4+")',32800),3857)) as punto2";
       rs = str.executeQuery( consulta );
+*/
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas2.consulta_dearcgis("act10_ed", c1, c2, c3, c4);
+
   while(rs.next()){
 
     String original = "DEARCGIS";
@@ -54,6 +64,10 @@ try {
             out.println ("<meta HTTP-EQUIV='Refresh' CONTENT='0; URL="+url+"'>");
         }
     }
+
+	rs.close();
+	rs = null;
+	
    catch (SQLException ex){
       out.println("<script>");
       out.println("  alert(\"Se genero la expresion de SQL: "+ex.getMessage().substring(0, ex.getMessage().length()-1)+" !\");");

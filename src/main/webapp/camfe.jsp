@@ -1,5 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
+
 <%
 
 String  id = request.getParameter("id");
@@ -7,7 +13,9 @@ String  val = request.getParameter("val");
 String consulta="";
 
 try {
-     consulta = "Update te_loc_coord set fact='"+val+"' where gid="+id;
+
+/*
+      consulta = "Update te_loc_coord set fact='"+val+"' where gid="+id;
       ResultSet rs = null;
       Statement str = null;
       Connection conexion = null;
@@ -21,7 +29,12 @@ try {
     str.executeUpdate( consulta );
     str.close();
     conexion.close();
+*/
+
+	Constructor_de_Consultas2.consulta_camfe("act10_ed", val, id);
     out.println("y");
+    
+  
     }
     catch (SQLException ex){
       out.println("x");

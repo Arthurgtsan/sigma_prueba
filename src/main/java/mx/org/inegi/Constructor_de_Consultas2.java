@@ -2338,6 +2338,196 @@ public class Constructor_de_Consultas2 {
 	    return rs;
 	}
 	
+	public static void consulta_camfe(String cnx, String val, String id) {
+
+		String consulta = "Update te_loc_coord set fact=? where gid=?";
+
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		//CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, val);
+			ps.setString(1, id);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);
+		
+			//return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} 
+		catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		//return rs;
+	}
+	
+	public static void consulta_campro(String cnx, String cgo, String id) {
+
+		String consulta = "Update cat_manz_modcar set proc=0,cve_def=null,fresp=null where proc not in (0,1) and cgo=? and gid=?";
+
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		//CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, cgo);
+			ps.setString(1, id);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);
+		
+			//return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} 
+		catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		//return rs;
+	}
+	
+	public static CachedRowSet consulta_cd_simplify(String cnx, String cve_ent, String cve_mun, String cve_loc, String tole, String us) {
+
+		String consulta = "select _a_weed_cd(?, ?, ?)";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, cve_ent + cve_mun + cve_loc); 
+			ps.setString(2, tole);
+			ps.setString(3, us);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static void consulta_chg_motivo(String cnx, String val, String gid, int cons) {
+
+		String consulta = "";
+	
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		//CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			switch (cons) {
+				case 0:
+					consulta = "Update te_mza_coord_fr set motivo=? where oid=?";
+					ps = con.prepareStatement(consulta);
+					ps.setString(1, val);
+					ps.setString(2, gid);
+					break;
+				case 1:
+					consulta = "Update te_mza set motivo=? where oid=?";
+					ps = con.prepareStatement(consulta);
+					ps.setString(1, val);
+					ps.setString(2, gid);
+					break;
+			}
+			//ps = con.prepareStatement(consulta);
+			//ps.setString(1, gid);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 //rs = RowSetProvider.newFactory().createCachedRowSet();
+		    // rs.populate(_rs);
+		
+			//return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} 
+		catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		//return rs;
+	}
+	
+	public static CachedRowSet consulta_dearcgis(String cnx, float c1, float c2, float c3, float c4) {
+
+		//String consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT(?, ?)',32800),3857)) as punto1,"
+	             // + "ST_AsText(ST_Transform(ST_GeomFromText('POINT(?, ?)',32800),3857)) as punto2";
+		
+		String consulta = 
+			    "select ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',32800),3857)) as punto1, " +
+			    "ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',32800),3857)) as punto2";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setFloat(1, c1);
+			ps.setFloat(2, c2);
+			ps.setFloat(3, c3);
+			ps.setFloat(4, c4);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+
+
+	
 	
 }
 

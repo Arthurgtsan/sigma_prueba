@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <%
 
 String  gid = request.getParameter("gid");
@@ -11,10 +16,16 @@ String remotehost  = session.getAttribute("remotehost").toString();
 
 try {
     if (cgo.substring(0,1).equals("F")){
-        consulta = "Update te_mza_coord_fr set motivo="+val+" where oid="+gid;
+        //consulta = "Update te_mza_coord_fr set motivo="+val+" where oid="+gid;
+    	Constructor_de_Consultas2.consulta_chg_motivo("act10_ed", val, gid, 0);
+
     }else{
-        consulta = "Update te_mza set motivo="+val+" where oid="+gid;
+        //consulta = "Update te_mza set motivo="+val+" where oid="+gid;
+    	Constructor_de_Consultas2.consulta_chg_motivo("act10_ed", val, gid, 1);
+
     }
+    
+/*
       ResultSet rs = null;
       Statement str = null;
       Connection conexion = null;
@@ -22,10 +33,11 @@ try {
       String hostbd  = session.getAttribute("hostbd").toString();
       String remotehostbd  = session.getAttribute("remotehostbd").toString();
       conexion = DriverManager.getConnection("jdbc:postgresql://"+remotehostbd+":5434/"+hostbd,"actcar","actcar");
-    str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-    str.executeUpdate( consulta );
-    str.close();
-    conexion.close();
+      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+      str.executeUpdate( consulta );
+      str.close();
+      conexion.close();
+*/
     out.println("0");
     }
     catch (SQLException ex){
