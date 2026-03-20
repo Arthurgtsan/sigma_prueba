@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -55,43 +60,44 @@ String  edo = request.getParameter("edo");
 String condicion="";
 String texto="";
 
-
-if(ni.equals("11")){
-texto="para el Estado "+ent;
-condicion=" where substring(cvegeo::text, 1, 2)='"+ent+"' ";
-
-}else if(ni.equals("12")){
-texto="para la regional "+Integer.parseInt(ent);;	
-	if(ni.equals("01")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='02' or substring(cvegeo::text, 1, 2)='03' or substring(cvegeo::text, 1, 2)='25' or substring(cvegeo::text, 1, 2)='26') ";
-	}else if(ni.equals("02")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='10' or substring(cvegeo::text, 1, 2)='08' or substring(cvegeo::text, 1, 2)='32') ";
-	}else if(ni.equals("03")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='28' or substring(cvegeo::text, 1, 2)='05' or substring(cvegeo::text, 1, 2)='19') ";
-	}else if(ni.equals("04")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='18' or substring(cvegeo::text, 1, 2)='16' or substring(cvegeo::text, 1, 2)='14' or substring(cvegeo::text, 1, 2)='06') ";
-	}else if(ni.equals("05")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='11' or substring(cvegeo::text, 1, 2)='24' or substring(cvegeo::text, 1, 2)='22' or substring(cvegeo::text, 1, 2)='01') ";
-	}else if(ni.equals("06")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='15' or substring(cvegeo::text, 1, 2)='17' or substring(cvegeo::text, 1, 2)='12') ";
-	}else if(ni.equals("07")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='30' or substring(cvegeo::text, 1, 2)='29' or substring(cvegeo::text, 1, 2)='21' or substring(cvegeo::text, 1, 2)='13' or substring(cvegeo::text, 1, 2)='09') ";
-	}else if(ni.equals("08")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='27' or substring(cvegeo::text, 1, 2)='20' or substring(cvegeo::text, 1, 2)='07') ";
-	}else if(ni.equals("09")){
-    condicion= " where (substring(cvegeo::text, 1, 2)='23' or substring(cvegeo::text, 1, 2)='31' or substring(cvegeo::text, 1, 2)='04') ";
-	}
-
-}else if(ni.equals("13")){
-	if(edo.equals("00")){
-		texto=" Nacional";
-		condicion="";
-	}else{
-		texto="para el Estado "+edo;
-        condicion=" where substring(cvegeo::text, 1, 2)='"+edo+"' ";	
-	}
+/*
+	if(ni.equals("11")){
+	texto="para el Estado "+ent;
+	condicion=" where substring(cvegeo::text, 1, 2)='"+ent+"' ";
 	
-}
+	}else if(ni.equals("12")){
+	texto="para la regional "+Integer.parseInt(ent);;	
+		if(ni.equals("01")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='02' or substring(cvegeo::text, 1, 2)='03' or substring(cvegeo::text, 1, 2)='25' or substring(cvegeo::text, 1, 2)='26') ";
+		}else if(ni.equals("02")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='10' or substring(cvegeo::text, 1, 2)='08' or substring(cvegeo::text, 1, 2)='32') ";
+		}else if(ni.equals("03")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='28' or substring(cvegeo::text, 1, 2)='05' or substring(cvegeo::text, 1, 2)='19') ";
+		}else if(ni.equals("04")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='18' or substring(cvegeo::text, 1, 2)='16' or substring(cvegeo::text, 1, 2)='14' or substring(cvegeo::text, 1, 2)='06') ";
+		}else if(ni.equals("05")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='11' or substring(cvegeo::text, 1, 2)='24' or substring(cvegeo::text, 1, 2)='22' or substring(cvegeo::text, 1, 2)='01') ";
+		}else if(ni.equals("06")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='15' or substring(cvegeo::text, 1, 2)='17' or substring(cvegeo::text, 1, 2)='12') ";
+		}else if(ni.equals("07")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='30' or substring(cvegeo::text, 1, 2)='29' or substring(cvegeo::text, 1, 2)='21' or substring(cvegeo::text, 1, 2)='13' or substring(cvegeo::text, 1, 2)='09') ";
+		}else if(ni.equals("08")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='27' or substring(cvegeo::text, 1, 2)='20' or substring(cvegeo::text, 1, 2)='07') ";
+		}else if(ni.equals("09")){
+	    condicion= " where (substring(cvegeo::text, 1, 2)='23' or substring(cvegeo::text, 1, 2)='31' or substring(cvegeo::text, 1, 2)='04') ";
+		}
+	
+	}else if(ni.equals("13")){
+		if(edo.equals("00")){
+			texto=" Nacional";
+			condicion="";
+		}else{
+			texto="para el Estado "+edo;
+	        condicion=" where substring(cvegeo::text, 1, 2)='"+edo+"' ";	
+		}
+		
+	}
+*/
 
 out.println( "<center class='t'><H2><CENTER CLASS=T ALIGN=CENTER> Informacion de Inconsistencias "+texto+"</H2>");
 
@@ -100,6 +106,7 @@ try {
 	 String datos="";
 	 int colorfila=0;
 	 String color="";
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -113,6 +120,10 @@ try {
 	  str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
 	  //out.println("select * from val_mc_vs_manz_afect "+condicion+" order by cvegeo;" );
       rs = str.executeQuery("select * from val_mc_vs_manz_afect "+condicion+" order by cvegeo;" );
+*/
+
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas2.consulta_inconsistencias("act10_ed", ent, edo, ni);
 
 		campos="<table border=1><tr class=n bgcolor=#DBDBD>";
 		campos+="<td align=center style='background-color:#dadeda;'><strong>&nbsp;No&nbsp;</strong>";
@@ -152,8 +163,9 @@ try {
 		out.println(datos);
 	out.println("</table><br><br>");
 	  rs.close();
-      str.close();
-      conexion.close();
+	  rs = null;
+      //str.close();
+      //conexion.close();
 }catch (SQLException ex){
       out.println("<script>");
       out.println("  alert(\'Se genero la expresion de SQL: "+ex.getMessage()+" !\');");

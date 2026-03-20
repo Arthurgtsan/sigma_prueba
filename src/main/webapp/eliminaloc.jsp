@@ -1,6 +1,11 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -57,11 +62,16 @@ n3=l_lon_dec;
 n3=Double.parseDouble(formateador.format(n3));
 String l_lon_geo=(String.format("%2s", n1).replace(' ', '0')) + (String.format("%2s", n2).replace(' ', '0')) + (String.format("%6s", n3).replace(' ', '0'));
  */    
+ 
+ /* CONSULTA OFICIAL 
  consulta="SELECT latitud,longitud,clave,nom_loc,status,cgo_act,ambito FROM cat_loc where status=1  and " +
           "st_intersects(the_geom,st_transform(ST_SetSRID(ST_MakeBox2D(ST_Point("+c1+", "+c2+"),ST_Point("+c3+" ,"+c4+")),4326),32800)) "+
 		  "ORDER BY st_distance(the_geom,st_transform(GeomFromText('POINT("+lon+" "+lat+")',4326),32800)) ASC LIMIT 1";
+ */
 //out.println(consulta);
+ CachedRowSet rs = null;
  try {
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -73,9 +83,14 @@ String l_lon_geo=(String.format("%2s", n1).replace(' ', '0')) + (String.format("
                                             );
        str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery( consulta );
-      rs.
-      rs.next();
-     String s1= (rs.getObject(1).toString());
+*/
+
+	
+	rs = Constructor_de_Consultas2.consulta_eliminaloc("act10_ed", c1, c2, c3, c4, lon, lat);
+	rs.next();
+	
+
+	String s1= (rs.getObject(1).toString());
      String s2= (rs.getObject(2).toString());
      String s3= (rs.getObject(3).toString());
      String s4= (rs.getObject(4).toString());      
@@ -92,8 +107,11 @@ String l_lon_geo=(String.format("%2s", n1).replace(' ', '0')) + (String.format("
         "<input type='hidden' name='lat_dec'><input type='hidden' name='lon_dec'>"
         + "</form></body></html>");
         rs.close();
-        str.close();
-        conexion.close();
+        //str.close();
+       // conexion.close();
+       
+       rs.close();
+       rs = null;
 }catch (SQLException ex){
       out.println("<script>");
       out.println("  alert(\"Se genero la expresion de SQL: "+ex.getMessage().substring(0, ex.getMessage().length()-1)+" !\");");

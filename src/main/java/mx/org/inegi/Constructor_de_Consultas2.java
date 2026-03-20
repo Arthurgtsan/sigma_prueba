@@ -2525,6 +2525,224 @@ public class Constructor_de_Consultas2 {
 		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
 		return rs;
 	}
+	
+	public static CachedRowSet consulta_editman(String cnx, String pass, String clave, String lon_dec, String lat_dec, int idus, int cons) {
+
+		String consulta  = "";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			switch (cons) {
+			case 0:
+				consulta = "select nivel,edicion,cons from usuarios where md5(password) = ?";
+				ps = con.prepareStatement(consulta);
+				ps.setString(1, pass);
+				break;
+			case 1:
+				consulta="select count(*) from shp_locr_coord where clave=?";
+				ps = con.prepareStatement(consulta);
+				ps.setString(1, clave);
+				break;
+				
+			case 2:
+				consulta="select a_shploc_editman(?, ?, ?, ?)";
+				ps = con.prepareStatement(consulta);
+				ps.setString(1, clave);
+				ps.setString(2, lon_dec);
+				ps.setString(3, lat_dec);
+				ps.setInt(4, idus);
+				break;
+			default:
+		        throw new IllegalArgumentException("id_cons no válido");
+			}
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_eliminaloc(String cnx,  String c1, String c2, String c3, String c4, String lon, String lat) {
+
+		/*
+		 String consulta="SELECT latitud,longitud,clave,nom_loc,status,cgo_act,ambito FROM cat_loc where status=1  and " +
+		          "st_intersects(the_geom,st_transform(ST_SetSRID(ST_MakeBox2D(ST_Point(?, ?),ST_Point(?, ?)),4326),32800)) "+
+				  "ORDER BY st_distance(the_geom,st_transform(GeomFromText('POINT(?, ?)',4326),32800)) ASC LIMIT 1";
+		 */
+		
+		String consulta =
+			    "SELECT latitud,longitud,clave,nom_loc,status,cgo_act,ambito " +
+			    "FROM cat_loc " +
+			    "WHERE status=1 AND " +
+			    "st_intersects(the_geom, st_transform(ST_SetSRID(ST_MakeBox2D(ST_Point(?, ?), ST_Point(?, ?)),4326),32800)) " +
+			    "ORDER BY st_distance(the_geom, st_transform(ST_SetSRID(ST_Point(?, ?),4326),32800)) ASC " +
+			    "LIMIT 1";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, c1);
+			ps.setString(2, c2);
+			ps.setString(3, c3);
+			ps.setString(4, c4);
+			ps.setString(5, lon);
+			ps.setString(6, lat);
+			
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_google2(String cnx,  float c1, float c2, float c3, float c4) {
+
+		String  consulta = "select ST_Distance(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")) as dist, "
+	               + "ST_AsText(st_centroid(ST_SetSRID(ST_MakeBox2D(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")),4326))) as punto ";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setFloat(1, c1);
+			ps.setFloat(2, c2);
+			ps.setFloat(3, c3);
+			ps.setFloat(4, c4);
+			
+			ps.setFloat(5, c1);
+			ps.setFloat(6, c2);
+			ps.setFloat(7, c3);
+			ps.setFloat(8, c4);
+			
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	
+	public static CachedRowSet consulta_inconsistencias(String cnx, String ent, String edo, String ni) {
+
+		String condicion="", texto="", consulta = "";
+
+
+		if(ni.equals("11")){
+		texto="para el Estado "+ent;
+		condicion=" where substring(cvegeo::text, 1, 2)='"+ent+"' ";
+
+		}else if(ni.equals("12")){
+		texto="para la regional "+Integer.parseInt(ent);;	
+			if(ni.equals("01")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='02' or substring(cvegeo::text, 1, 2)='03' or substring(cvegeo::text, 1, 2)='25' or substring(cvegeo::text, 1, 2)='26') ";
+			}else if(ni.equals("02")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='10' or substring(cvegeo::text, 1, 2)='08' or substring(cvegeo::text, 1, 2)='32') ";
+			}else if(ni.equals("03")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='28' or substring(cvegeo::text, 1, 2)='05' or substring(cvegeo::text, 1, 2)='19') ";
+			}else if(ni.equals("04")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='18' or substring(cvegeo::text, 1, 2)='16' or substring(cvegeo::text, 1, 2)='14' or substring(cvegeo::text, 1, 2)='06') ";
+			}else if(ni.equals("05")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='11' or substring(cvegeo::text, 1, 2)='24' or substring(cvegeo::text, 1, 2)='22' or substring(cvegeo::text, 1, 2)='01') ";
+			}else if(ni.equals("06")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='15' or substring(cvegeo::text, 1, 2)='17' or substring(cvegeo::text, 1, 2)='12') ";
+			}else if(ni.equals("07")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='30' or substring(cvegeo::text, 1, 2)='29' or substring(cvegeo::text, 1, 2)='21' or substring(cvegeo::text, 1, 2)='13' or substring(cvegeo::text, 1, 2)='09') ";
+			}else if(ni.equals("08")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='27' or substring(cvegeo::text, 1, 2)='20' or substring(cvegeo::text, 1, 2)='07') ";
+			}else if(ni.equals("09")){
+		    condicion= " where (substring(cvegeo::text, 1, 2)='23' or substring(cvegeo::text, 1, 2)='31' or substring(cvegeo::text, 1, 2)='04') ";
+			}
+
+		}else if(ni.equals("13")){
+			if(edo.equals("00")){
+				texto=" Nacional";
+				condicion="";
+			}else{
+				texto="para el Estado "+edo;
+		        condicion=" where substring(cvegeo::text, 1, 2)='"+edo+"' ";	
+			}
+			
+		}
+		
+		consulta = "select * from val_mc_vs_manz_afect " + condicion + " order by cvegeo";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			//ps.setString(1, condicion);
+
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
 
 
 	

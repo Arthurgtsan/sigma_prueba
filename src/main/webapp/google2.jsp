@@ -1,6 +1,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.io.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <%
 float c1 = Float.parseFloat(request.getParameter("c1")),
         c2 = Float.parseFloat(request.getParameter("c2")),
@@ -25,6 +30,7 @@ String consulta= "",
 int pos=0, ran=0;
 if (esc==0){
 try {
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
@@ -35,13 +41,22 @@ try {
                                              "actcar"
                                             );
       str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
+*/
       //ccl
       //consulta = "select ST_Distance(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")) as dist, "
       //         + "ST_AsText(ST_Transform(st_centroid(ST_SetSRID(ST_MakeBox2D(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")),32800)),4326)) as punto ";
       //geo
+      
+/*
       consulta = "select ST_Distance(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")) as dist, "
                + "ST_AsText(st_centroid(ST_SetSRID(ST_MakeBox2D(ST_Point("+c1+","+c2+"),ST_Point("+c3+","+c4+")),4326))) as punto ";
+     
       rs = str.executeQuery( consulta );
+*/
+
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas2.consulta_google2("act10_ed", c1, c2, c3, c4);
+      
   while(rs.next()){
             String s1=rs.getObject(1).toString();
             String s2=rs.getObject(2).toString();
@@ -77,6 +92,10 @@ try {
     }
     out.println ("<html><meta HTTP-EQUIV='Refresh' CONTENT='0; URL=http://dc046068asdggma.inegi.gob.mx:8070/openlayers/"+archivo1+"'>");
     }
+  	
+  rs.close();
+  rs = null;
+  
     }
    catch (SQLException ex){
       out.println("<script>");

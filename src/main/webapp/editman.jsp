@@ -1,6 +1,11 @@
 <%@page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -146,7 +151,10 @@ ajax.send(null);
     salida = "",
     st = "";
   String  pass = request.getParameter("pass");
-  String  consultapass="select nivel,edicion,cons from usuarios where md5(password) = '"+pass+"';";
+  
+  CachedRowSet rs = null;
+  
+ // String  consultapass="select nivel,edicion,cons from usuarios where md5(password) = '"+pass+"';";
 try {
   if (clave==null){
        out.println("<body><Form action=\"editman.jsp\" method=\"post\" name=\"inicia\"><center><b>MODIFICACION DE COORDENADAS</b><br><br><table border=1>"+
@@ -159,19 +167,18 @@ try {
   }else{
       consulta="select count(*) from shp_locr_coord where clave='"+clave+"'";
       out.println("<center><b>VALIDANDO...</b></center>");
-      ResultSet rs = null;
-      Statement str = null;
-      Connection conexion = null;
-      Class.forName("org.postgresql.Driver");
-      conexion = DriverManager.getConnection("jdbc:postgresql://10.153.3.25:5434/actcargeo10","actcar","actcar");
-      str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-      rs = str.executeQuery( consultapass );
+ /*
+ 
+ */
+ 	  rs = Constructor_de_Consultas2.consulta_editman("act10_ed", pass, null, null, null, 0, 0);
+ 
       rs.next();
       int s1=Integer.parseInt(rs.getObject(1).toString()); //nivel 
       int s2=Integer.parseInt(rs.getObject(2).toString()); //edicion
       int idus=Integer.parseInt(rs.getObject(3).toString()); //edicion
       if ((s2==1)){
-          rs = str.executeQuery( consulta );
+          //rs = str.executeQuery( consulta );
+          rs = Constructor_de_Consultas2.consulta_editman("act10_ed", pass, null, null, null, 0, 1);
           rs.next();
         int s3= Integer.parseInt(rs.getObject(1).toString());
         if (s3==0){
@@ -179,8 +186,9 @@ try {
             out.println("<script>alert('La CLAVE de la localidad es incorrecta!!');document.inicia.submit();</script>");
         }else{
           out.println("<Form action=\"editman.jsp\" method=\"post\" name=\"inicia\"></form></body>");
-          consulta="select a_shploc_editman('"+clave+"','"+lon_dec+"','"+lat_dec+"','"+idus+"')";
-          rs = str.executeQuery( consulta );
+          //consulta="select a_shploc_editman('"+clave+"','"+lon_dec+"','"+lat_dec+"','"+idus+"')";
+          //rs = str.executeQuery( consulta );
+          rs = Constructor_de_Consultas2.consulta_editman("act10_ed", null, clave, lon_dec, lat_dec, idus, 2);
           rs.next();
           String s4=rs.getObject(1).toString();
           out.println("<script>alert('Coordenadas modificadas, distancia: ("+s4+" mts)');"
@@ -195,9 +203,10 @@ try {
         out.println ("<br><center>No tienes privilegios<br>para realizar cambios!!</center>");
      }
     rs.close();
-    str.close();
-    conexion.close();
-    }
+   // str.close();
+    //conexion.close();
+  	rs=null;  
+  }
    }
    catch (SQLException ex){
       out.println("<script>");
