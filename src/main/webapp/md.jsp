@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <%
 float c1 = Float.parseFloat(request.getParameter("c1")),
         c2 = Float.parseFloat(request.getParameter("c2")),
@@ -13,11 +18,12 @@ String consulta= "",
         punto4="";     
 int pos=0;
 try {
+/*
       Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
       Class.forName("org.postgresql.Driver");
-       conexion = DriverManager.getConnection(
+      conexion = DriverManager.getConnection(
                                              "jdbc:postgresql://10.153.3.25:5434/actcargeo10",
                                              "actcar",
                                              "actcar"
@@ -26,6 +32,10 @@ try {
       consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT("+c1+" "+c2+")',3857),4326)) as punto1,"
               + "ST_AsText(ST_Transform(ST_GeomFromText('POINT("+c3+" "+c4+")',3857),4326)) as punto2";
       rs = str.executeQuery( consulta );
+*/
+	CachedRowSet rs = null;
+	rs = Constructor_de_Consultas2.consulta_md("act10_ed", c1, c2, c3, c4);
+
 	while(rs.next()){
             String s1=rs.getObject(1).toString();
             String s2=rs.getObject(2).toString();
@@ -42,6 +52,8 @@ try {
             punto4 = punto.trim().substring(pos,punto.length());
             out.println ("<meta HTTP-EQUIV='Refresh' CONTENT='0; URL=http://gaia.inegi.org.mx/mdm5/viewer.html?tema=catentmunloc&clon="+punto1+"&clat="+punto2+"&clon2="+punto3+"&clat2="+punto4+"'>");
         }
+		rs.close();
+		rs = null;
     }  
    catch (SQLException ex){
       out.println("<script>");
@@ -54,6 +66,7 @@ try {
       out.println("  alert(\"Se genero la expresion: "+ex.getMessage().substring(0, ex.getMessage().length()-1)+" !\");");
       out.println("</script>");
     }
+
  
 %>
 

@@ -28,12 +28,7 @@ try {
    // CachedRowSet rs = null;
     Constructor_de_Consultas.consulta_asigna_loc_cd_01(remotehostbd, gid);
 
-    String ban="1";
-    while(rs.next()){
-      ban="2";
-    }
-    
-    out.print(ban);
+
     //str.close();
     //conexion.close();
    // rs.close();

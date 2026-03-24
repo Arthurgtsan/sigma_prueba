@@ -63,11 +63,9 @@ try {
             url = "http://"+request.getServerName()+":8070/openlayers/index.jsp?sts=1&ban=1&st=AMBAS&capa=99&c1="+punto1+"&c2="+punto2+"&c3="+punto3+"&c4="+punto4+"&password="+sb.toString()+"&cat=X";
             out.println ("<meta HTTP-EQUIV='Refresh' CONTENT='0; URL="+url+"'>");
         }
-    }
-
-	rs.close();
-	rs = null;
-	
+  		rs.close();
+		rs = null;
+    }	
    catch (SQLException ex){
       out.println("<script>");
       out.println("  alert(\"Se genero la expresion de SQL: "+ex.getMessage().substring(0, ex.getMessage().length()-1)+" !\");");
@@ -81,5 +79,3 @@ try {
     }
  
 %>
-
- 

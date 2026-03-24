@@ -142,8 +142,8 @@ String consulta1 = " select * from (select usre, (select nombre from usuarios wh
       out.println("<table>");
       out.println("<tr><td class=n3 align=right>TOTAL<td class=n3 align=right>&nbsp;"+sum2+"&nbsp;");
       out.println("</table><br>");
-      str.close();
-      conexion.close();
+
+      rs.close();
     }
 %>
 

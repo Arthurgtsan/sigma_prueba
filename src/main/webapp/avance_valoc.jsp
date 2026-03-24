@@ -40,6 +40,7 @@ th{
   padding: 5px;
 }
 </style>
+</head>
 <body >
   <center><font class='titulo'>Avance de Validacion</font><br><br>
   <form method='POST' name=enviar><br>
@@ -49,6 +50,10 @@ th{
 <%
 String pass = request.getParameter("pass");
 String ban = request.getParameter("ban");
+
+int n2=0;
+CachedRowSet rs = null;
+
 try{
 
       if (ban != null){
@@ -67,20 +72,20 @@ try{
                                                    "actcar"
                                                   );
             str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
-            int n2=0;
+            
             rs = str.executeQuery( consulta );
 */
 			
-			CachedRowSet rs = null;
 			rs = Constructor_de_Consultas.consulta_avance_valoc_01("act10_ed", pass);
 
             while(rs.next()){
-                      n2=1;
-                      cons=rs.getObject(1).toString();
+            	n2=1;
+                cons=rs.getObject(1).toString();
             }
+            
             if (n2==0){
-              out.println("<br><font class='error'>-- USUARIO INCORRECTO --</font>");
-          }else{
+           		out.println("<br><font class='error'>-- USUARIO INCORRECTO --</font>");
+          	}else{
         	  rs = Constructor_de_Consultas.consulta_avance_valoc_02("act10_ed", cons);
         	/*
           		String consulta1="";
@@ -122,7 +127,6 @@ try{
             out.println("<table>");
             out.println("<tr><td class=n3 align=right>TOTAL<td class=n3 align=right>&nbsp;"+sum2+"&nbsp;");
             out.println("</table><br>");
-            str.close();
           }
             //conexion.close();
             rs.close();

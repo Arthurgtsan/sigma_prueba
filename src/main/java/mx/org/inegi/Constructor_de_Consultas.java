@@ -1763,6 +1763,13 @@ public class Constructor_de_Consultas {
 			
 			ps.setQueryTimeout(3000);
 			_rs = ps.executeQuery();
+			
+			String ban="1";
+		    while(_rs.next()){
+		      ban="2";
+		    }
+		    
+		    System.out.print(ban);
 			 //rs = RowSetProvider.newFactory().createCachedRowSet();
 		    // rs.populate(_rs);
 		

@@ -1,6 +1,10 @@
 <%@ page import="java.util.*" session="true" %>
 <%@ page import="java.sql.*"%>
 
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <%
 String  cgo = request.getParameter("cgo");
 String  cve_ent = request.getParameter("cve_ent");
@@ -14,8 +18,12 @@ String  geom  = request.getParameter("geom");
 String consulta="";
 HttpSession sesion = request.getSession(false);
 String remotehost  = session.getAttribute("remotehost").toString();
+
+CachedRowSet rs = null;
+
 try {
-		consulta = "select m_casos_especiales('"+cgo+"','"+cve_ent+"','"+cve_mun+"','"+cve_loc+"','"+cve_ageb+"','"+img+"','"+proy+"','"+us+"','"+geom+"')";
+/*
+	  consulta = "select m_casos_especiales('"+cgo+"','"+cve_ent+"','"+cve_mun+"','"+cve_loc+"','"+cve_ageb+"','"+img+"','"+proy+"','"+us+"','"+geom+"')";
       ResultSet rs = null;
       Statement str = null;
       Connection conexion = null;
@@ -26,11 +34,15 @@ try {
     //out.print(consulta);
     str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
     rs = str.executeQuery( consulta );
+*/
+	rs = Constructor_de_Consultas2.consulta_mod_casos("act10_ed", cgo, cve_ent, cve_mun, cve_loc, cve_ageb, img, proy, us, geom);
   	rs.next();
     out.print(rs.getObject(1).toString());
-    str.close();
-    conexion.close();
-    }
+    //str.close();
+    //conexion.close();
+    rs.close();
+	rs = null;
+	}
     catch (SQLException ex){
       out.print("0");
   }

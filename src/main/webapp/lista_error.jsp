@@ -1,5 +1,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*"%>
+
+<%@ page import="javax.sql.rowset.*" %> 
+<%@ page import="com.sun.rowset.CachedRowSetImpl" %>
+<%@ page import="mx.org.inegi.Constructor_de_Consultas2"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>
@@ -280,7 +285,8 @@ out.println("&nbsp;&nbsp;&nbsp;&nbsp;<font class=n>Filtrar por Estado:</font>&nb
 //out.println("<input type=checkbox name=sinloc "+sinlochec+" class=boton onclick='envia();'><font class=c>Excluir \"(L) Localidad (Plano) no interseca con Manzana\"</font><br><br>");
 out.println("&nbsp;&nbsp;&nbsp;<font class=n>Filtrar por Resultado:</font>&nbsp;"+select2+"</font><br><br>");
 //out.println ("select cve_ent,  cve_mun ,  cve_loc ,  cve_ageb,  cve_mza,  resultado, fecha,st_x(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)),st_y(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)) from temp_mza_rev_errores "+consulta+sinlocons+consErr+" order by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza;" );
-      Statement str = null;
+/*
+	  Statement str = null;
       ResultSet rs = null;
       Connection conexion = null;
       Class.forName("org.postgresql.Driver");
@@ -292,6 +298,9 @@ out.println("&nbsp;&nbsp;&nbsp;<font class=n>Filtrar por Resultado:</font>&nbsp;
 
 	  str = conexion.createStatement(rs.TYPE_SCROLL_SENSITIVE, rs.CONCUR_UPDATABLE);
       rs = str.executeQuery("select cve_ent,  cve_mun ,  cve_loc ,  cve_ageb,  cve_mza,  resultado, fecha,st_x(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)),st_y(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)) from temp_mza_rev_errores "+consulta+sinlocons+consErr+" order by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza;" );
+*/
+		CachedRowSet rs = null;
+		rs = Constructor_de_Consultas2.consulta_lista_error("act10_ed", consulta, sinlocons, consErr);
 
 		//out.println("select cve_ent,  cve_mun ,  cve_loc ,  cve_ageb,  cve_mza,  resultado, fecha,st_x(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)),st_y(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)) from temp_mza_rev_errores "+consulta+sinlocons+consErr+" order by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza;");
 		out.println( "<table border=1><tr class=n bgcolor=#BBBBBB>			<td style='background-color:#BDBDBD;'><strong>&nbsp;No&nbsp;</strong>        <td style='background-color:#BDBDBD;'<trong>&nbsp;Entidad&nbsp;</strong>		<td style='background-color:#BDBDBD;'><strong>&nbsp;&nbsp;Municipio&nbsp;&nbsp;</strong>		<td style='background-color:#BDBDBD;'<trong>&nbsp;&nbsp;Localidad&nbsp;&nbsp;</strong>		<td style='background-color:#BDBDBD;'><strong>&nbsp;&nbsp;Ageb&nbsp;&nbsp;</strong>		<td style='background-color:#BDBDBD;'<trong>&nbsp;&nbsp;Manzana&nbsp;&nbsp;</strong>        <td style='background-color:#DBDBD;' align=center><strong>&nbsp;&nbsp;Resultado&nbsp;&nbsp;</strong><td style='background-color:#DBDBD;' align=center><strong>&nbsp;&nbsp;Fecha&nbsp;&nbsp;</strong><td style='background-color:#DBDBD;'   align=center><strong>&nbsp;&nbsp;Referencia&nbsp;&nbsp;</strong>");
@@ -342,8 +351,10 @@ out.println("&nbsp;&nbsp;&nbsp;<font class=n>Filtrar por Resultado:</font>&nbsp;
 	out.println("</table><font class=r><br><br><font class=t>Total:"+count);
 out.println("<br><br>");
 	  rs.close();
-      str.close();
-      conexion.close();
+	  rs = null;
+      
+	  //str.close();
+      //conexion.close();
 
 %>
 <br>

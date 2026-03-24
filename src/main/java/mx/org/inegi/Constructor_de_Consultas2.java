@@ -2743,6 +2743,131 @@ public class Constructor_de_Consultas2 {
 		return rs;
 	}
 	
+	public static CachedRowSet consulta_lista_error(String cnx, String consulta, String sinlocons, String consErr) {
+
+		String consulta1="select cve_ent,  cve_mun ,  cve_loc ,  cve_ageb,  cve_mza,  resultado, fecha,st_x(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)),st_y(ST_Transform(ST_PointOnSurface(st_makevalid(the_geom)),4326)) from temp_mza_rev_errores "+consulta+sinlocons+consErr+" order by cve_ent,cve_mun,cve_loc,cve_ageb,cve_mza";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta1);
+			
+			//ps.setString(1, pass);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_md(String cnx, float c1, float c2, float c3, float c4) {
+
+		/* consulta original nomas agregando ?
+			String consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT(?, ?)',3857),4326)) as punto1,"
+	              + "ST_AsText(ST_Transform(ST_GeomFromText('POINT(?, ?)',3857),4326)) as punto2";
+	   	*/
+		
+		/* consulta sugerida por chatgpt 
+		 * 	String consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',3857),4326)) as punto1,"
+                + "ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',3857),4326)) as punto2";
+		 */
+		
+		/* consulta mejorada de chatgpt
+		 * String consulta = "select ST_AsText(ST_Transform(ST_SetSRID(ST_MakePoint(?, ?),3857),4326)) as punto1,"
+                + "ST_AsText(ST_Transform(ST_SetSRID(ST_MakePoint(?, ?),3857),4326)) as punto2";
+		 */
+		
+		// elegi la 2
+		String consulta = "select ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',3857),4326)) as punto1,"
+                + "ST_AsText(ST_Transform(ST_GeomFromText('POINT(' || ? || ' ' || ? || ')',3857),4326)) as punto2";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setFloat(1, c1);
+			ps.setFloat(2, c2);
+			ps.setFloat(3, c3);
+			ps.setFloat(4, c4);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}
+	
+	public static CachedRowSet consulta_mod_casos(String cnx, String cgo, String cve_ent, String cve_mun, String cve_loc, String cve_ageb, String img, String proy, String us, String geom) {
+
+		
+		String consulta = "select m_casos_especiales(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		ResultSet _rs = null;
+		//ResultSet rs2 = null;
+		//PreparedStatement ps2;
+		CachedRowSet rs = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		//try (Connection con = AdministradorDataSource_Sigma.getConnection(cnx);
+		try {	
+			con = AdministradorDataSource_Sigma.getConnection(cnx);
+			ps = con.prepareStatement(consulta);
+			
+			ps.setString(1, cgo);
+			ps.setString(2, cve_ent);
+			ps.setString(3, cve_mun);
+			ps.setString(4, cve_loc);
+			ps.setString(5, cve_ageb);
+			ps.setString(6, img);
+			ps.setString(7, proy);
+			ps.setString(8, us);
+			ps.setString(9, geom);
+			
+			ps.setQueryTimeout(3000);
+			_rs = ps.executeQuery();
+			 rs = RowSetProvider.newFactory().createCachedRowSet();
+		     rs.populate(_rs);	
+						
+			return rs;
+			// con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {if (con != null) {	try {con.close();} catch (SQLException e) {	e.printStackTrace();}};	if (ps != null) {try {ps.close();} catch (SQLException e) {	e.printStackTrace();}};	if (_rs != null) {try {_rs.close();} catch (SQLException e) {e.printStackTrace();	}};}
+		return rs;
+	}	
+	
 
 
 	
